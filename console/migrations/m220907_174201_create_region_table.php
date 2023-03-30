@@ -17,8 +17,8 @@ class m220907_174201_create_region_table extends Migration
             'name_ru' => $this->string(),
             'name_uz' => $this->string(),
             'status' => $this->integer()->notNull()->defaultValue(1),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
+            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
         ]);
     }
 

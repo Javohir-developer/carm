@@ -17,12 +17,12 @@ class m230330_083628_create_suppliers_table extends Migration
             'user_id' => $this->integer(),
             'company_id' => $this->integer(),
             'name' => $this->string(),
-            'phone' => $this->string(),
-            'inn' => $this->integer(),
-            'ndc' => $this->integer(),
+            'phone' => $this->bigInteger(),
+            'inn' => $this->bigInteger(),
+            'ndc' => $this->bigInteger(),
             'status' => $this->integer()->notNull()->defaultValue(1),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
+            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
         ]);
         $this->addForeignKey('fk_suppliers_companies',  'suppliers', 'company_id', 'companies', 'id');
         $this->addForeignKey('fk_suppliers_user',  'suppliers', 'user_id', 'user', 'id');

@@ -18,7 +18,7 @@ class CompaniesSearch extends Companies
     {
         return [
             [['id', 'status', 'companies_type'], 'integer'],
-            [['name', 'subdomain', 'logo_sliders', 'photo_companies', 'currency', 'address_ru', 'address_uz', 'latitude', 'longitude', 'working_mode', 'email', 'call', 'telegram', 'facebook', 'instagram', 'about', 'created_at', 'updated_at'], 'safe'],
+            [['name', 'subdomain', 'logo_sliders', 'photo_companies', 'currency', 'address_ru', 'address_uz', 'latitude', 'longitude', 'working_mode', 'email', 'phone', 'telegram', 'facebook', 'instagram', 'about', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -74,7 +74,7 @@ class CompaniesSearch extends Companies
             ->andFilterWhere(['ilike', 'longitude', $this->longitude])
             ->andFilterWhere(['ilike', 'working_mode', $this->working_mode])
             ->andFilterWhere(['ilike', 'email', $this->email])
-            ->andFilterWhere(['ilike', 'call', $this->call])
+            ->andFilterWhere(['ilike', 'phone', $this->phone])
             ->andFilterWhere(['ilike', 'telegram', $this->telegram])
             ->andFilterWhere(['ilike', 'facebook', $this->facebook])
             ->andFilterWhere(['ilike', 'instagram', $this->instagram])

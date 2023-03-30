@@ -28,11 +28,11 @@ class BaseController extends \yii\web\Controller
                         'roles' => ['@'],// Правило для аутентифицированных пользователей.
                     ],
                     [
-                        'actions' => ['index'],
+                        'actions' => ['index', 'create', 'view', 'update', 'delete'],
                         'allow' => true,
                         'roles' => ['Drektor'],
                         'matchCallback' => function () {
-                            $controllers = ['statistics', 'site'];
+                            $controllers = ['statistics', 'site', 'suppliers'];
                             return in_array(Yii::$app->controller->id, $controllers);// Метод $controllers вернет true или false в зависимости от роли пользователя.
                         },
                     ],

@@ -24,15 +24,15 @@ class m130523_201441_create_companies_table extends Migration
             'longitude' => $this->string(),
             'working_mode' => $this->string(),
             'email' => $this->string(),
-            'call' => $this->integer(),
+            'phone' => $this->bigInteger(),
             'telegram' => $this->string(),
             'facebook' => $this->string(),
             'instagram' => $this->string(),
             'about' => $this->text(),
             'companies_type' => $this->integer(),
             'status' => $this->smallInteger()->notNull()->defaultValue(1),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
+            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
         ]);
     }
 

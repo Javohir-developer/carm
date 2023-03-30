@@ -36,7 +36,7 @@ use Yii;
  */
 class Companies extends BaseModel
 {
-    const STATUS_ACTIVE = 1;
+
     public $username;
     public $password;
     /**
@@ -59,8 +59,7 @@ class Companies extends BaseModel
             [['name'], 'required'],
             [['name', 'password', 'currency', 'address_ru', 'address_uz', 'latitude', 'longitude', 'working_mode', 'email', 'telegram', 'facebook', 'instagram'], 'string', 'max' => 255],
             [['logo'], 'string', 'max' => 225],
-            [['call'], 'string', 'max' => 9],
-            [['name'], 'string', 'max' => 12],
+            [['phone'], 'string', 'max' => 12, 'min' => 12],
         ];
     }
 
@@ -96,11 +95,5 @@ class Companies extends BaseModel
         return $this->hasMany(User::class, ['company_id' => 'id']);
     }
 
-    public static function Status(){
-        return [
-            1 => Yii::t('app', 'Актив'),
-            0 =>Yii::t('app', 'Неактив')
-        ];
-    }
 
 }

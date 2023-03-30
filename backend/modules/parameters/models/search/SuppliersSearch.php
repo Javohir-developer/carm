@@ -17,8 +17,8 @@ class SuppliersSearch extends Suppliers
     public function rules()
     {
         return [
-            [['id', 'user_id', 'company_id', 'inn', 'ndc', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['name', 'phone'], 'safe'],
+            [['id', 'user_id', 'company_id', 'phone', 'inn', 'ndc', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['name'], 'safe'],
         ];
     }
 
@@ -61,6 +61,7 @@ class SuppliersSearch extends Suppliers
             'id' => $this->id,
             'user_id' => $this->user_id,
             'company_id' => $this->company_id,
+            'phone' => $this->phone,
             'inn' => $this->inn,
             'ndc' => $this->ndc,
             'status' => $this->status,
@@ -68,8 +69,7 @@ class SuppliersSearch extends Suppliers
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['ilike', 'name', $this->name])
-            ->andFilterWhere(['ilike', 'phone', $this->phone]);
+        $query->andFilterWhere(['ilike', 'name', $this->name]);
 
         return $dataProvider;
     }

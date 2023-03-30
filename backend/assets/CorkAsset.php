@@ -13,10 +13,10 @@ class CorkAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'cork-style2/layouts/horizontal-light-menu/css/light/loader.css',
-        'cork-style2/layouts/horizontal-light-menu/css/dark/loader.css',
+//        'cork-style2/layouts/horizontal-light-menu/css/light/loader.css',
+//        'cork-style2/layouts/horizontal-light-menu/css/dark/loader.css',
 //        'cork-style2/layouts/horizontal-light-menu/loader.js',
-        'https://fonts.googleapis.com/css?family=Nunito:400,600,700',
+//        'https://fonts.googleapis.com/css?family=Nunito:400,600,700',
         'cork-style2/src/bootstrap/css/bootstrap.min.css',
         'cork-style2/layouts/horizontal-light-menu/css/light/plugins.css',
         'cork-style2/layouts/horizontal-light-menu/css/dark/plugins.css',
@@ -37,7 +37,7 @@ class CorkAsset extends AssetBundle
     ];
 
     public $depends = [
-//        'yii\web\YiiAsset',
+        'yii\web\YiiAsset',
 //        'yii\bootstrap4\BootstrapAsset',
     ];
 }

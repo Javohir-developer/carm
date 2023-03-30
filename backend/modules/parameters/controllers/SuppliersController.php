@@ -3,7 +3,9 @@
 namespace backend\modules\parameters\controllers;
 
 use app\modules\parameters\models\search\SuppliersSearch;
+use backend\controllers\BaseController;
 use backend\modules\parameters\models\Suppliers;
+use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -11,26 +13,14 @@ use yii\web\NotFoundHttpException;
 /**
  * SuppliersController implements the CRUD actions for Suppliers model.
  */
-class SuppliersController extends Controller
+class SuppliersController extends BaseController
 {
-    /**
-     * @inheritDoc
-     */
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ]
-        );
-    }
 
+    public function beforeAction($action)
+    {
+        $this->view->title = Yii::t('app', 'Поставщики');
+        return parent::beforeAction($action);
+    }
     /**
      * Lists all Suppliers models.
      *
@@ -71,8 +61,10 @@ class SuppliersController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                Yii::$app->session->setFlash('success', Yii::t('app', 'добавлена новая поставщик'));
+                return $this->redirect(['index', 'id' => $model->id]);
             }
+            Yii::$app->session->setFlash('error', Yii::t('app', "Ошибка с поставщик"));
         } else {
             $model->loadDefaultValues();
         }
@@ -93,8 +85,12 @@ class SuppliersController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            if ($model->save()){
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Обновил нового поставщика'));
+                return $this->redirect(['index', 'id' => $model->id]);
+            }
+            Yii::$app->session->setFlash('error', Yii::t('app', "Ошибка с поставщик"));
         }
 
         return $this->render('update', [

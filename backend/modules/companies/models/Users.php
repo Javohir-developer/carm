@@ -43,6 +43,7 @@ class Users extends User
             [['password'], 'required', 'on' => self::SCENARIO_CREATE],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => Yii::t('app', 'Это имя пользователя уже занято.'), 'on' => self::SCENARIO_CREATE],
             ['username', 'trim'],
+            [['phone'], 'string', 'max' => 12, 'min' => 12],
         ];
     }
 
@@ -88,13 +89,6 @@ class Users extends User
                 return true;
             }
         }
-    }
-
-    public static function statusUser(){
-        return [
-            self::STATUS_ACTIVE => Yii::t('app', 'Активный'),
-            self::STATUS_INACTIVE => Yii::t('app', 'Неактивный'),
-        ];
     }
 
     public static function companies(){

@@ -11,10 +11,8 @@ use yii\rbac\Rule;
 
 class BaseModel extends ActiveRecord
 {
-
-    public static function company_id(){
-        return Yii::$app->company->id();
-    }
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
 
     public function UploadFiles($files, $file_put_name = false){
         if ($this->{$files} == true){
@@ -65,6 +63,13 @@ class BaseModel extends ActiveRecord
         $auth_assignment = AuthAssignment::findOne(['user_id' => $id]);
         if ($user_password){$user_password->delete();}
         if ($auth_assignment){$auth_assignment->delete();}
+    }
+
+    public static function status(){
+        return [
+            self::STATUS_ACTIVE => Yii::t('app', 'Активный'),
+            self::STATUS_INACTIVE => Yii::t('app', 'Неактивный'),
+        ];
     }
 
 }

@@ -16,7 +16,7 @@ class m130524_201442_init extends Migration
             'id' => $this->primaryKey(),
             'username' => $this->string()->notNull()->unique(),
             'full_name' => $this->string(),
-            'phone' => $this->string()->null(),
+            'phone' => $this->bigInteger()->null(),
             'company_id' => $this->integer()->null(),
             'image' => $this->string(),
             'auth_key' => $this->string(32)->notNull(),
@@ -26,8 +26,8 @@ class m130524_201442_init extends Migration
             'rule' => $this->string(),
             'status' => $this->integer()->notNull()->defaultValue(10),
             'plan_id' => $this->integer()->notNull()->defaultValue(1),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
+            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
         ], $tableOptions);
         $this->addForeignKey('fk_user_companies',  'user', 'company_id', 'companies', 'id');
     }

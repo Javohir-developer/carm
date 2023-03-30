@@ -2,6 +2,9 @@
 
 namespace backend\modules\parameters\models;
 
+use backend\modules\companies\models\Companies;
+use common\models\BaseModel;
+use common\models\User;
 use Yii;
 
 /**
@@ -11,7 +14,7 @@ use Yii;
  * @property int|null $user_id
  * @property int|null $company_id
  * @property string|null $name
- * @property string|null $phone
+ * @property int|null $phone
  * @property int|null $inn
  * @property int|null $ndc
  * @property int $status
@@ -19,11 +22,9 @@ use Yii;
  * @property int|null $updated_at
  *
  * @property Companies $company
- * @property Companies $company0
  * @property User $user
- * @property User $user0
  */
-class Suppliers extends \yii\db\ActiveRecord
+class Suppliers extends BaseModel
 {
     /**
      * {@inheritdoc}
@@ -39,13 +40,12 @@ class Suppliers extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'company_id', 'inn', 'ndc', 'status', 'created_at', 'updated_at'], 'default', 'value' => null],
-            [['user_id', 'company_id', 'inn', 'ndc', 'status', 'created_at', 'updated_at'], 'integer'],
-            [['name', 'phone'], 'string', 'max' => 255],
-            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Companies::class, 'targetAttribute' => ['company_id' => 'id']],
-            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Companies::class, 'targetAttribute' => ['company_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
+            [['created_at', 'updated_at'], 'safe'],
+            [['user_id'], 'default', 'value' => Yii::$app->user->id],
+            [['company_id'], 'default', 'value' => Yii::$app->company->id()],
+            [['user_id', 'company_id', 'phone', 'inn', 'ndc', 'status'], 'integer'],
+            [['name'], 'string', 'max' => 255],
+            [['phone'], 'string', 'max' => 12, 'min' => 12],
         ];
     }
 
@@ -55,16 +55,12 @@ class Suppliers extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'company_id' => 'Company ID',
-            'name' => 'Name',
-            'phone' => 'Phone',
+            'name' => Yii::t('app', 'Имя'),
+            'phone' => Yii::t('app', 'Телефон'),
             'inn' => 'Inn',
             'ndc' => 'Ndc',
-            'status' => 'Status',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'status' => Yii::t('app', 'Статус'),
+            'created_at' => Yii::t('app', 'Созданное время'),
         ];
     }
 
@@ -79,31 +75,11 @@ class Suppliers extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Company0]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCompany0()
-    {
-        return $this->hasOne(Companies::class, ['id' => 'company_id']);
-    }
-
-    /**
      * Gets query for [[User]].
      *
      * @return \yii\db\ActiveQuery
      */
     public function getUser()
-    {
-        return $this->hasOne(User::class, ['id' => 'user_id']);
-    }
-
-    /**
-     * Gets query for [[User0]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser0()
     {
         return $this->hasOne(User::class, ['id' => 'user_id']);
     }

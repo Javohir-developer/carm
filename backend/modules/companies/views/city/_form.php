@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'region_id')->dropDownList($model->regions, ['prompt'=>Yii::t('app', Yii::t('app', 'Выбрать область'))]) ?>
 
-    <?= $form->field($model, 'status')->radioList($model::Status()) ?>
+    <?= $form->field($model, 'status')->radioList($model::status())  ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

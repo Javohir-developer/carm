@@ -18,8 +18,8 @@ class m220907_174241_create_city_table extends Migration
             'name_uz' => $this->string(),
             'status' => $this->integer()->notNull()->defaultValue(1),
             'region_id' => $this->integer(),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
+            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
         ]);
         $this->addForeignKey('fk_city_region',  'city', 'region_id', 'region', 'id');
     }

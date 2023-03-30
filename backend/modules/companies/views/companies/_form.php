@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
     <div class="row">
         <div class="col-sm-6">
             <?= $form->field($model, 'name')->textInput(['maxlength' => 12]) ?>
-            <?= $form->field($model, 'status')->radioList($model::Status()) ?>
+            <?= $form->field($model, 'status')->radioList($model::status())  ?>
         </div>
     </div>
 

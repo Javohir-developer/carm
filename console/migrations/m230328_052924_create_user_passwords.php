@@ -18,8 +18,8 @@ class m230328_052924_create_user_passwords extends Migration
             'username' => $this->string(),
             'password' => $this->string(),
             'company_name' => $this->string()->null(),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
+            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
+            'updated_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
         ]);
     }
 

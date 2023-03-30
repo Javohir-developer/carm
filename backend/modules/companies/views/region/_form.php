@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name_uz')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->radioList($model::Status()) ?>
+    <?= $form->field($model, 'status')->radioList($model::status())  ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

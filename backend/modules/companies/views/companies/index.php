@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Companies', ['create'], ['class' => 'btn btn-success  float-right margin-top-15']) ?>
+        <?= Html::a('Create Companies', ['create'], ['class' => 'btn btn-success  float-right margin-bottom-15']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status',
                 'value' => function($model) {
-                    return $model->status == 1 ? 'Актив' : 'Не актив';
+                    return $model->status == 1 ? Yii::t('app', 'Актив') : Yii::t('app', 'Не актив');
                 }
             ],
             ['class' => 'yii\grid\ActionColumn'],
