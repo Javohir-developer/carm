@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+
+  backend:
+    image: carm
+    container_name: carm
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile
+    volumes:
+      - .:/var/www/app
+    ports:
+      - '5050:8083'
+
+  pgsql:
+    container_name: carm-db
+    image: postgres:9.5
+    environment:
+      - POSTGRES_DB=carm
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+    volumes:
+      - ./docker/postgres_data:/var/lib/postgresql/data/
+    ports:
+      - "5432:5432"

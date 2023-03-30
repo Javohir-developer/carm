@@ -1,0 +1,27 @@
+server {
+    listen 8083;
+    server_name _;
+    root /var/www/app/backend/web;
+    index index.php;
+
+    access_log /var/log/nginx/carm_access.log;
+    error_log /var/log/nginx/carm_error.log;
+
+    location / {
+        try_files $uri $uri/ /index.php$is_args$args;
+    }
+
+    location ~ \.php$ {
+        #fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        #include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+        fastcgi_index index.php;
+        include fastcgi.conf;
+        #fastgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        #try_files $uri =404;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
