@@ -3,29 +3,28 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%suppliers}}`.
+ * Handles the creation of table `{{%warehouses}}`.
  */
-class m230330_083628_create_suppliers_table extends Migration
+class m230330_085746_create_warehouses_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%suppliers}}', [
+        $this->createTable('{{%warehouses}}', [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer(),
             'company_id' => $this->integer(),
             'name' => $this->string(),
-            'phone' => $this->string(),
-            'inn' => $this->integer(),
-            'ndc' => $this->integer(),
+            'type' => $this->integer(),
+            'description' => $this->text(),
             'status' => $this->integer()->notNull()->defaultValue(1),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
         ]);
-        $this->addForeignKey('fk_suppliers_companies',  'suppliers', 'company_id', 'companies', 'id');
-        $this->addForeignKey('fk_suppliers_user',  'suppliers', 'user_id', 'user', 'id');
+        $this->addForeignKey('fk_warehouses_companies',  'warehouses', 'company_id', 'companies', 'id');
+        $this->addForeignKey('fk_warehouses_user',  'warehouses', 'user_id', 'user', 'id');
     }
 
     /**
@@ -33,6 +32,6 @@ class m230330_083628_create_suppliers_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%suppliers}}');
+        $this->dropTable('{{%warehouses}}');
     }
 }

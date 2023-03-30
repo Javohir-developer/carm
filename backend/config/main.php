@@ -21,21 +21,15 @@ return [
             'class' => 'yii\gii\Module',
             'allowedIPs' => ['*']
         ],
-        'products' => [
-            'class' => 'backend\modules\products\Products',
-        ],
-        'categories' => [
-            'class' => 'backend\modules\categories\Categories',
-        ],
         'companies' => [
             'class' => 'backend\modules\companies\Companies',
         ],
         'statistics' => [
             'class' => 'backend\modules\statistics\Statistics',
         ],
-        'services' => [
-            'class' => 'backend\modules\services\Services',
-        ]
+        'parameters' => [
+            'class' => 'backend\modules\parameters\Parameters',
+        ],
     ],
     'components' => [
         'formatter' => [
