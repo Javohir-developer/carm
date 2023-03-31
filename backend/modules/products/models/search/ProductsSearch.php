@@ -1,13 +1,13 @@
 <?php
 
-namespace app\modules\parameters\models\search;
+namespace app\modules\products\models\search;
 
-use backend\modules\parameters\models\Products;
+use backend\modules\products\models\Products;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * ProductsSearch represents the model behind the search form of `backend\modules\parameters\models\Products`.
+ * ProductsSearch represents the model behind the search form of `backend\modules\products\models\Products`.
  */
 class ProductsSearch extends Products
 {

@@ -1,13 +1,13 @@
 <?php
 
-use backend\modules\parameters\models\Products;
+use backend\modules\products\models\Products;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
 /** @var yii\web\View $this */
-/** @var \app\modules\parameters\models\search\ProductsSearch $searchModel */
+/** @var \app\modules\products\models\search\ProductsSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = 'Products';

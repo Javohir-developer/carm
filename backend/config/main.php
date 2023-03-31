@@ -15,7 +15,6 @@ return [
     'modules' => [
         'gridview' => [
             'class' => 'kartik\grid\Module',
-            // other module settings
         ],
         'gii' => [
             'class' => 'yii\gii\Module',
@@ -29,6 +28,9 @@ return [
         ],
         'parameters' => [
             'class' => 'backend\modules\parameters\Parameters',
+        ],
+        'products' => [
+            'class' => 'backend\modules\products\Products',
         ],
     ],
     'components' => [

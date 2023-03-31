@@ -1,7 +1,11 @@
 <?php
 
-namespace backend\modules\parameters\models;
+namespace backend\modules\products\models;
 
+use backend\modules\companies\models\Companies;
+use backend\modules\parameters\models\Suppliers;
+use backend\modules\parameters\models\Warehouses;
+use common\models\User;
 use Yii;
 
 /**
