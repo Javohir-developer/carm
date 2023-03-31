@@ -10,3 +10,52 @@
 .margin-top-15{
   margin-top: 15px;
 }
+.menu-login{
+    margin-left: auto!important;
+    margin-top: 6px;
+}
+.dropdown-login{
+    padding: 5px 16px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    margin-right: -10px;
+    /* margin-left: -10px; */
+    margin-top: -1px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #e0e6ed;
+}
+.media-body h5 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 3px;
+    color: #000;
+}
+.media-body p {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 0;
+    color: #4361ee;
+}
+
+.dropdown-item a {
+    display: block;
+    color: #515365;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 3px 4px;
+    border-radius: 8px;
+}
+@media only screen and (min-width: 991px){
+    .header-container{
+        display: none;
+    }
+    .sidebar-wrapper{
+        top: 0!important;
+    }
+    #content {
+        margin-top: 58px!important;
+    }
+}
+.sidebar-wrapper #sidebar {
+    border-radius: 0px!important;
+}

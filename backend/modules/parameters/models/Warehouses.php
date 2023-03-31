@@ -2,6 +2,7 @@
 
 namespace backend\modules\parameters\models;
 
+use backend\models\BaseModel;
 use backend\modules\companies\models\Companies;
 use common\models\User;
 use Yii;
@@ -22,7 +23,7 @@ use Yii;
  * @property Companies $company
  * @property User $user
  */
-class Warehouses extends \yii\db\ActiveRecord
+class Warehouses extends BaseModel
 {
     /**
      * {@inheritdoc}
@@ -38,12 +39,12 @@ class Warehouses extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'company_id', 'type', 'status', 'created_at', 'updated_at'], 'default', 'value' => null],
-            [['user_id', 'company_id', 'type', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['created_at', 'updated_at'], 'safe'],
+            [['user_id'], 'default', 'value' => Yii::$app->user->id],
+            [['company_id'], 'default', 'value' => Yii::$app->company->id()],
+            [['user_id', 'company_id', 'type', 'status'], 'integer'],
             [['description'], 'string'],
             [['name'], 'string', 'max' => 255],
-            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Companies::class, 'targetAttribute' => ['company_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -53,15 +54,14 @@ class Warehouses extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'company_id' => 'Company ID',
-            'name' => 'Name',
-            'type' => 'Type',
-            'description' => 'Description',
-            'status' => 'Status',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'name' => Yii::t('app', 'Имя'),
+            'phone' => Yii::t('app', 'Телефон'),
+            'type' => Yii::t('app', 'Тип'),
+            'description' => Yii::t('app', 'Описание'),
+            'inn' => 'Inn',
+            'ndc' => 'Ndc',
+            'status' => Yii::t('app', 'Статус'),
+            'created_at' => Yii::t('app', 'Созданное время'),
         ];
     }
 

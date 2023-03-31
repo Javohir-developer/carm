@@ -28,6 +28,10 @@ class Users extends User
      */
     public $password;
     const SCENARIO_CREATE = 'create';
+    const STATUS_ACTIVE = 10;
+    const STATUS_INACTIVE = 9;
+
+
     public static function tableName()
     {
         return 'user';
@@ -97,5 +101,12 @@ class Users extends User
 
     public static function rule(){
         return ArrayHelper::map(AuthItem::find()->all(), 'name', 'name');
+    }
+
+    public static function userStatus(){
+        return [
+            self::STATUS_ACTIVE => Yii::t('app', 'Активный'),
+            self::STATUS_INACTIVE => Yii::t('app', 'Неактивный'),
+        ];
     }
 }

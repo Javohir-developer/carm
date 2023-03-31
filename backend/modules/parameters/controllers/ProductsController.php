@@ -2,33 +2,43 @@
 
 namespace backend\modules\parameters\controllers;
 
-use app\modules\parameters\models\search\WarehousesSearch;
-use backend\controllers\BaseController;
-use backend\modules\parameters\models\Warehouses;
-use Yii;
+use app\modules\parameters\models\search\ProductsSearch;
+use backend\modules\parameters\models\Products;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
- * WarehousesController implements the CRUD actions for Warehouses model.
+ * ProductsController implements the CRUD actions for Products model.
  */
-class WarehousesController extends BaseController
+class ProductsController extends Controller
 {
-    public function beforeAction($action)
+    /**
+     * @inheritDoc
+     */
+    public function behaviors()
     {
-        $this->view->title = Yii::t('app', 'Склады');
-        return parent::beforeAction($action);
+        return array_merge(
+            parent::behaviors(),
+            [
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'delete' => ['POST'],
+                    ],
+                ],
+            ]
+        );
     }
 
     /**
-     * Lists all Warehouses models.
+     * Lists all Products models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new WarehousesSearch();
+        $searchModel = new ProductsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -38,7 +48,7 @@ class WarehousesController extends BaseController
     }
 
     /**
-     * Displays a single Warehouses model.
+     * Displays a single Products model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -51,20 +61,18 @@ class WarehousesController extends BaseController
     }
 
     /**
-     * Creates a new Warehouses model.
+     * Creates a new Products model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Warehouses();
+        $model = new Products();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                Yii::$app->session->setFlash('success', Yii::t('app', 'Добавлена новая '));
-                return $this->redirect(['index', 'id' => $model->id]);
+                return $this->redirect(['view', 'id' => $model->id]);
             }
-            Yii::$app->session->setFlash('error', Yii::t('app', "Ошибка с склад"));
         } else {
             $model->loadDefaultValues();
         }
@@ -75,7 +83,7 @@ class WarehousesController extends BaseController
     }
 
     /**
-     * Updates an existing Warehouses model.
+     * Updates an existing Products model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -85,12 +93,8 @@ class WarehousesController extends BaseController
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post())) {
-            if ($model->save()){
-                Yii::$app->session->setFlash('success', Yii::t('app', 'Обновил нового склад'));
-                return $this->redirect(['index', 'id' => $model->id]);
-            }
-            Yii::$app->session->setFlash('error', Yii::t('app', "Ошибка с склад"));
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -99,7 +103,7 @@ class WarehousesController extends BaseController
     }
 
     /**
-     * Deletes an existing Warehouses model.
+     * Deletes an existing Products model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -113,15 +117,15 @@ class WarehousesController extends BaseController
     }
 
     /**
-     * Finds the Warehouses model based on its primary key value.
+     * Finds the Products model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Warehouses the loaded model
+     * @return Products the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Warehouses::findOne(['id' => $id])) !== null) {
+        if (($model = Products::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

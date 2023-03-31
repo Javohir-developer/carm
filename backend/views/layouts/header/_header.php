@@ -49,7 +49,6 @@ use yii\helpers\Url;
                 </a>
             </li>
 
-
             <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <div class="avatar-container">
@@ -87,6 +86,7 @@ use yii\helpers\Url;
         </ul>
     </header>
 </div>
+
 <!--  END NAVBAR  -->
 
 <!--  BEGIN MAIN CONTAINER  -->

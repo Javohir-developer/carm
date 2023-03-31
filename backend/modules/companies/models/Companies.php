@@ -23,7 +23,7 @@ use Yii;
  * @property string|null $longitude
  * @property string|null $working_mode
  * @property string|null $email
- * @property int|null $call
+ * @property int|null $phone
  * @property string|null $telegram
  * @property string|null $facebook
  * @property string|null $instagram
@@ -55,7 +55,7 @@ class Companies extends BaseModel
         return [
             [['photo_companies', 'created_at', 'updated_at'], 'safe'],
             [['about'], 'string'],
-            [['status',  'call', 'companies_type'], 'integer'],
+            [['status',  'phone', 'companies_type'], 'integer'],
             [['name'], 'required'],
             [['name', 'password', 'currency', 'address_ru', 'address_uz', 'latitude', 'longitude', 'working_mode', 'email', 'telegram', 'facebook', 'instagram'], 'string', 'max' => 255],
             [['logo'], 'string', 'max' => 225],

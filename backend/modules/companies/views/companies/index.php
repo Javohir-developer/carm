@@ -31,6 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->status == 1 ? Yii::t('app', 'Актив') : Yii::t('app', 'Не актив');
                 }
             ],
+            'created_at',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

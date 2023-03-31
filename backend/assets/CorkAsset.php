@@ -19,10 +19,10 @@ class CorkAsset extends AssetBundle
 //        'https://fonts.googleapis.com/css?family=Nunito:400,600,700',
         'cork-style2/src/bootstrap/css/bootstrap.min.css',
         'cork-style2/layouts/horizontal-light-menu/css/light/plugins.css',
-        'cork-style2/layouts/horizontal-light-menu/css/dark/plugins.css',
+//        'cork-style2/layouts/horizontal-light-menu/css/dark/plugins.css',
         'cork-style2/src/plugins/src/apex/apexcharts.css',
         'cork-style2/src/assets/css/light/dashboard/dash_1.css',
-        'cork-style2/src/assets/css/dark/dashboard/dash_1.css',
+//        'cork-style2/src/assets/css/dark/dashboard/dash_1.css',
         'cork-style2/assets/css/main.css',
         'cork-style2/assets/css/alert.css',
     ];
