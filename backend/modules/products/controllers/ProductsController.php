@@ -3,6 +3,7 @@
 namespace backend\modules\products\controllers;
 
 use app\modules\products\models\search\ProductsSearch;
+use backend\controllers\BaseController;
 use backend\modules\products\models\Products;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -11,25 +12,8 @@ use yii\web\NotFoundHttpException;
 /**
  * ProductsController implements the CRUD actions for Products model.
  */
-class ProductsController extends Controller
+class ProductsController extends BaseController
 {
-    /**
-     * @inheritDoc
-     */
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ]
-        );
-    }
 
     /**
      * Lists all Products models.
@@ -38,10 +22,12 @@ class ProductsController extends Controller
      */
     public function actionIndex()
     {
+        $model = new Products();
         $searchModel = new ProductsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
+            'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

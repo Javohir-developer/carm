@@ -23,6 +23,11 @@ class CorkAsset extends AssetBundle
         'cork-style2/src/plugins/src/apex/apexcharts.css',
         'cork-style2/src/assets/css/light/dashboard/dash_1.css',
 //        'cork-style2/src/assets/css/dark/dashboard/dash_1.css',
+
+        'cork-style2/src/plugins/src/table/datatable/datatables.css',
+        'cork-style2/src/plugins/css/light/table/datatable/dt-global_style.css',
+//        'cork-style2/src/plugins/css/dark/table/datatable/dt-global_style.css',
+
         'cork-style2/assets/css/main.css',
         'cork-style2/assets/css/alert.css',
     ];

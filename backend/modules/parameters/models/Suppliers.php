@@ -3,7 +3,7 @@
 namespace backend\modules\parameters\models;
 
 use backend\modules\companies\models\Companies;
-use common\models\BaseModel;
+use backend\models\BaseModel;
 use common\models\User;
 use Yii;
 

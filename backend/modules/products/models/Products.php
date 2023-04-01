@@ -2,6 +2,7 @@
 
 namespace backend\modules\products\models;
 
+use backend\models\BaseModel;
 use backend\modules\companies\models\Companies;
 use backend\modules\parameters\models\Suppliers;
 use backend\modules\parameters\models\Warehouses;
@@ -52,7 +53,7 @@ use Yii;
  * @property User $user
  * @property Warehouses $warehouse
  */
-class Products extends \yii\db\ActiveRecord
+class Products extends BaseModel
 {
     /**
      * {@inheritdoc}
@@ -68,14 +69,13 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'currency_amount', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'entry_price', 'exit_price', 'old_entry_price', 'old_exit_price', 'unit_type', 'amount', 'input_status', 'status'], 'default', 'value' => null],
+            [['user_id'], 'default', 'value' => Yii::$app->user->id],
+            [['company_id'], 'default', 'value' => Yii::$app->company->id()],
             [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'currency_amount', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'entry_price', 'exit_price', 'old_entry_price', 'old_exit_price', 'unit_type', 'amount', 'input_status', 'status'], 'integer'],
             [['date', 'production_time', 'valid', 'created_at', 'updated_at'], 'safe'],
             [['evaluation', 'old_evaluation'], 'number'],
             [['type', 'model', 'brand', 'size'], 'string', 'max' => 255],
-            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Companies::class, 'targetAttribute' => ['company_id' => 'id']],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Suppliers::class, 'targetAttribute' => ['supplier_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
             [['warehouse_id'], 'exist', 'skipOnError' => true, 'targetClass' => Warehouses::class, 'targetAttribute' => ['warehouse_id' => 'id']],
         ];
     }
@@ -86,19 +86,16 @@ class Products extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'company_id' => 'Company ID',
+            'barcode' => 'Barcode',
+            'type' => 'Type',
+            'brand' => 'Brand',
             'warehouse_id' => 'Warehouse ID',
             'supplier_id' => 'Supplier ID',
             'date' => 'Date',
             'currency' => 'Currency',
             'currency_amount' => 'Currency Amount',
-            'barcode' => 'Barcode',
             'group' => 'Group',
-            'type' => 'Type',
             'model' => 'Model',
-            'brand' => 'Brand',
             'size' => 'Size',
             'ikpu' => 'Ikpu',
             'unit_amount' => 'Unit Amount',

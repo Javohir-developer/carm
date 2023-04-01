@@ -39,6 +39,7 @@ return [
             'dateFormat' => 'php:d-M-Y',
             'datetimeFormat' => 'php:d-M-Y H:i:s',
             'timeFormat' => 'php:H:i:s',
+            'nullDisplay' => '&nbsp;',
         ],
         'assetManager' => [
             'bundles' => [
