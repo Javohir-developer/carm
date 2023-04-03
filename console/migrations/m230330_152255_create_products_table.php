@@ -14,11 +14,11 @@ class m230330_152255_create_products_table extends Migration
     {
         $this->createTable('{{%products}}', [
             'id' => $this->primaryKey(),
-            'user_id' => $this->integer(),
-            'company_id' => $this->integer(),
+            'user_id' => $this->integer()->notNull(),
+            'company_id' => $this->integer()->notNull(),
 
-            'warehouse_id' => $this->integer(),
-            'supplier_id' => $this->integer(),
+            'warehouse_id' => $this->integer()->notNull(),
+            'supplier_id' => $this->integer()->notNull(),
             'date' => $this->date(),
             'currency' => $this->integer()->notNull()->defaultValue(1),
             'currency_amount' => $this->integer(),

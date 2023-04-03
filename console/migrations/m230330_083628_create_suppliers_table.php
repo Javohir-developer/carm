@@ -14,8 +14,8 @@ class m230330_083628_create_suppliers_table extends Migration
     {
         $this->createTable('{{%suppliers}}', [
             'id' => $this->primaryKey(),
-            'user_id' => $this->integer(),
-            'company_id' => $this->integer(),
+            'user_id' => $this->integer()->notNull(),
+            'company_id' => $this->integer()->notNull(),
             'name' => $this->string(),
             'phone' => $this->bigInteger(),
             'inn' => $this->bigInteger(),

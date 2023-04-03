@@ -14,8 +14,8 @@ class m230330_085746_create_warehouses_table extends Migration
     {
         $this->createTable('{{%warehouses}}', [
             'id' => $this->primaryKey(),
-            'user_id' => $this->integer(),
-            'company_id' => $this->integer(),
+            'user_id' => $this->integer()->notNull(),
+            'company_id' => $this->integer()->notNull(),
             'name' => $this->string(),
             'type' => $this->integer(),
             'description' => $this->text(),

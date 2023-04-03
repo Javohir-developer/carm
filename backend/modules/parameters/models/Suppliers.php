@@ -3,7 +3,6 @@
 namespace backend\modules\parameters\models;
 
 use backend\modules\companies\models\Companies;
-use backend\models\BaseModel;
 use common\models\User;
 use Yii;
 
@@ -11,20 +10,21 @@ use Yii;
  * This is the model class for table "suppliers".
  *
  * @property int $id
- * @property int|null $user_id
- * @property int|null $company_id
+ * @property int $user_id
+ * @property int $company_id
  * @property string|null $name
  * @property int|null $phone
  * @property int|null $inn
  * @property int|null $ndc
  * @property int $status
- * @property int|null $created_at
- * @property int|null $updated_at
+ * @property string|null $created_at
+ * @property string|null $updated_at
  *
  * @property Companies $company
+ * @property Products[] $products
  * @property User $user
  */
-class Suppliers extends BaseModel
+class Suppliers extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -40,12 +40,13 @@ class Suppliers extends BaseModel
     public function rules()
     {
         return [
-            [['created_at', 'updated_at'], 'safe'],
             [['user_id'], 'default', 'value' => Yii::$app->user->id],
             [['company_id'], 'default', 'value' => Yii::$app->company->id()],
             [['user_id', 'company_id', 'phone', 'inn', 'ndc', 'status'], 'integer'],
+            [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
-            [['phone'], 'string', 'max' => 12, 'min' => 12],
+            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Companies::class, 'targetAttribute' => ['company_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -55,12 +56,16 @@ class Suppliers extends BaseModel
     public function attributeLabels()
     {
         return [
-            'name' => Yii::t('app', 'Имя'),
-            'phone' => Yii::t('app', 'Телефон'),
+            'id' => 'ID',
+            'user_id' => 'User ID',
+            'company_id' => 'Company ID',
+            'name' => 'Name',
+            'phone' => 'Phone',
             'inn' => 'Inn',
             'ndc' => 'Ndc',
-            'status' => Yii::t('app', 'Статус'),
-            'created_at' => Yii::t('app', 'Созданное время'),
+            'status' => 'Status',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 
@@ -72,6 +77,16 @@ class Suppliers extends BaseModel
     public function getCompany()
     {
         return $this->hasOne(Companies::class, ['id' => 'company_id']);
+    }
+
+    /**
+     * Gets query for [[Products]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProducts()
+    {
+        return $this->hasMany(Products::class, ['supplier_id' => 'id']);
     }
 
     /**

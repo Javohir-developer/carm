@@ -11,16 +11,17 @@ use Yii;
  * This is the model class for table "warehouses".
  *
  * @property int $id
- * @property int|null $user_id
- * @property int|null $company_id
+ * @property int $user_id
+ * @property int $company_id
  * @property string|null $name
  * @property int|null $type
  * @property string|null $description
  * @property int $status
- * @property int|null $created_at
- * @property int|null $updated_at
+ * @property string|null $created_at
+ * @property string|null $updated_at
  *
  * @property Companies $company
+ * @property Products[] $products
  * @property User $user
  */
 class Warehouses extends BaseModel
@@ -39,12 +40,14 @@ class Warehouses extends BaseModel
     public function rules()
     {
         return [
-            [['created_at', 'updated_at'], 'safe'],
             [['user_id'], 'default', 'value' => Yii::$app->user->id],
             [['company_id'], 'default', 'value' => Yii::$app->company->id()],
             [['user_id', 'company_id', 'type', 'status'], 'integer'],
             [['description'], 'string'],
+            [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
+            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Companies::class, 'targetAttribute' => ['company_id' => 'id']],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -54,14 +57,15 @@ class Warehouses extends BaseModel
     public function attributeLabels()
     {
         return [
-            'name' => Yii::t('app', 'Имя'),
-            'phone' => Yii::t('app', 'Телефон'),
-            'type' => Yii::t('app', 'Тип'),
-            'description' => Yii::t('app', 'Описание'),
-            'inn' => 'Inn',
-            'ndc' => 'Ndc',
-            'status' => Yii::t('app', 'Статус'),
-            'created_at' => Yii::t('app', 'Созданное время'),
+            'id' => 'ID',
+            'user_id' => 'User ID',
+            'company_id' => 'Company ID',
+            'name' => 'Name',
+            'type' => 'Type',
+            'description' => 'Description',
+            'status' => 'Status',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 
@@ -73,6 +77,16 @@ class Warehouses extends BaseModel
     public function getCompany()
     {
         return $this->hasOne(Companies::class, ['id' => 'company_id']);
+    }
+
+    /**
+     * Gets query for [[Products]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProducts()
+    {
+        return $this->hasMany(Products::class, ['warehouse_id' => 'id']);
     }
 
     /**
