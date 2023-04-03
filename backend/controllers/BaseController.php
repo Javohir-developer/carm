@@ -28,7 +28,7 @@ class BaseController extends \yii\web\Controller
                         'roles' => ['@'],// Правило для аутентифицированных пользователей.
                     ],
                     [
-                        'actions' => ['index', 'create', 'view', 'update', 'delete'],
+                        'actions' => ['index', 'create', 'view', 'update', 'delete', 'add-product-to-cache', 'update-product-to-cache'],
                         'allow' => true,
                         'roles' => ['Drektor'],
                         'matchCallback' => function () {

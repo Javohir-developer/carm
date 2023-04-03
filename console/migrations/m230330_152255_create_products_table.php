@@ -20,7 +20,7 @@ class m230330_152255_create_products_table extends Migration
             'warehouse_id' => $this->integer(),
             'supplier_id' => $this->integer(),
             'date' => $this->date(),
-            'currency' => $this->integer(),
+            'currency' => $this->integer()->notNull()->defaultValue(1),
             'currency_amount' => $this->integer(),
 
 
@@ -39,7 +39,7 @@ class m230330_152255_create_products_table extends Migration
             'production_time' => $this->date(),
             'term_amount' => $this->integer(),
             'term_type' => $this->integer(),
-            'valid' => $this->time(),
+            'valid' => $this->date(),
 
             'ndc' => $this->integer(),
             'entry_price' => $this->integer(),

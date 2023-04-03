@@ -19,6 +19,7 @@ return array(
     'unclead\\multipleinput\\tests\\' => array($vendorDir . '/unclead/yii2-multiple-input/tests'),
     'unclead\\multipleinput\\examples\\' => array($vendorDir . '/unclead/yii2-multiple-input/examples'),
     'unclead\\multipleinput\\' => array($vendorDir . '/unclead/yii2-multiple-input/src'),
+    'trntv\\yii\\datetime\\' => array($vendorDir . '/trntv/yii2-datetime-widget/src'),
     'mihaildev\\elfinder\\' => array($vendorDir . '/mihaildev/yii2-elfinder'),
     'mihaildev\\ckeditor\\' => array($vendorDir . '/mihaildev/yii2-ckeditor'),
     'linslin\\yii2\\curl\\' => array($vendorDir . '/linslin/yii2-curl'),

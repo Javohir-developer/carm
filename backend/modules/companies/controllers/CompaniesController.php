@@ -21,12 +21,12 @@ class CompaniesController extends BaseController
     public function beforeAction($action)
     {
         $this->view->title = Yii::t('app', 'Компания');
-        $this->view->registerJsFile('@web/modules-assets/companies/js/company.js', [
-            'depends' => JqueryAsset::className()
-        ]);
-        $this->view->registerCssFile('@web/modules-assets/companies/css/company.css', [
-            ['depends' => BootstrapAsset::className()]
-        ]);
+//        $this->view->registerJsFile('@web/, [
+//            'depends' => JqueryAsset::className()
+//        ]);
+//        $this->view->registerCssFile('@web/', [
+//            ['depends' => BootstrapAsset::className()]
+//        ]);
         return parent::beforeAction($action);
     }
     /**

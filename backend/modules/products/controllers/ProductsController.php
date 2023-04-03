@@ -5,15 +5,29 @@ namespace backend\modules\products\controllers;
 use app\modules\products\models\search\ProductsSearch;
 use backend\controllers\BaseController;
 use backend\modules\products\models\Products;
+use Yii;
+use yii\bootstrap\BootstrapAsset;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
+use yii\web\JqueryAsset;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
  */
 class ProductsController extends BaseController
 {
+    public function beforeAction($action)
+    {
+        $this->view->registerJsFile('@web/cork-style2/assets/modules/products/js/main.js', [
+            'depends' => JqueryAsset::className()
+        ]);
+        $this->view->registerCssFile('@web/cork-style2/assets/modules/products/css/main.css', [
+            ['depends' => BootstrapAsset::className()]
+        ]);
+        return parent::beforeAction($action);
+    }
 
     /**
      * Lists all Products models.
@@ -23,14 +37,19 @@ class ProductsController extends BaseController
     public function actionIndex()
     {
         $model = new Products();
-        $searchModel = new ProductsSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
         return $this->render('index', [
-            'model' => $model,
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'model' => $model
         ]);
+    }
+
+    public function actionAddProductToCache(){
+        $model = new Products();
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if ($model->load($this->request->post())) {
+            if ($model->addProductToCache()){
+                return $this->renderPartial('_cache-index');
+            }
+        }
     }
 
     /**

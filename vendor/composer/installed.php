@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '5bf4d33b86e156294df6e2c9d416eb96fc197334',
+        'reference' => '0d9a37b4175a46fed5b18779504b4a1aa27e9c93',
         'name' => 'yiisoft/yii2-app-advanced',
         'dev' => true,
     ),
@@ -70,6 +70,15 @@
             'reference' => 'd364be5b066b38f3675a5a1dc174ce1ab1f3360e',
             'dev_requirement' => false,
         ),
+        'bower-asset/eonasdan-bootstrap-datetimepicker' => array(
+            'pretty_version' => '4.x-dev',
+            'version' => '4.9999999.9999999.9999999-dev',
+            'type' => 'bower-asset',
+            'install_path' => __DIR__ . '/../bower-asset/eonasdan-bootstrap-datetimepicker',
+            'aliases' => array(),
+            'reference' => '5b97d5b89e4bcbded740efed7dfb1f3ec4c745a2',
+            'dev_requirement' => false,
+        ),
         'bower-asset/inputmask' => array(
             'pretty_version' => '3.3.11',
             'version' => '3.3.11.0',
@@ -95,6 +104,15 @@
             'install_path' => __DIR__ . '/../bower-asset/jquery-ui',
             'aliases' => array(),
             'reference' => '44ecf3794cc56b65954cc19737234a3119d036cc',
+            'dev_requirement' => false,
+        ),
+        'bower-asset/moment' => array(
+            'pretty_version' => '2.29.4',
+            'version' => '2.29.4.0',
+            'type' => 'bower-asset',
+            'install_path' => __DIR__ . '/../bower-asset/moment',
+            'aliases' => array(),
+            'reference' => '000ac1800e620f770f4eb31b5ae908f6167b0ab2',
             'dev_requirement' => false,
         ),
         'bower-asset/punycode' => array(
@@ -280,7 +298,7 @@
             'aliases' => array(
                 0 => '1.21.x-dev',
             ),
-            'reference' => '275f172eba8c4f0bbb588c6303cc95faf6658e14',
+            'reference' => 'e43a73207c7ab3a081c3cd7d2f1df32c06ef33ba',
             'dev_requirement' => true,
         ),
         'guzzlehttp/psr7' => array(
@@ -478,7 +496,7 @@
             'aliases' => array(
                 0 => '2.2.x-dev',
             ),
-            'reference' => 'f74f2cfbd5b4628ea578735890c39f9a8e4ed062',
+            'reference' => 'f554b1c5cadb36f00949a9df7aa79395754cb667',
             'dev_requirement' => false,
         ),
         'kartik-v/yii2-widget-sidenav' => array(
@@ -754,7 +772,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../phpunit/phpunit',
             'aliases' => array(),
-            'reference' => 'dd5ade0546ce911c938da8b665f93b928efd3835',
+            'reference' => 'd71cb094df51c339285e8eacc6ab34202a95619b',
             'dev_requirement' => true,
         ),
         'psr/container' => array(
@@ -1204,6 +1222,17 @@
             'reference' => '34a41e998c2183e22995f158c581e7b5e755ab9e',
             'dev_requirement' => true,
         ),
+        'trntv/yii2-datetime-widget' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'type' => 'yii2-extension',
+            'install_path' => __DIR__ . '/../trntv/yii2-datetime-widget',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'reference' => '0340f8aec151f893604dc730624d159205cbf57f',
+            'dev_requirement' => false,
+        ),
         'unclead/yii2-multiple-input' => array(
             'pretty_version' => '2.27.0',
             'version' => '2.27.0.0',
@@ -1241,7 +1270,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '5bf4d33b86e156294df6e2c9d416eb96fc197334',
+            'reference' => '0d9a37b4175a46fed5b18779504b4a1aa27e9c93',
             'dev_requirement' => false,
         ),
         'yiisoft/yii2-bootstrap' => array(

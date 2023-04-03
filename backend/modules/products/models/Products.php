@@ -2,12 +2,12 @@
 
 namespace backend\modules\products\models;
 
-use backend\models\BaseModel;
 use backend\modules\companies\models\Companies;
 use backend\modules\parameters\models\Suppliers;
 use backend\modules\parameters\models\Warehouses;
 use common\models\User;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "products".
@@ -18,7 +18,7 @@ use Yii;
  * @property int|null $warehouse_id
  * @property int|null $supplier_id
  * @property string|null $date
- * @property int|null $currency
+ * @property int $currency
  * @property int|null $currency_amount
  * @property int|null $barcode
  * @property int|null $group
@@ -53,7 +53,7 @@ use Yii;
  * @property User $user
  * @property Warehouses $warehouse
  */
-class Products extends BaseModel
+class Products extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -62,6 +62,14 @@ class Products extends BaseModel
     {
         return 'products';
     }
+
+
+    public static function cacheProd()
+    {
+        return Yii::$app->user->id.'_'.Yii::$app->company->id();
+    }
+
+
 
     /**
      * {@inheritdoc}
@@ -86,16 +94,19 @@ class Products extends BaseModel
     public function attributeLabels()
     {
         return [
-            'barcode' => 'Barcode',
-            'type' => 'Type',
-            'brand' => 'Brand',
+            'id' => 'ID',
+            'user_id' => 'User ID',
+            'company_id' => 'Company ID',
             'warehouse_id' => 'Warehouse ID',
             'supplier_id' => 'Supplier ID',
             'date' => 'Date',
             'currency' => 'Currency',
             'currency_amount' => 'Currency Amount',
+            'barcode' => 'Barcode',
             'group' => 'Group',
+            'type' => 'Type',
             'model' => 'Model',
+            'brand' => 'Brand',
             'size' => 'Size',
             'ikpu' => 'Ikpu',
             'unit_amount' => 'Unit Amount',
@@ -119,6 +130,21 @@ class Products extends BaseModel
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public function addProductToCache(){
+        if ($this->validate()){
+            Yii::$app->company->session();
+            $_SESSION[self::cacheProd()][] = $this->attributes;
+            return true;
+        }
+    }
+
+    public static function getProductInCache(){
+        if (!empty($_SESSION[self::cacheProd()])){
+            return $_SESSION[self::cacheProd()];
+        }
+        return [];
     }
 
     /**
@@ -159,5 +185,22 @@ class Products extends BaseModel
     public function getWarehouse()
     {
         return $this->hasOne(Warehouses::class, ['id' => 'warehouse_id']);
+    }
+
+    public static function currencyType(){
+        return [
+          1 => Yii::t('app', 'SUM'),
+          2 => Yii::t('app', 'USD')
+        ];
+    }
+
+    public function Warehouses(){
+        $warehouse = Warehouses::find()->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id()])->all();
+        return ArrayHelper::map($warehouse, 'id', 'name');
+    }
+
+    public function Suppliers(){
+        $warehouse = Suppliers::find()->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id()])->all();
+        return ArrayHelper::map($warehouse, 'id', 'name');
     }
 }

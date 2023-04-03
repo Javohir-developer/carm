@@ -294,6 +294,31 @@
             "install-path": "../bower-asset/bootstrap-datepicker"
         },
         {
+            "name": "bower-asset/eonasdan-bootstrap-datetimepicker",
+            "version": "4.x-dev",
+            "version_normalized": "4.9999999.9999999.9999999-dev",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:Eonasdan/bootstrap-datetimepicker.git",
+                "reference": "5b97d5b89e4bcbded740efed7dfb1f3ec4c745a2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Eonasdan/bootstrap-datetimepicker/zipball/5b97d5b89e4bcbded740efed7dfb1f3ec4c745a2",
+                "reference": "5b97d5b89e4bcbded740efed7dfb1f3ec4c745a2"
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.8.3",
+                "bower-asset/moment": ">=2.10.5"
+            },
+            "type": "bower-asset",
+            "installation-source": "dist",
+            "license": [
+                "MIT"
+            ],
+            "install-path": "../bower-asset/eonasdan-bootstrap-datetimepicker"
+        },
+        {
             "name": "bower-asset/inputmask",
             "version": "3.3.11",
             "version_normalized": "3.3.11.0",
@@ -361,6 +386,27 @@
                 "MIT"
             ],
             "install-path": "../bower-asset/jquery-ui"
+        },
+        {
+            "name": "bower-asset/moment",
+            "version": "2.29.4",
+            "version_normalized": "2.29.4.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:moment/moment.git",
+                "reference": "000ac1800e620f770f4eb31b5ae908f6167b0ab2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moment/moment/zipball/000ac1800e620f770f4eb31b5ae908f6167b0ab2",
+                "reference": "000ac1800e620f770f4eb31b5ae908f6167b0ab2"
+            },
+            "type": "bower-asset",
+            "installation-source": "dist",
+            "license": [
+                "MIT"
+            ],
+            "install-path": "../bower-asset/moment"
         },
         {
             "name": "bower-asset/punycode",
@@ -1459,12 +1505,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FakerPHP/Faker.git",
-                "reference": "275f172eba8c4f0bbb588c6303cc95faf6658e14"
+                "reference": "e43a73207c7ab3a081c3cd7d2f1df32c06ef33ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/275f172eba8c4f0bbb588c6303cc95faf6658e14",
-                "reference": "275f172eba8c4f0bbb588c6303cc95faf6658e14",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/e43a73207c7ab3a081c3cd7d2f1df32c06ef33ba",
+                "reference": "e43a73207c7ab3a081c3cd7d2f1df32c06ef33ba",
                 "shasum": ""
             },
             "require": {
@@ -1489,7 +1535,7 @@
                 "ext-iconv": "Required by Faker\\Provider\\ru_RU\\Text::realText() for generating real Russian text.",
                 "ext-mbstring": "Required for multibyte Unicode string functionality."
             },
-            "time": "2023-03-11T18:13:54+00:00",
+            "time": "2023-04-02T16:53:22+00:00",
             "default-branch": true,
             "type": "library",
             "extra": {
@@ -2641,19 +2687,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-select2.git",
-                "reference": "f74f2cfbd5b4628ea578735890c39f9a8e4ed062"
+                "reference": "f554b1c5cadb36f00949a9df7aa79395754cb667"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/f74f2cfbd5b4628ea578735890c39f9a8e4ed062",
-                "reference": "f74f2cfbd5b4628ea578735890c39f9a8e4ed062",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/f554b1c5cadb36f00949a9df7aa79395754cb667",
+                "reference": "f554b1c5cadb36f00949a9df7aa79395754cb667",
                 "shasum": ""
             },
             "require": {
                 "kartik-v/yii2-krajee-base": ">=3.0.4",
                 "select2/select2": ">=4.0"
             },
-            "time": "2022-08-29T12:24:10+00:00",
+            "time": "2023-03-30T13:17:08+00:00",
             "default-branch": true,
             "type": "yii2-extension",
             "extra": {
@@ -2692,7 +2738,7 @@
             ],
             "support": {
                 "issues": "https://github.com/kartik-v/yii2-widget-select2/issues",
-                "source": "https://github.com/kartik-v/yii2-widget-select2/tree/v2.2.4"
+                "source": "https://github.com/kartik-v/yii2-widget-select2/tree/master"
             },
             "funding": [
                 {
@@ -4389,12 +4435,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "dd5ade0546ce911c938da8b665f93b928efd3835"
+                "reference": "d71cb094df51c339285e8eacc6ab34202a95619b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/dd5ade0546ce911c938da8b665f93b928efd3835",
-                "reference": "dd5ade0546ce911c938da8b665f93b928efd3835",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/d71cb094df51c339285e8eacc6ab34202a95619b",
+                "reference": "d71cb094df51c339285e8eacc6ab34202a95619b",
                 "shasum": ""
             },
             "require": {
@@ -4428,7 +4474,7 @@
                 "ext-xdebug": "PHP extension that provides line coverage as well as branch and path coverage",
                 "phpunit/php-invoker": "To allow enforcing time limits"
             },
-            "time": "2023-03-22T08:13:23+00:00",
+            "time": "2023-04-02T05:25:34+00:00",
             "bin": [
                 "phpunit"
             ],
@@ -7514,6 +7560,59 @@
                 }
             ],
             "install-path": "../theseer/tokenizer"
+        },
+        {
+            "name": "trntv/yii2-datetime-widget",
+            "version": "dev-master",
+            "version_normalized": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/trntv/yii2-datetime-widget.git",
+                "reference": "0340f8aec151f893604dc730624d159205cbf57f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/trntv/yii2-datetime-widget/zipball/0340f8aec151f893604dc730624d159205cbf57f",
+                "reference": "0340f8aec151f893604dc730624d159205cbf57f",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/eonasdan-bootstrap-datetimepicker": "^4.17",
+                "bower-asset/moment": "^2.21",
+                "yiisoft/yii2": "^2.0"
+            },
+            "time": "2018-11-23T12:01:56+00:00",
+            "default-branch": true,
+            "type": "yii2-extension",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "trntv\\yii\\datetime\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Eugene Terentev",
+                    "email": "eugene@terentev.net"
+                }
+            ],
+            "description": "Date/Time Picker widget for Yii2 framework",
+            "keywords": [
+                "bootstrap",
+                "datetime picker",
+                "extension",
+                "widget",
+                "yii2"
+            ],
+            "support": {
+                "issues": "https://github.com/trntv/yii2-datetime-widget/issues",
+                "source": "https://github.com/trntv/yii2-datetime-widget/tree/1.1.1"
+            },
+            "install-path": "../trntv/yii2-datetime-widget"
         },
         {
             "name": "unclead/yii2-multiple-input",

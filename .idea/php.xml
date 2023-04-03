@@ -142,6 +142,9 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/exporter" />
       <path value="$PROJECT_DIR$/vendor/sebastian/resource-operations" />
       <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/trntv/yii2-datetime-widget" />
+      <path value="$PROJECT_DIR$/vendor/bower-asset/eonasdan-bootstrap-datetimepicker" />
+      <path value="$PROJECT_DIR$/vendor/bower-asset/moment" />
     </include_path>
   </component>
   <component name="PhpStanOptionsConfiguration">

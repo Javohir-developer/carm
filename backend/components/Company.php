@@ -27,5 +27,11 @@ class Company extends Component{
     public static function decodedPassword($password){
         return base64_encode(strrev(base64_encode($password)));
     }
+
+    public function session(){
+        $session = Yii::$app->session;
+        if (!$session->isActive)
+            $session->open();
+    }
 }
 ?>

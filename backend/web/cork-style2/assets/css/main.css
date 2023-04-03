@@ -72,7 +72,7 @@
     overflow-x: auto;
     overflow-y: auto;
     position: relative;
-    max-height: 300px;
+    /*max-height: 300px;*/
 }
 .right-position-sticky{
     position: sticky;

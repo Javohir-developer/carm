@@ -1,0 +1,26 @@
+.padding-class{
+    margin-top: 3px;
+    padding-top: 3px;
+    padding-bottom: 6px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.form-control{
+    padding: 4px 1.25rem!important;
+    width: 40%;!important;
+}
+.index-form-control{
+    width: 40%;!important;
+}
+.h6-size{
+    font-size: 16px;
+}
+.index-send-button{
+    margin-top: 66% !important;
+    width: 100%;
+}
+
+
+.table-parent-div{
+    max-height: 350px;
+}

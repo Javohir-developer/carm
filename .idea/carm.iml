@@ -134,6 +134,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/exporter" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/resource-operations" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/trntv/yii2-datetime-widget" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/bower-asset/eonasdan-bootstrap-datetimepicker" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/bower-asset/moment" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
