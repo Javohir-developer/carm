@@ -15,12 +15,17 @@
 .h6-size{
     font-size: 16px;
 }
+.index-add-button{
+    /*margin-top: 45% !important;*/
+    width: 100%;
+}
 .index-send-button{
-    margin-top: 45% !important;
+    margin-top: 10px;
+    /*margin-top: 1% !important;*/
     width: 100%;
 }
 
 
 .table-parent-div{
-    max-height: 300px;
+    height: 300px;
 }

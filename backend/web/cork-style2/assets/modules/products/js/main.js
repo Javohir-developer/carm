@@ -1,18 +1,26 @@
-function addProductToCache(param) {
+
+function addProductToCache(obj) {
     $.ajax({
-        url: $(param).data('url'),
+        url: $(obj).data('url'),
         type: 'POST',
-        // data: $(param).serializeArray(),
-        data: $(param).serialize(),
-        datatype: 'json',
+        data: $(obj).serialize(),
+        dataType: 'json',
         success: function (data) {
-            if (data !== null){
-                $('#_cache-index').html(data);
+            if (data.status) {
+                success();
+                $('#_cache-index').html(data.result);
+            }else {
+                validateErrors(data.result);
             }
         },
         error: function () {
             alert('ERROR');
         },
+        complete: function () {
+
+        }
     });
     return false;
 }
+
+
