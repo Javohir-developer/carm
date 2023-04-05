@@ -13,6 +13,11 @@ class BaseModel extends ActiveRecord
 {
     const STATUS_ACTIVE = 1;
     const STATUS_INACTIVE = 0;
+    const RULE_THE_CREATOR = 'theCreator';
+    const RULE_DREKTOR = 'Drektor';
+    const RULE_ADMIN = 'Admin';
+    const RULE_USER = 'User';
+
 
     public function UploadFiles($files, $file_put_name = false){
         if ($this->{$files} == true){

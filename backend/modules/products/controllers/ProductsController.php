@@ -12,6 +12,7 @@ use yii\web\Controller;
 use yii\web\JqueryAsset;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
@@ -47,9 +48,12 @@ class ProductsController extends BaseController
         Yii::$app->response->format = Response::FORMAT_JSON;
         if ($model->load($this->request->post())) {
             if ($model->addProductToCache()){
-                return $this->renderPartial('_cache-index');
+                $result = $this->renderPartial('_cache-index');
+                return ['status' => true, 'result' => $result];
             }
         }
+        $result = ActiveForm::validate($model);
+        return ['status' => false, 'result' => $result];
     }
 
     /**

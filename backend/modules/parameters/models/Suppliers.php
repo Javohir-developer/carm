@@ -2,6 +2,7 @@
 
 namespace backend\modules\parameters\models;
 
+use backend\models\BaseModel;
 use backend\modules\companies\models\Companies;
 use common\models\User;
 use Yii;
@@ -24,7 +25,7 @@ use Yii;
  * @property Products[] $products
  * @property User $user
  */
-class Suppliers extends \yii\db\ActiveRecord
+class Suppliers extends BaseModel
 {
     /**
      * {@inheritdoc}

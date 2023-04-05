@@ -1,10 +1,7 @@
 <?php
 
 use backend\modules\products\models\Products;
-use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\Pjax;
-
 ?>
 <div class="products-index">
     <div  class="table-parent-div">
@@ -29,9 +26,9 @@ use yii\widgets\Pjax;
             </tr>
             </thead>
             <tbody>
-            <?php foreach (Products::getProductInCache() as $product):?>
+            <?php $i = 1; foreach (Products::getProductInCache() as $product):?>
                 <tr>
-                <td>1</td>
+                <td><?=$i++;?></td>
                 <td>0</td>
                 <td>tuxum</td>
                 <td>SHerzod dukon</td>

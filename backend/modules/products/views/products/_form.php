@@ -4,19 +4,21 @@ use kartik\widgets\DatePicker;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
+use yii\widgets\Pjax;
 
 /** @var yii\web\View $this */
 /** @var backend\modules\products\models\Products $model */
 /** @var yii\widgets\ActiveForm $form */
 $confg = [
-    'action' => false,
-    'method' => 'post',
+    'enableAjaxValidation'=>true,
     'options' => [
+        'onsubmit' => 'return addProductToCache(this);',
+        'id' => 'products-form-send-ajax',
         'data-url' => $model->isNewRecord ? Url::to(['/products/products/add-product-to-cache']) : Url::to(['/products/products/update-product-to-cache', 'id' => $model->id]),
-        'onsubmit' => 'return addProductToCache(this);'
     ]
 ];
 ?>
+<?php Pjax::begin(); ?>
 <div class="products-form container-fluid">
     <?php $form = ActiveForm::begin($confg); ?>
 
@@ -109,9 +111,9 @@ $confg = [
                             <?= $form->field($model, 'exit_price')->textInput() ?>
                         </div>
                         <div class="col-sm-6">
-                            <?= $form->field($model, 'old_entry_price')->textInput() ?>
-                            <?= $form->field($model, 'old_evaluation')->textInput() ?>
-                            <?= $form->field($model, 'old_exit_price')->textInput() ?>
+                            <?= $form->field($model, 'old_entry_price')->textInput(['disabled' => true]) ?>
+                            <?= $form->field($model, 'old_evaluation')->textInput(['disabled' => true]) ?>
+                            <?= $form->field($model, 'old_exit_price')->textInput(['disabled' => true]) ?>
                         </div>
                     </div>
                 </div>
@@ -129,30 +131,16 @@ $confg = [
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <?= Html::submitButton(Yii::t('app', 'Добавить'), ['class' => 'btn btn-success index-send-button']) ?>
+                                <?= Html::submitButton(Yii::t('app', 'Добавить'), ['class' => 'btn btn-primary index-add-button']) ?>
+                            </div>
+                            <div class="form-group ">
+                                <?= Html::Button(Yii::t('app', 'Провести'), ['class' => 'btn btn-success index-send-button']) ?>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <?php ActiveForm::end(); ?>
-
 </div>
+<?php Pjax::end(); ?>

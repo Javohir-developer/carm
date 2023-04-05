@@ -68,7 +68,6 @@ class WarehousesController extends BaseController
         } else {
             $model->loadDefaultValues();
         }
-
         return $this->render('create', [
             'model' => $model,
         ]);

@@ -41,19 +41,19 @@ return [
             'timeFormat' => 'php:H:i:s',
             'nullDisplay' => '&nbsp;',
         ],
-        'assetManager' => [
-            'bundles' => [
-                'yii\web\JqueryAsset' => [
-                    'js'=>[]
-                ],
-                'yii\bootstrap\BootstrapPluginAsset' => [
-                    'js'=>[]
-                ],
-                'yii\bootstrap\BootstrapAsset' => [
-                    'css' => [],
-                ],
-            ],
-        ],
+//        'assetManager' => [
+//            'bundles' => [
+//                'yii\web\JqueryAsset' => [
+//                    'js'=>[]
+//                ],
+//                'yii\bootstrap\BootstrapPluginAsset' => [
+//                    'js'=>[]
+//                ],
+//                'yii\bootstrap\BootstrapAsset' => [
+//                    'css' => [],
+//                ],
+//            ],
+//        ],
         'request' => [
             'baseUrl' => '',
             'csrfParam' => '_csrf-backend',

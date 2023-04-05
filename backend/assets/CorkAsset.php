@@ -33,10 +33,11 @@ class CorkAsset extends AssetBundle
 //        'cork-style2/layouts/horizontal-light-menu/app.js',
 //        'cork-style2/src/plugins/src/apex/apexcharts.min.js',
 //        'cork-style2/src/assets/js/dashboard/dash_1.js',
+        'cork-style2/assets/js/main.js'
     ];
 
     public $depends = [
-//        'yii\web\YiiAsset',
+        'yii\web\YiiAsset',
 //        'yii\bootstrap4\BootstrapAsset',
     ];
 }
