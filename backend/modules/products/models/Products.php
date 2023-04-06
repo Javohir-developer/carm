@@ -2,11 +2,13 @@
 
 namespace backend\modules\products\models;
 
+use backend\models\BaseModel;
 use backend\modules\companies\models\Companies;
 use backend\modules\parameters\models\Suppliers;
 use backend\modules\parameters\models\Warehouses;
 use common\models\User;
 use Yii;
+use yii\base\ErrorException;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -53,7 +55,7 @@ use yii\helpers\ArrayHelper;
  * @property User $user
  * @property Warehouses $warehouse
  */
-class Products extends \yii\db\ActiveRecord
+class Products extends BaseModel
 {
     /**
      * {@inheritdoc}
@@ -79,7 +81,8 @@ class Products extends \yii\db\ActiveRecord
         return [
             [['user_id'], 'default', 'value' => Yii::$app->user->id],
             [['company_id'], 'default', 'value' => Yii::$app->company->id()],
-            [['user_id', 'company_id', 'supplier_id', 'warehouse_id'], 'required'],
+            [['input_status', 'status'], 'default', 'value' => self::STATUS_ACTIVE],
+            [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'type'], 'required'],
             [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'currency_amount', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'entry_price', 'exit_price', 'old_entry_price', 'old_exit_price', 'unit_type', 'amount', 'input_status', 'status'], 'integer'],
             [['date', 'production_time', 'valid', 'created_at', 'updated_at'], 'safe'],
             [['evaluation', 'old_evaluation'], 'number'],
@@ -135,12 +138,28 @@ class Products extends \yii\db\ActiveRecord
             return true;
         }
     }
+    public function deleteProductFromCache($id){
+        if (!empty($_SESSION[self::cacheProd()][$id])){
+            unset($_SESSION[self::cacheProd()][$id]);
+            return true;
+        }
+    }
 
     public static function getProductInCache(){
         if (!empty($_SESSION[self::cacheProd()])){
             return $_SESSION[self::cacheProd()];
         }
         return [];
+    }
+
+    public function saveCacheProducts(){
+        foreach($_SESSION[self::cacheProd()] as $value){
+            $product = new Products();
+            $product->attributes = $value;
+            $product->save();
+        }
+        unset($_SESSION[self::cacheProd()]);
+        return true;
     }
 
     /**
@@ -198,5 +217,21 @@ class Products extends \yii\db\ActiveRecord
     public function Suppliers(){
         $warehouse = Suppliers::find()->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id()])->all();
         return ArrayHelper::map($warehouse, 'id', 'name');
+    }
+
+    public static function unitType(){
+        return [
+            1 => Yii::t('app', 'шт'),
+            2 => Yii::t('app', 'кг')
+        ];
+    }
+
+    public static function termType(){
+        return [
+            1 => Yii::t('app', 'Суток'),
+            2 => Yii::t('app', 'Неделя'),
+            3 => Yii::t('app', 'Месяц'),
+            4 => Yii::t('app', 'год')
+        ];
     }
 }

@@ -26,16 +26,16 @@ $confg = [
             <div class="row">
                 <h6 class="text-center h6-size">Данные</h6>
                 <div class="col-sm-2">
-                    <?= $form->field($model, 'warehouse_id')->dropDownList($model->Warehouses(), ['prompt'=>Yii::t('app', 'Выбираете склад')]) ?>
+                    <?= $form->field($model, 'barcode')->textInput() ?>
                 </div>
                 <div class="col-sm-2">
-                    <?= $form->field($model, 'supplier_id')->dropDownList($model->Suppliers(), ['prompt'=>Yii::t('app', 'Выбираете поставщик')]) ?>
+                    <?= $form->field($model, 'warehouse_id')->dropDownList($model->Warehouses(), ['prompt'=> '-----']) ?>
+                </div>
+                <div class="col-sm-2">
+                    <?= $form->field($model, 'supplier_id')->dropDownList($model->Suppliers(), ['prompt'=> '-----']) ?>
                 </div>
                 <div class="col-sm-2">
                     <?php echo $form->field($model, 'date')->textInput(['type' => 'date', 'value' => date('Y-m-d')]); ?>
-                </div>
-                <div class="col-sm-2">
-                    <?= $form->field($model, 'barcode')->textInput() ?>
                 </div>
                 <div class="col-sm-2">
                     <?= $form->field($model, 'group')->textInput() ?>
@@ -94,7 +94,7 @@ $confg = [
                                     <?= $form->field($model, 'term_amount')->textInput(['class' => 'form-control index-form-control']) ?>
                                 </div>
                                 <div class="col-sm-6">
-                                    <?= $form->field($model, 'term_type')->textInput(['class' => 'form-control index-form-control']) ?>
+                                    <?= $form->field($model, 'term_type')->dropDownList($model::termType(), ['prompt'=> '-----']) ?>
                                 </div>
                             </div>
                             <?= $form->field($model, 'valid')->textInput(['type' => 'date', 'value' => date('Y-m-d'), 'class' => 'form-control index-form-control']) ?>
@@ -123,7 +123,7 @@ $confg = [
                             <div class="row">
                                 <h6 class="text-center h6-size">Продукт</h6>
                                 <div class="col-sm-6">
-                                    <?= $form->field($model, 'unit_type')->textInput() ?>
+                                    <?= $form->field($model, 'unit_type')->dropDownList($model::unitType()) ?>
                                     <?= $form->field($model, 'amount')->textInput() ?>
                                 </div>
                                 <div class="col-sm-6"></div>
@@ -134,7 +134,7 @@ $confg = [
                                 <?= Html::submitButton(Yii::t('app', 'Добавить'), ['class' => 'btn btn-primary index-add-button']) ?>
                             </div>
                             <div class="form-group ">
-                                <?= Html::Button(Yii::t('app', 'Провести'), ['class' => 'btn btn-success index-send-button']) ?>
+                                <?= Html::Button(Yii::t('app', 'Провести'), ['class' => 'btn btn-success index-send-button', 'data-url' => Url::to(['/products/products/save-cache-products']), 'onclick' => 'saveCacheProducts(this)']) ?>
                             </div>
                         </div>
                     </div>

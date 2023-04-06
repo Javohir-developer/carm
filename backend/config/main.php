@@ -6,13 +6,17 @@ $params = array_merge(
     require __DIR__ . '/params-local.php'
 );
 
-return [
+$config = [
 
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
 //    'bootstrap' => ['log'],
     'modules' => [
+        'debug' => [
+            'class' => 'yii\debug\Module',
+            'allowedIPs' => []
+        ],
         'gridview' => [
             'class' => 'kartik\grid\Module',
         ],
@@ -34,6 +38,10 @@ return [
         ],
     ],
     'components' => [
+        'cache' => [
+//            'class' => 'yii\caching\FileCache',
+            'class' => 'yii\caching\DummyCache',
+        ],
         'formatter' => [
             'class' => 'yii\i18n\Formatter',
             'dateFormat' => 'php:d-M-Y',
@@ -110,3 +118,5 @@ return [
     ],
     'params' => $params,
 ];
+
+return $config;

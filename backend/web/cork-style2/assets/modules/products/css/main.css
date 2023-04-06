@@ -16,16 +16,17 @@
     font-size: 16px;
 }
 .index-add-button{
-    /*margin-top: 45% !important;*/
     width: 100%;
 }
 .index-send-button{
     margin-top: 10px;
-    /*margin-top: 1% !important;*/
     width: 100%;
 }
 
 
 .table-parent-div{
+    height: 300px;
+}
+.table-bordered{
     height: 300px;
 }

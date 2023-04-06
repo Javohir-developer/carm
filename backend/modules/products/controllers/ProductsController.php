@@ -56,6 +56,24 @@ class ProductsController extends BaseController
         return ['status' => false, 'result' => $result];
     }
 
+    public function actionDeleteProductFromCache(){
+        $model = new Products();
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if ($model->deleteProductFromCache(Yii::$app->request->post('id'))){
+            $result = $this->renderPartial('_cache-index');
+            return ['status' => true, 'result' => $result];
+        }
+    }
+
+    public function actionSaveCacheProducts(){
+        $model = new Products();
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if ($model->saveCacheProducts()){
+            $result = $this->renderPartial('_cache-index');
+            return ['status' => true, 'result' => $result];
+        }
+    }
+
     /**
      * Displays a single Products model.
      * @param int $id ID

@@ -6,7 +6,7 @@ function validateErrors(data){
 
 function success(){
     $('.help-block').empty();
-    $("#products-form-send-ajax").trigger('reset');
+    // $("#products-form-send-ajax").trigger('reset');
 }
 
 
