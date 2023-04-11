@@ -14,7 +14,7 @@ $confg = [
     'options' => [
         'onsubmit' => 'return addProductToCache(this);',
         'id' => 'products-form-send-ajax',
-        'data-url' => $model->isNewRecord ? Url::to(['/products/products/add-product-to-cache']) : Url::to(['/products/products/update-product-to-cache', 'id' => $model->id]),
+        'data-url' => Url::to(['/products/products/add-product-to-cache']),
     ]
 ];
 ?>
@@ -24,7 +24,7 @@ $confg = [
 
         <div class="card padding-class">
             <div class="row">
-                <h6 class="text-center h6-size">Данные</h6>
+                <h6 class="text-center h6-size"><?=Yii::t('app', 'Информация о товаре')?></h6>
                 <div class="col-sm-2">
                     <?= $form->field($model, 'barcode')->textInput() ?>
                 </div>
@@ -50,12 +50,6 @@ $confg = [
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="card padding-class">
-            <div class="row">
-                <h6 class="text-center h6-size">Продукт</h6>
                 <div class="col-sm-2">
                     <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
                 </div>
@@ -71,23 +65,21 @@ $confg = [
                 <div class="col-sm-2">
                     <?= $form->field($model, 'ikpu')->textInput() ?>
                 </div>
-                <div class="col-sm-2">
-
-                </div>
             </div>
         </div>
 
         <div class="card padding-class">
             <div class="row">
                 <div class="col-sm-4 card">
-                    <h6 class="text-center h6-size">Продукт</h6>
                     <div class="row">
                         <div class="col-sm-6">
+                            <h6 class="text-center h6-size"><?=Yii::t('app', 'Признаки')?></h6>
                             <?= $form->field($model, 'unit_amount')->textInput(['class' => 'form-control index-form-control']) ?>
                             <?= $form->field($model, 'max_ast')->textInput(['class' => 'form-control index-form-control']) ?>
                             <?= $form->field($model, 'min_ast')->textInput(['class' => 'form-control index-form-control']) ?>
                         </div>
                         <div class="col-sm-6">
+                            <h6 class="text-center h6-size"><?=Yii::t('app', 'Срок годности')?></h6>
                             <?= $form->field($model, 'production_time')->textInput(['type' => 'date', 'class' => 'form-control index-form-control', 'placeholder'=>Yii::t('app', 'Выбираете склад')]) ?>
                             <div class="row">
                                 <div class="col-sm-6">
@@ -102,7 +94,7 @@ $confg = [
                     </div>
                 </div>
                 <div class="col-sm-4 card">
-                    <h6 class="text-center h6-size">Продукт</h6>
+                    <h6 class="text-center h6-size"><?=Yii::t('app', 'Цены')?></h6>
                     <div class="row">
                         <div class="col-sm-6">
 <!--                            --><?php //= $form->field($model, 'ndc')->textInput() ?>
@@ -121,7 +113,7 @@ $confg = [
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="row">
-                                <h6 class="text-center h6-size">Продукт</h6>
+                                <h6 class="text-center h6-size"><?=Yii::t('app', 'Количество')?></h6>
                                 <div class="col-sm-6">
                                     <?= $form->field($model, 'unit_type')->dropDownList($model::unitType()) ?>
                                     <?= $form->field($model, 'amount')->textInput() ?>

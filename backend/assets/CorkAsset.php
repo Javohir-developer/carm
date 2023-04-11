@@ -13,6 +13,8 @@ class CorkAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
+//        'https://cros.uz/shopping/bootstrap/css/shop_style.css',
+
         'cork-style2/src/bootstrap/css/bootstrap.min.css',
         'cork-style2/layouts/horizontal-light-menu/css/light/plugins.css',
         'cork-style2/src/plugins/src/apex/apexcharts.css',
@@ -22,7 +24,7 @@ class CorkAsset extends AssetBundle
         'cork-style2/src/plugins/css/light/table/datatable/dt-global_style.css',
 
         'cork-style2/assets/css/main.css',
-        'cork-style2/assets/css/alert.css',
+        'cork-style2/assets/css/alert-2.css',
     ];
     public $js = [
 
@@ -33,6 +35,7 @@ class CorkAsset extends AssetBundle
 //        'cork-style2/layouts/horizontal-light-menu/app.js',
 //        'cork-style2/src/plugins/src/apex/apexcharts.min.js',
 //        'cork-style2/src/assets/js/dashboard/dash_1.js',
+        'cork-style2/assets/js/bootstrap-notify-3-1-5.js',
         'cork-style2/assets/js/main.js'
     ];
 

@@ -56,6 +56,11 @@ class ProductsController extends BaseController
         return ['status' => false, 'result' => $result];
     }
 
+    public function actionUpdateProductFromCache(){
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return Yii::$app->request->post();
+    }
+
     public function actionDeleteProductFromCache(){
         $model = new Products();
         Yii::$app->response->format = Response::FORMAT_JSON;
@@ -72,6 +77,7 @@ class ProductsController extends BaseController
             $result = $this->renderPartial('_cache-index');
             return ['status' => true, 'result' => $result];
         }
+        return ['status' => false, 'notification' => Yii::t('app', 'Нет товаров для провести')];
     }
 
     /**

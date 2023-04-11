@@ -82,7 +82,7 @@ class Products extends BaseModel
             [['user_id'], 'default', 'value' => Yii::$app->user->id],
             [['company_id'], 'default', 'value' => Yii::$app->company->id()],
             [['input_status', 'status'], 'default', 'value' => self::STATUS_ACTIVE],
-            [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'type'], 'required'],
+            [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'type', 'amount', 'entry_price', 'evaluation', 'exit_price'], 'required'],
             [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'currency_amount', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'entry_price', 'exit_price', 'old_entry_price', 'old_exit_price', 'unit_type', 'amount', 'input_status', 'status'], 'integer'],
             [['date', 'production_time', 'valid', 'created_at', 'updated_at'], 'safe'],
             [['evaluation', 'old_evaluation'], 'number'],
@@ -153,13 +153,15 @@ class Products extends BaseModel
     }
 
     public function saveCacheProducts(){
-        foreach($_SESSION[self::cacheProd()] as $value){
-            $product = new Products();
-            $product->attributes = $value;
-            $product->save();
+        if (!empty($_SESSION[self::cacheProd()])){
+            foreach($_SESSION[self::cacheProd()] as $value){
+                $product = new Products();
+                $product->attributes = $value;
+                $product->save();
+            }
+            unset($_SESSION[self::cacheProd()]);
+            return true;
         }
-        unset($_SESSION[self::cacheProd()]);
-        return true;
     }
 
     /**
