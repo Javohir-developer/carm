@@ -10,14 +10,36 @@ function addProductToCache(obj) {
                 success();
                 $('#_cache-index').html(data.result);
             }else {
+                Notnotify('данных недостаточно !', 'danger');
                 validateErrors(data.result);
             }
         },
         error: function () {
-            alert('ERROR');
-        },
-        complete: function () {
+            Notnotify('что произошло не так !', 'danger');
+            console.log(request.responseText);
+        }
+    });
+    return false;
+}
 
+function updateProductFromCache(obj) {
+    $.ajax({
+        url: $(obj).data('url'),
+        type: 'POST',
+        data: $(obj).serialize(),
+        dataType: 'json',
+        success: function (data) {
+            if (data.status) {
+                success();
+                $('#_cache-index').html(data.result);
+            }else {
+                Notnotify('данных недостаточно !', 'danger');
+                validateErrors(data.result);
+            }
+        },
+        error: function () {
+            Notnotify('что произошло не так !', 'danger');
+            console.log(request.responseText);
         }
     });
     return false;
@@ -36,7 +58,7 @@ function deleteProductFromCache(obj){
             }
         },
         error: function (request) {
-            alert('ошибка')
+            Notnotify('что произошло не так !', 'danger');
             console.log(request.responseText);
         }
     });
@@ -51,10 +73,13 @@ function saveCacheProducts(obj){
         success: function (data) {
             if (data.status) {
                 $('#_cache-index').html(data.result);
+                Notnotify('Товар успешно провести', 'success');
+            }else {
+                Notnotify(data.notification, 'danger');
             }
         },
         error: function (request) {
-            alert('ошибка')
+            Notnotify('что произошло не так !', 'danger');
             console.log(request.responseText);
         }
     });

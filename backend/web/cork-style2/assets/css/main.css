@@ -92,14 +92,7 @@
     border: aliceblue!important;
     color: #fff!important;
 }
-.no-wrap-button{
-    position: sticky;
-    bottom: 0;
-    z-index: 3;
-    background: #fff!important;
-    border-left: 1px solid #acacac!important;
-    color: #3b3f5c!important;
-}
+
 
 
 .table-parent-div > table > tbody > tr > td, .table-parent-div > table > thead > tr > th {
@@ -114,10 +107,6 @@
 .table:not(.dataTable).table-bordered.table-striped > tbody > tr:last-child td:first-child {
      border-bottom-left-radius: 0!important;
 }
-.table-parent-div > .table > thead > tr > th, .table-parent-div > .table > tbody > tr > td {
-    padding: 5px 17px 5px 17px!important;
-}
-
 
 .table-parent-div > .table {
     margin-bottom: 0;
@@ -126,5 +115,8 @@
     padding: 9px;
 }
 /*end*/
+.help-block{
+    color: red;
+}
 
 
