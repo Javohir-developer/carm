@@ -1,8 +1,8 @@
 <?php
+use yii\widgets\Pjax;
 ?>
-<div id="_cache-index">
-    <?= $this->render('_cache-index')?>
-</div>
-<?= $this->render('_form', ['model' => $model]) ?>
 
+
+<?= $this->render('_cache-index')?>
+<?= $this->render('_form', ['model' => $model]) ?>
 

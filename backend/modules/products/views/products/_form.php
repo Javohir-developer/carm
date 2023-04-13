@@ -18,7 +18,7 @@ $confg = [
     ]
 ];
 ?>
-<?php Pjax::begin(); ?>
+
 <div class="products-form container-fluid">
     <?php $form = ActiveForm::begin($confg); ?>
 
@@ -134,5 +134,5 @@ $confg = [
             </div>
         </div>
     <?php ActiveForm::end(); ?>
+
 </div>
-<?php Pjax::end(); ?>

@@ -40,26 +40,65 @@
 }
 .up-ca-form-inp{
     border: none;
-    width: 100%;
+    width: 100px;
 }
 .table {
     border-collapse: collapse!important;
 }
-.table-parent-div > .table > thead > tr > th, .table-parent-div > .table > tbody > tr > td {
-    padding: 3px 17px 3px 17px!important;
-}
+/*.table-parent-div > .table > thead > tr > th, .table-parent-div > .table > tbody > tr > td {*/
+/*    padding: 3px 17px 3px 17px!important;*/
+/*}*/
 /*.table-striped:not(.dataTable) > tbody > tr:nth-of-type(odd) td {*/
 /*    background-color: #fff!important;*/
 /*}*/
-.table-striped>tbody>tr:nth-of-type(odd)>* {
-    --bs-table-accent-bg: #fff!important;
+/*.table-striped>tbody>tr:nth-of-type(odd)>* {*/
+/*    --bs-table-accent-bg: #fff!important;*/
+/*}*/
+/*.no-wrap-button {*/
+/*    position: sticky;*/
+/*    bottom: -2px;*/
+/*    z-index: 3;*/
+/*    background: #fff !important;*/
+/*    !* border-left: 1px solid #acacac!important; *!*/
+/*    border: 2px solid #c1cfde!important;*/
+/*    color: #031fbd !important;*/
+/*}*/
+
+.number-item > input{
+    width: 44px;
+    text-align: center;
+    border: none;
+    background: #fff;
 }
-.no-wrap-button {
-    position: sticky;
-    bottom: -2px;
-    z-index: 3;
-    background: #fff !important;
-    /* border-left: 1px solid #acacac!important; */
-    border: 2px solid #c1cfde!important;
-    color: #031fbd !important;
+.up-ca-form-inp{
+    background: #fff!important;
+}
+.number-item {
+    padding: 1px 9px!important;
+}
+/*.list-group-item{*/
+/*    width: 20px;*/
+/*    overflow-x: hidden;*/
+/*}*/
+.list-group-item-title{
+    width: 65px!important;
+}
+.list-group-item-num{
+    border-top: 1px solid rgb(220 220 220) !important;
+}
+.list-group-item-back{
+    background: rgb(220 220 220) !important;
+}
+.list-group-horizontal{
+    background: rgb(220 220 220);
+}
+.right-position-sticky-title{
+    position: sticky!important;
+    right: 0;
+    background: rgb(220 220 220) !important;
+}
+.title-sticky{
+    position: sticky!important;
+    z-index: 1;
+    top: -1px;
 }

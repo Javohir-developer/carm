@@ -3,12 +3,14 @@ function addProductToCache(obj) {
     $.ajax({
         url: $(obj).data('url'),
         type: 'POST',
-        data: $(obj).serialize(),
+        data: $(obj).serializeArray(),
         dataType: 'json',
         success: function (data) {
             if (data.status) {
                 success();
-                $('#_cache-index').html(data.result);
+                // $('#_cache-index2').html(data);
+                $.pjax.reload('#products-cache-index');
+                Notnotify('Продукт успешно обновлен', 'success');
             }else {
                 Notnotify('данных недостаточно !', 'danger');
                 validateErrors(data.result);
@@ -16,7 +18,6 @@ function addProductToCache(obj) {
         },
         error: function () {
             Notnotify('что произошло не так !', 'danger');
-            console.log(request.responseText);
         }
     });
     return false;
@@ -26,20 +27,18 @@ function updateProductFromCache(obj) {
     $.ajax({
         url: $(obj).data('url'),
         type: 'POST',
-        data: $(obj).serialize(),
-        dataType: 'json',
+        data: $(obj).serializeArray(),
+        dataType: 'html',
         success: function (data) {
-            if (data.status) {
-                success();
-                $('#_cache-index').html(data.result);
+            if (data) {
+                $.pjax.reload('#products-cache-index');
+                Notnotify('Продукт успешно обновлен', 'success');
             }else {
-                Notnotify('данных недостаточно !', 'danger');
-                validateErrors(data.result);
+                Notnotify('что произошло не так !', 'danger');
             }
         },
         error: function () {
             Notnotify('что произошло не так !', 'danger');
-            console.log(request.responseText);
         }
     });
     return false;
@@ -50,20 +49,21 @@ function deleteProductFromCache(obj){
         url: $(obj).data('url'),
         type: 'POST',
         data: {id: $(obj).data('id')},
-        dataType: 'json',
+        dataType: 'html',
         success: function (data) {
-            if (data.status) {
-                success();
-                $('#_cache-index').html(data.result);
+            if (data){
+                // $('#_cache-index1').html(data);
+                $.pjax.reload('#products-cache-index');
+                Notnotify('Продукт успешно удалено !', 'success');
             }
         },
         error: function (request) {
             Notnotify('что произошло не так !', 'danger');
-            console.log(request.responseText);
         }
     });
     return false;
 }
+
 
 function saveCacheProducts(obj){
     $.ajax({
@@ -71,18 +71,19 @@ function saveCacheProducts(obj){
         type: 'POST',
         dataType: 'json',
         success: function (data) {
-            if (data.status) {
-                $('#_cache-index').html(data.result);
+            if (data) {
+                $.pjax.reload('#products-cache-index');
                 Notnotify('Товар успешно провести', 'success');
             }else {
-                Notnotify(data.notification, 'danger');
+                Notnotify('Нет товаров для провести', 'danger');
             }
         },
         error: function (request) {
             Notnotify('что произошло не так !', 'danger');
-            console.log(request.responseText);
         }
     });
 }
+
+
 
 

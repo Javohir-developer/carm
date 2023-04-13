@@ -48,8 +48,7 @@ class ProductsController extends BaseController
         Yii::$app->response->format = Response::FORMAT_JSON;
         if ($model->load($this->request->post())) {
             if ($model->addProductToCache()){
-                $result = $this->renderPartial('_cache-index');
-                return ['status' => true, 'result' => $result];
+                return ['status' => true];
             }
         }
         $result = ActiveForm::validate($model);
@@ -58,15 +57,19 @@ class ProductsController extends BaseController
 
     public function actionUpdateProductFromCache(){
         Yii::$app->response->format = Response::FORMAT_JSON;
-        return Yii::$app->request->post();
+        $model = new Products();
+        if ($model->updateProductFromCache($this->request->post())){
+//            return $this->renderPartial('_cache-index');
+            return ['status' => true];
+        }
     }
 
     public function actionDeleteProductFromCache(){
         $model = new Products();
         Yii::$app->response->format = Response::FORMAT_JSON;
         if ($model->deleteProductFromCache(Yii::$app->request->post('id'))){
-            $result = $this->renderPartial('_cache-index');
-            return ['status' => true, 'result' => $result];
+            return $this->renderPartial('_cache-index');
+//            return ['status' => true];
         }
     }
 
@@ -74,10 +77,8 @@ class ProductsController extends BaseController
         $model = new Products();
         Yii::$app->response->format = Response::FORMAT_JSON;
         if ($model->saveCacheProducts()){
-            $result = $this->renderPartial('_cache-index');
-            return ['status' => true, 'result' => $result];
+            return ['status' => true];
         }
-        return ['status' => false, 'notification' => Yii::t('app', 'Нет товаров для провести')];
     }
 
     /**

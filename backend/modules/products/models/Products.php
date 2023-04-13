@@ -9,6 +9,7 @@ use backend\modules\parameters\models\Warehouses;
 use common\models\User;
 use Yii;
 use yii\base\ErrorException;
+use yii\base\Exception;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -137,6 +138,10 @@ class Products extends BaseModel
             $_SESSION[self::cacheProd()][] = $this->attributes;
             return true;
         }
+    }
+    public function updateProductFromCache($post){
+        $_SESSION[self::cacheProd()][$post['id']] = array_merge($_SESSION[self::cacheProd()][$post['id']], $post);
+        return true;
     }
     public function deleteProductFromCache($id){
         if (!empty($_SESSION[self::cacheProd()][$id])){
