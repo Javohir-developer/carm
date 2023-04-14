@@ -8,7 +8,6 @@ function addProductToCache(obj) {
         success: function (data) {
             if (data.status) {
                 success();
-                // $('#_cache-index2').html(data);
                 $.pjax.reload('#products-cache-index');
                 Notnotify('Продукт успешно обновлен', 'success');
             }else {
@@ -52,7 +51,6 @@ function deleteProductFromCache(obj){
         dataType: 'html',
         success: function (data) {
             if (data){
-                // $('#_cache-index1').html(data);
                 $.pjax.reload('#products-cache-index');
                 Notnotify('Продукт успешно удалено !', 'success');
             }

@@ -48,6 +48,9 @@ $config = [
             'datetimeFormat' => 'php:d-M-Y H:i:s',
             'timeFormat' => 'php:H:i:s',
             'nullDisplay' => '&nbsp;',
+            'thousandSeparator' => '.',
+            'decimalSeparator' => '.',
+            'currencyCode'=>'sum',
         ],
 //        'assetManager' => [
 //            'bundles' => [

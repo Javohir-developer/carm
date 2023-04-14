@@ -21,7 +21,7 @@ class m230330_152255_create_products_table extends Migration
             'supplier_id' => $this->integer()->notNull(),
             'date' => $this->date(),
             'currency' => $this->integer()->notNull()->defaultValue(1),
-            'currency_amount' => $this->integer(),
+            'currency_amount' => $this->float(),
 
 
             'barcode' => $this->integer(),
@@ -42,12 +42,12 @@ class m230330_152255_create_products_table extends Migration
             'valid' => $this->date(),
 
             'ndc' => $this->integer(),
-            'entry_price' => $this->integer(),
+            'entry_price' => $this->float(),
             'evaluation' => $this->float(),
-            'exit_price' => $this->integer(),
-            'old_entry_price' => $this->integer(),
+            'exit_price' => $this->float(),
+            'old_entry_price' => $this->float(),
             'old_evaluation' => $this->float(),
-            'old_exit_price' => $this->integer(),
+            'old_exit_price' => $this->float(),
 
             'unit_type' => $this->integer(),
             'amount' => $this->integer(),

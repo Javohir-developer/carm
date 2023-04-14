@@ -29,12 +29,14 @@ class CorkAsset extends AssetBundle
     public $js = [
 
         'cork-style2/src/bootstrap/js/bootstrap.bundle.min.js',
+
 //        'cork-style2/src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js',
 //        'cork-style2/src/plugins/src/mousetrap/mousetrap.min.js',
 //        'cork-style2/src/plugins/src/waves/waves.min.js',
-//        'cork-style2/layouts/horizontal-light-menu/app.js',
+        'cork-style2/layouts/horizontal-light-menu/app.js',
 //        'cork-style2/src/plugins/src/apex/apexcharts.min.js',
 //        'cork-style2/src/assets/js/dashboard/dash_1.js',
+
         'cork-style2/assets/js/bootstrap-notify-3-1-5.js',
         'cork-style2/assets/js/main.js'
     ];

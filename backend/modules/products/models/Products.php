@@ -84,9 +84,9 @@ class Products extends BaseModel
             [['company_id'], 'default', 'value' => Yii::$app->company->id()],
             [['input_status', 'status'], 'default', 'value' => self::STATUS_ACTIVE],
             [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'type', 'amount', 'entry_price', 'evaluation', 'exit_price'], 'required'],
-            [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'currency_amount', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'entry_price', 'exit_price', 'old_entry_price', 'old_exit_price', 'unit_type', 'amount', 'input_status', 'status'], 'integer'],
+            [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status'], 'integer'],
             [['date', 'production_time', 'valid', 'created_at', 'updated_at'], 'safe'],
-            [['evaluation', 'old_evaluation'], 'number'],
+            [['currency_amount', 'entry_price', 'exit_price', 'old_entry_price', 'old_exit_price', 'evaluation', 'old_evaluation'], 'number'],
             [['type', 'model', 'brand', 'size'], 'string', 'max' => 255],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Suppliers::class, 'targetAttribute' => ['supplier_id' => 'id']],
             [['warehouse_id'], 'exist', 'skipOnError' => true, 'targetClass' => Warehouses::class, 'targetAttribute' => ['warehouse_id' => 'id']],
@@ -140,6 +140,8 @@ class Products extends BaseModel
         }
     }
     public function updateProductFromCache($post){
+        $post['entry_price'] = self::strReplace($post['entry_price']);
+        $post['exit_price'] = self::strReplace($post['exit_price']);
         $_SESSION[self::cacheProd()][$post['id']] = array_merge($_SESSION[self::cacheProd()][$post['id']], $post);
         return true;
     }
@@ -209,12 +211,6 @@ class Products extends BaseModel
         return $this->hasOne(Warehouses::class, ['id' => 'warehouse_id']);
     }
 
-    public static function currencyType(){
-        return [
-          1 => Yii::t('app', 'SUM'),
-          2 => Yii::t('app', 'USD')
-        ];
-    }
 
     public function Warehouses(){
         $warehouse = Warehouses::find()->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id()])->all();
@@ -226,6 +222,12 @@ class Products extends BaseModel
         return ArrayHelper::map($warehouse, 'id', 'name');
     }
 
+    public static function currencyType(){
+        return [
+            1 => Yii::t('app', 'UZS'),
+            2 => Yii::t('app', 'USD')
+        ];
+    }
     public static function unitType(){
         return [
             1 => Yii::t('app', 'шт'),
@@ -240,5 +242,13 @@ class Products extends BaseModel
             3 => Yii::t('app', 'Месяц'),
             4 => Yii::t('app', 'год')
         ];
+    }
+
+    public static function Currency($currency){
+        return number_format(self::strReplace($currency), 0, ' ', ' ');
+    }
+
+    public static function strReplace($num){
+        return str_replace(" ", "", $num);
     }
 }

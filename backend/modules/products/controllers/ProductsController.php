@@ -59,7 +59,6 @@ class ProductsController extends BaseController
         Yii::$app->response->format = Response::FORMAT_JSON;
         $model = new Products();
         if ($model->updateProductFromCache($this->request->post())){
-//            return $this->renderPartial('_cache-index');
             return ['status' => true];
         }
     }
@@ -68,8 +67,7 @@ class ProductsController extends BaseController
         $model = new Products();
         Yii::$app->response->format = Response::FORMAT_JSON;
         if ($model->deleteProductFromCache(Yii::$app->request->post('id'))){
-            return $this->renderPartial('_cache-index');
-//            return ['status' => true];
+            return ['status' => true];
         }
     }
 

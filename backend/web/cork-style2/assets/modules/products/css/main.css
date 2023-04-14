@@ -28,12 +28,7 @@
 }
 
 
-.table-parent-div{
-    height: 355px;
-}
-.table-bordered{
-    height: 355px;
-}
+
 .update-product-from-cache-form{
     border: none;
     background: #fff;
@@ -89,7 +84,7 @@
 .list-group-item-back{
     background: rgb(220 220 220) !important;
 }
-.list-group-horizontal{
+.title-horizontal{
     background: rgb(220 220 220);
 }
 .right-position-sticky-title{
@@ -102,3 +97,102 @@
     z-index: 1;
     top: -1px;
 }
+.buttom-sticky{
+    position: sticky!important;
+    z-index: 1;
+    bottom: -1px;
+    border: 1px solid rgb(0 0 0 / 61%);
+    background: #fff!important;
+}
+.products-index{
+    padding: 0;
+}
+.table-parent-div{
+    height: 355px;
+}
+/*.table-bordered{*/
+/*    height: 355px;*/
+/*}*/
+.text-col{
+    color: #0d6efd;
+}
+/* big */
+@media screen and (min-width:600px) {
+    ul {
+        width: 1300px;
+        overflow-x: scroll;
+        white-space:nowrap;
+        display:inline-block;
+    }
+
+
+    .list ul {
+        display:table-row;
+    }
+
+    .list ul > li {
+        text-align: center;
+        width: 132px;
+        display:table-cell;
+        padding:.5px 1em;
+    }
+
+}
+
+/* small */
+/*@media screen and (max-width:599px) {*/
+
+/*    .list ul {*/
+/*        border:solid 1px #ccc;*/
+/*        display:block;*/
+/*        list-style:none;*/
+/*        margin:1em;*/
+/*        padding:.5em 1em;*/
+/*    }*/
+
+/*    .list ul:first-child {*/
+/*        display:none;*/
+/*    }*/
+
+/*    .list ul > li {*/
+/*        display:block;*/
+/*        padding:.25em 0;*/
+/*    }*/
+
+/*    .list ul:nth-child(odd) > li + li {*/
+/*        border-top:solid 1px #ccc;*/
+/*    }*/
+
+/*    .list ul:nth-child(even) > li + li {*/
+/*        border-top:solid 1px #eee;*/
+/*    }*/
+
+/*    .list ul > li:before {*/
+/*        color:#4f6185;*/
+/*        content:attr(data-label);*/
+/*        display:inline-block;*/
+/*        font-size:75%;*/
+/*        font-weight:bold;*/
+/*        text-transform:capitalize;*/
+/*        vertical-align:top;*/
+/*        width:50%;*/
+/*    }*/
+
+/*    .list p {*/
+/*        margin:-1em 0 0 50%;*/
+/*    }*/
+
+/*}*/
+
+/*!* tiny *!*/
+/*@media screen and (max-width:349px) {*/
+
+/*    .list ul > li:before {*/
+/*        display:block;*/
+/*    }*/
+
+/*    .list p {*/
+/*        margin:0;*/
+/*    }*/
+
+/*}*/
