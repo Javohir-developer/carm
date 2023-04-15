@@ -79,6 +79,14 @@ class ProductsController extends BaseController
         }
     }
 
+    public function actionClearProductsFromCache(){
+        $model = new Products();
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if ($model->clearProductsFromCache()){
+            return ['status' => true];
+        }
+    }
+
     /**
      * Displays a single Products model.
      * @param int $id ID

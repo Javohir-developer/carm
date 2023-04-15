@@ -139,6 +139,7 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/trntv/yii2-datetime-widget" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/bower-asset/eonasdan-bootstrap-datetimepicker" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/bower-asset/moment" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/yii2-number" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

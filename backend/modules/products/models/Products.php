@@ -69,10 +69,13 @@ class Products extends BaseModel
 
     public static function cacheProd()
     {
-        return Yii::$app->user->id.'_'.Yii::$app->company->id();
+        return 'cache-'.Yii::$app->user->id.'_'.Yii::$app->company->id();
     }
 
-
+    public static function cacheSum()
+    {
+        return 'sum-'.Yii::$app->user->id.'_'.Yii::$app->company->id();
+    }
 
     /**
      * {@inheritdoc}
@@ -132,85 +135,6 @@ class Products extends BaseModel
         ];
     }
 
-    public function addProductToCache(){
-        if ($this->validate()){
-            Yii::$app->company->session();
-            $_SESSION[self::cacheProd()][] = $this->attributes;
-            return true;
-        }
-    }
-    public function updateProductFromCache($post){
-        $post['entry_price'] = self::strReplace($post['entry_price']);
-        $post['exit_price'] = self::strReplace($post['exit_price']);
-        $_SESSION[self::cacheProd()][$post['id']] = array_merge($_SESSION[self::cacheProd()][$post['id']], $post);
-        return true;
-    }
-    public function deleteProductFromCache($id){
-        if (!empty($_SESSION[self::cacheProd()][$id])){
-            unset($_SESSION[self::cacheProd()][$id]);
-            return true;
-        }
-    }
-
-    public static function getProductInCache(){
-        if (!empty($_SESSION[self::cacheProd()])){
-            return $_SESSION[self::cacheProd()];
-        }
-        return [];
-    }
-
-    public function saveCacheProducts(){
-        if (!empty($_SESSION[self::cacheProd()])){
-            foreach($_SESSION[self::cacheProd()] as $value){
-                $product = new Products();
-                $product->attributes = $value;
-                $product->save();
-            }
-            unset($_SESSION[self::cacheProd()]);
-            return true;
-        }
-    }
-
-    /**
-     * Gets query for [[Company]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCompany()
-    {
-        return $this->hasOne(Companies::class, ['id' => 'company_id']);
-    }
-
-    /**
-     * Gets query for [[Supplier]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSupplier()
-    {
-        return $this->hasOne(Suppliers::class, ['id' => 'supplier_id']);
-    }
-
-    /**
-     * Gets query for [[User]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUser()
-    {
-        return $this->hasOne(User::class, ['id' => 'user_id']);
-    }
-
-    /**
-     * Gets query for [[Warehouse]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getWarehouse()
-    {
-        return $this->hasOne(Warehouses::class, ['id' => 'warehouse_id']);
-    }
-
 
     public function Warehouses(){
         $warehouse = Warehouses::find()->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id()])->all();
@@ -221,6 +145,61 @@ class Products extends BaseModel
         $warehouse = Suppliers::find()->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id()])->all();
         return ArrayHelper::map($warehouse, 'id', 'name');
     }
+
+    public static function getProductInCache(){
+        if (!empty($_SESSION[self::cacheProd()])){
+            return $_SESSION[self::cacheProd()];
+        }
+        return [];
+    }
+
+    public static function getSumParamsInCache(){
+        if (!empty($_SESSION[self::cacheSum()])){
+            return $_SESSION[self::cacheSum()];
+        }
+        return [];
+    }
+
+    public function addProductToCache(){
+        if ($this->validate()){
+            Yii::$app->company->session();
+            $_SESSION[self::cacheProd()][] = $this->attributes;
+            self::sumParams();
+            return true;
+        }
+    }
+    public function updateProductFromCache($post){
+        $post['entry_price'] = self::strReplace($post['entry_price']);
+        $post['exit_price'] = self::strReplace($post['exit_price']);
+        $_SESSION[self::cacheProd()][$post['id']] = array_merge($_SESSION[self::cacheProd()][$post['id']], $post);
+        self::sumParams();
+        return true;
+    }
+    public function deleteProductFromCache($id){
+        if (!empty($_SESSION[self::cacheProd()][$id])){
+            unset($_SESSION[self::cacheProd()][$id]);
+            self::sumParams();
+            return true;
+        }
+    }
+
+    public function saveCacheProducts(){
+        if (!empty($_SESSION[self::cacheProd()])){
+            foreach($_SESSION[self::cacheProd()] as $value){
+                $product = new Products();
+                $product->attributes = $value;
+                $product->save();
+            }
+            unset($_SESSION[self::cacheProd()], $_SESSION[self::cacheSum()]);
+            return true;
+        }
+    }
+
+    public function clearProductsFromCache(){
+        unset($_SESSION[self::cacheProd()], $_SESSION[self::cacheSum()]);
+        return true;
+    }
+
 
     public static function currencyType(){
         return [
@@ -251,4 +230,56 @@ class Products extends BaseModel
     public static function strReplace($num){
         return str_replace(" ", "", $num);
     }
+
+    public static function sumParams(){
+        $_SESSION[self::cacheSum()]['entry_price'] = array_sum(array_column($_SESSION[self::cacheProd()], 'entry_price'));
+        $_SESSION[self::cacheSum()]['exit_price'] = array_sum(array_column($_SESSION[self::cacheProd()], 'exit_price'));
+        $_SESSION[self::cacheSum()]['amount'] = array_sum(array_column($_SESSION[self::cacheProd()], 'amount'));
+    }
+
+
+
+
+
+
+    //    /**
+//     * Gets query for [[Company]].
+//     *
+//     * @return \yii\db\ActiveQuery
+//     */
+//    public function getCompany()
+//    {
+//        return $this->hasOne(Companies::class, ['id' => 'company_id']);
+//    }
+//
+//    /**
+//     * Gets query for [[Supplier]].
+//     *
+//     * @return \yii\db\ActiveQuery
+//     */
+//    public function getSupplier()
+//    {
+//        return $this->hasOne(Suppliers::class, ['id' => 'supplier_id']);
+//    }
+//
+//    /**
+//     * Gets query for [[User]].
+//     *
+//     * @return \yii\db\ActiveQuery
+//     */
+//    public function getUser()
+//    {
+//        return $this->hasOne(User::class, ['id' => 'user_id']);
+//    }
+//
+//    /**
+//     * Gets query for [[Warehouse]].
+//     *
+//     * @return \yii\db\ActiveQuery
+//     */
+//    public function getWarehouse()
+//    {
+//        return $this->hasOne(Warehouses::class, ['id' => 'warehouse_id']);
+//    }
+
 }

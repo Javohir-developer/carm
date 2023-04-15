@@ -4,6 +4,7 @@ use backend\modules\products\models\Products;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
+$i = 1;
 ?>
 <?php Pjax::begin(['timeout' => 5000, 'id'=>'products-cache-index', 'enablePushState' => false]); ?>
 <div class="products-index">
@@ -11,42 +12,38 @@ use yii\widgets\Pjax;
         <div id="_cache-index" class="table table-striped table-bordered">
             <div  id="_cache-index1"  class="list">
                 <ul class="list-group  list-group-horizontal title-horizontal title-sticky">
-                    <li class="list-group-item title-sticky number-item list-group-item-num  list-group-item-back" ><input class="list-group-item-back" value="#" disabled></li>
+                    <li class="list-group-item left-position-sticky-title title-sticky number-item list-group-item-num  list-group-item-back z-index-title-num" ><input class="list-group-item-back" value="#" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Бар код')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Тип')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
-                    <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Бренд')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
-                    <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Модель')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
-                    <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Размер')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Валюта')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Ед изм')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Кол-во')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Цена прх.')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Оценка')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Цена прд.')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
-                    <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Стар. цена прх.')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
-                    <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Стар. цена прд.')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
+                    <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Бренд')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
+                    <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Модель')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
+                    <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Размер')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Созд. время')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li  class="right-position-sticky-title title-sticky list-group-item"><input class=" up-ca-form-inp list-group-item-back list-group-item-title" disabled></li>
                 </ul>
-                <?php $i = 1; foreach (Products::getProductInCache() as $key => $val):?>
+                <?php foreach (Products::getProductInCache() as $key => $val):?>
                     <?php echo Html::beginForm(false, 'post', ['enableAjaxValidation'=>true, 'onsubmit' => 'return updateProductFromCache(this);', 'data-url' => Url::to(['/products/products/update-product-from-cache'])]) ?>
-                    <?=Html::hiddenInput('id', $key); ?>
+                    <input type="hidden" name="id" value="<?=$key?>">
                     <ul class="list-group  list-group-horizontal">
-                        <li class="list-group-item number-item" ><input type="text" value="<?=$i++;?>" disabled></li>
+                        <li class="list-group-item left-position-sticky-title number-item" ><input type="text" value="<?=$i++;?>" disabled></li>
                         <li class="list-group-item"><?= Html::textInput('barcode',  $val['barcode'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number']) ?></li>
                         <li class="list-group-item"><?= Html::textInput('type',     $val['type'], ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
+                        <li class="list-group-item"><?= Html::dropDownList('currency',      [$val['currency']], Products::currencyType(), ['class' => 'text-center up-ca-form-inp']); ?></li>
+                        <li class="list-group-item"><?= Html::dropDownList('unit_type',      [$val['unit_type']], Products::unitType(), ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('amount',           $val['amount'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number']) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('entry_price',      Products::Currency($val['entry_price']), ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('evaluation',       $val['evaluation'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number', 'step' => 'any']) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('exit_price',       $val['exit_price'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number', 'step' => 'any']) ?></li>
                         <li class="list-group-item"><?= Html::textInput('brand',    $val['brand'], ['class' => 'text-center up-ca-form-inp']) ?></li>
                         <li class="list-group-item"><?= Html::textInput('model',    $val['model'], ['class' => 'text-center up-ca-form-inp']) ?></li>
                         <li class="list-group-item"><?= Html::textInput('size',     $val['size'], ['class' => 'text-center up-ca-form-inp']) ?></li>
-                        <li class="list-group-item"><?= Html::dropDownList('currency', [$val['currency']], Products::currencyType(), ['class' => 'text-center up-ca-form-inp']); ?></li>
-                        <li class="list-group-item"><?= Html::textInput('unit_type',$val['unit_type'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number']) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('amount',       $val['amount'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number']) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('entry_price',  Products::Currency($val['entry_price']), ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('evaluation',   $val['evaluation'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number', 'step' => 'any']) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('exit_price',   $val['exit_price'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number', 'step' => 'any']) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('old_entry_price',  $val['old_entry_price'], ['class' => 'text-center up-ca-form-inp', 'type' => 'number', 'step' => 'any']) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('old_exit_price',  $val['old_exit_price'], ['class' => 'text-center up-ca-form-inp', 'type' => 'number', 'step' => 'any']) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('date',  $val['date'], ['type' => 'date', 'class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('date',             $val['date'], ['type' => 'date', 'class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
                         <li  class="right-position-sticky list-group-item">
                             <?= Html::SubmitButton(
                                 '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>',
@@ -60,21 +57,19 @@ use yii\widgets\Pjax;
                     <?php echo Html::endForm() ?>
                 <?php endforeach;?>
                 <ul class="list-group list-group-horizontal">
-                    <li class=" list-group-item buttom-sticky number-item list-group-item-num" ><input class="" value="" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="0" class="text-center up-ca-form-inp text-col" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="0" class="text-center up-ca-form-inp text-col" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="0" class="text-center up-ca-form-inp text-col" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="0" class="text-center up-ca-form-inp text-col" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="0" class="text-center up-ca-form-inp text-col" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="0" class="text-center up-ca-form-inp text-col" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="0" class="text-center up-ca-form-inp text-col" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="0" class="text-center up-ca-form-inp text-col" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="0" class="text-center up-ca-form-inp text-col" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="0" class="text-center up-ca-form-inp text-col" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="0" class="text-center up-ca-form-inp text-col" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="0" class="text-center up-ca-form-inp text-col" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="0" class="text-center up-ca-form-inp text-col" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="0" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky number-item list-group-item-num" ><input  class="up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="<?=isset(Products::getSumParamsInCache()['amount']) ? Products::getSumParamsInCache()['amount'] : 0; ?>" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="<?=isset(Products::getSumParamsInCache()['entry_price']) ? Products::getSumParamsInCache()['entry_price'] : 0; ?>" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="<?=isset(Products::getSumParamsInCache()['exit_price']) ? Products::getSumParamsInCache()['exit_price'] : 0; ?>" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
                     <li  class="right-position-sticky-title buttom-sticky list-group-item"><input class=" up-ca-form-inp text-col list-group-item-title" disabled></li>
                 </ul>
             </div>
@@ -82,8 +77,3 @@ use yii\widgets\Pjax;
     </div>
 </div>
 <?php Pjax::end(); ?>
-<style>
-
-
-
-</style>

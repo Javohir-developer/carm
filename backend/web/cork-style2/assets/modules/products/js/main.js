@@ -82,6 +82,25 @@ function saveCacheProducts(obj){
     });
 }
 
+function clearProductsFromCache(obj){
+    $.ajax({
+        url: $(obj).data('url'),
+        type: 'POST',
+        dataType: 'json',
+        success: function (data) {
+            if (data) {
+                $.pjax.reload('#products-cache-index');
+                Notnotify('Продукт успешно удалено !', 'success');
+            }else {
+                Notnotify('Нет товаров для провести', 'danger');
+            }
+        },
+        error: function (request) {
+            Notnotify('что произошло не так !', 'danger');
+        }
+    });
+}
+
 
 
 

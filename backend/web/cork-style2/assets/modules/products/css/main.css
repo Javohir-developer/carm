@@ -20,7 +20,12 @@
 .index-add-button{
     width: 100%;
     margin-bottom: 10px;
-    margin-top: 27px;
+    margin-top: 10px;
+}
+.index-clear-button{
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 .index-send-button{
 
@@ -76,10 +81,12 @@
 /*    overflow-x: hidden;*/
 /*}*/
 .list-group-item-title{
+    /*width: 25px!important;*/
     width: 65px!important;
 }
 .list-group-item-num{
     border-top: 1px solid rgb(220 220 220) !important;
+    border-bottom-left-radius: initial!important;
 }
 .list-group-item-back{
     background: rgb(220 220 220) !important;
@@ -92,10 +99,18 @@
     right: 0;
     background: rgb(220 220 220) !important;
 }
+.left-position-sticky-title{
+    position: sticky!important;
+    left: 0;
+    z-index: 1;
+}
 .title-sticky{
     position: sticky!important;
-    z-index: 1;
+    z-index: 2;
     top: -1px;
+}
+.z-index-title-num{
+    z-index: 3!important;
 }
 .buttom-sticky{
     position: sticky!important;

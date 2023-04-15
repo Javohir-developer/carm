@@ -145,6 +145,7 @@
       <path value="$PROJECT_DIR$/vendor/trntv/yii2-datetime-widget" />
       <path value="$PROJECT_DIR$/vendor/bower-asset/eonasdan-bootstrap-datetimepicker" />
       <path value="$PROJECT_DIR$/vendor/bower-asset/moment" />
+      <path value="$PROJECT_DIR$/vendor/kartik-v/yii2-number" />
     </include_path>
   </component>
   <component name="PhpStanOptionsConfiguration">

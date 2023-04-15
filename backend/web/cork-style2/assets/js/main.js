@@ -25,7 +25,8 @@ function Notnotify(notification, type){
             delay: 2000,
             placement: {
                 from: "top",
-                align: "right"
+                align: "left"
+                // align: "right"
             },
         }
     );

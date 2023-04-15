@@ -74,7 +74,7 @@ $confg = [
                     <div class="row">
                         <div class="col-sm-6">
                             <h6 class="text-center h6-size"><?=Yii::t('app', 'Признаки')?></h6>
-                            <?= $form->field($model, 'unit_amount')->textInput(['class' => 'form-control index-form-control']) ?>
+<!--                            --><?php //= $form->field($model, 'unit_amount')->textInput(['class' => 'form-control index-form-control']) ?>
                             <?= $form->field($model, 'max_ast')->textInput(['class' => 'form-control index-form-control']) ?>
                             <?= $form->field($model, 'min_ast')->textInput(['class' => 'form-control index-form-control']) ?>
                         </div>
@@ -128,6 +128,13 @@ $confg = [
                             <div class="form-group ">
                                 <?= Html::Button(Yii::t('app', 'Провести'), ['class' => 'btn btn-success index-send-button', 'data-url' => Url::to(['/products/products/save-cache-products']), 'onclick' => 'saveCacheProducts(this)']) ?>
                             </div>
+                            <div class="form-group">
+                                <?= Html::Button('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                      <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg>',
+                                    ['class' => 'btn btn-danger index-clear-button', 'data-url' => Url::to(['/products/products/clear-products-from-cache']), 'onclick' => 'clearProductsFromCache(this)']); ?>
+                            </div>
+
                         </div>
                     </div>
                 </div>
