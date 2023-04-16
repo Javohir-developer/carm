@@ -15,10 +15,10 @@ use yii\widgets\ActiveForm;
         <div class="col-sm-6">
             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($model, 'type')->textInput() ?>
+<!--            --><?php //= $form->field($model, 'type')->textInput() ?>
         </div>
         <div class="col-sm-6">
-            <?= $form->field($model, 'description')->textarea(['rows' => 5]) ?>
+<!--            --><?php //= $form->field($model, 'description')->textarea(['rows' => 5]) ?>
 
             <?= $form->field($model, 'status')->radioList($model::status()) ?>
         </div>

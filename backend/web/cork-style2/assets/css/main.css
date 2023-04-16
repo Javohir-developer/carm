@@ -84,7 +84,7 @@
     right: 0;
     background: #fff!important;
 }
-.no-wrap{
+.no-wrap > th{
     position: sticky;
     top: 0;
     z-index: 3;

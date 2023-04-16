@@ -47,6 +47,7 @@ class ListOfTransitionsSearch extends ListOfTransitions
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => false,
         ]);
 
         $this->load($params);

@@ -45,6 +45,7 @@ class WarehousesSearch extends Warehouses
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
+            'sort' => false,
             'query' => $query,
         ]);
 

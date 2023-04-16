@@ -41,9 +41,9 @@ $i = 1;
                         <li class="list-group-item"><?= Html::textInput('amount',       $val['amount'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number']) ?></li>
                         <li class="list-group-item"><?= Html::textInput('entry_price',  Products::Currency($val['entry_price']), ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
                         <li class="list-group-item"><?= Html::textInput('evaluation',   $val['evaluation'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number', 'step' => 'any']) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('exit_price',   $val['exit_price'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number', 'step' => 'any']) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('sum_entry_price',  $val['sum_entry_price'], ['class' => 'text-center up-ca-form-inp', 'disabled' => true]) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('sum_exit_price',   $val['sum_exit_price'], ['class' => 'text-center up-ca-form-inp', 'disabled' => true]) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('exit_price',   Products::Currency($val['exit_price']), ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('sum_entry_price',  Products::Currency($val['sum_entry_price']), ['class' => 'text-center up-ca-form-inp', 'disabled' => true]) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('sum_exit_price',   Products::Currency($val['sum_exit_price']), ['class' => 'text-center up-ca-form-inp', 'disabled' => true]) ?></li>
                         <li class="list-group-item"><?= Html::textInput('brand',        $val['brand'], ['class' => 'text-center up-ca-form-inp']) ?></li>
                         <li class="list-group-item"><?= Html::textInput('model',        $val['model'], ['class' => 'text-center up-ca-form-inp']) ?></li>
                         <li class="list-group-item"><?= Html::textInput('size',         $val['size'], ['class' => 'text-center up-ca-form-inp']) ?></li>
@@ -70,8 +70,8 @@ $i = 1;
                     <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
                     <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
                     <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="<?=isset(Products::getSumParamsInCache()['sum_entry_price']) ? Products::getSumParamsInCache()['sum_entry_price'] : 0; ?>" class="text-center up-ca-form-inp text-col" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="<?=isset(Products::getSumParamsInCache()['sum_exit_price']) ? Products::getSumParamsInCache()['sum_exit_price'] : 0; ?>" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="<?=isset(Products::getSumParamsInCache()['sum_entry_price']) ? Products::Currency(Products::getSumParamsInCache()['sum_entry_price']) : 0; ?>" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="<?=isset(Products::getSumParamsInCache()['sum_exit_price']) ? Products::Currency(Products::getSumParamsInCache()['sum_exit_price']) : 0; ?>" class="text-center up-ca-form-inp text-col" disabled></li>
                     <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
                     <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
                     <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>

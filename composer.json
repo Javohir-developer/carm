@@ -54,6 +54,9 @@
         },
         "platform": {
             "php": "7.4"
+        },
+        "github-oauth": {
+            "github.com": "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"
         }
     },
     "repositories": [

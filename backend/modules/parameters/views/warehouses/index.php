@@ -12,12 +12,12 @@ use yii\helpers\Url;
 
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="warehouses-index">
+<div class="warehouses-index container-fluid">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
+<!--    <h1>--><?php //= Html::encode($this->title) ?><!--</h1>-->
+<!--    float-right margin-bottom-15-->
     <p>
-        <?= Html::a(Yii::t('app', 'Создать склад'), ['create'], ['class' => 'btn btn-success  float-right margin-bottom-15']) ?>
+        <?= Html::a(Yii::t('app', 'Создать склад'), ['create'], ['class' => 'btn btn-success  ']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -25,11 +25,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
 //        'filterModel' => $searchModel,
+        'summary' => '',
+        'options' => ['class' => 'table-parent-div'],
+        'headerRowOptions' => ['class' => 'no-wrap'],
+        'tableOptions' => ['class' => 'table table-striped table-bordered'],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'name',
-            'type',
-            'description:ntext',
             [
                 'attribute' => 'status',
                 'value' => function($model) {
