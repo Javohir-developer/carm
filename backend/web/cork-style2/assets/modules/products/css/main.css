@@ -154,6 +154,11 @@
 
 }
 
+.class-disabled{
+    background-color: #f8f9fa!important;
+    color: #424242!important;
+}
+
 /* small */
 /*@media screen and (max-width:599px) {*/
 

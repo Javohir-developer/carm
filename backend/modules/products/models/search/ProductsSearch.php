@@ -17,9 +17,9 @@ class ProductsSearch extends Products
     public function rules()
     {
         return [
-            [['id', 'user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'currency_amount', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'entry_price', 'exit_price', 'old_entry_price', 'old_exit_price', 'unit_type', 'amount', 'input_status', 'status'], 'integer'],
+            [['id', 'user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'currency_amount', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price', 'unit_type', 'amount', 'input_status', 'status'], 'integer'],
             [['date', 'type', 'model', 'brand', 'size', 'production_time', 'valid', 'created_at', 'updated_at'], 'safe'],
-            [['evaluation', 'old_evaluation'], 'number'],
+            [['evaluation'], 'number'],
         ];
     }
 
@@ -81,9 +81,8 @@ class ProductsSearch extends Products
             'entry_price' => $this->entry_price,
             'evaluation' => $this->evaluation,
             'exit_price' => $this->exit_price,
-            'old_entry_price' => $this->old_entry_price,
-            'old_evaluation' => $this->old_evaluation,
-            'old_exit_price' => $this->old_exit_price,
+            'sum_entry_price' => $this->sum_entry_price,
+            'sum_exit_price' => $this->sum_exit_price,
             'unit_type' => $this->unit_type,
             'amount' => $this->amount,
             'input_status' => $this->input_status,

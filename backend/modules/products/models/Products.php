@@ -41,9 +41,8 @@ use yii\helpers\ArrayHelper;
  * @property int|null $entry_price
  * @property float|null $evaluation
  * @property int|null $exit_price
- * @property int|null $old_entry_price
- * @property float|null $old_evaluation
- * @property int|null $old_exit_price
+ * @property int|null $sum_entry_price
+ * @property int|null $sum_exit_price
  * @property int|null $unit_type
  * @property int|null $amount
  * @property int $input_status
@@ -89,7 +88,8 @@ class Products extends BaseModel
             [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'type', 'amount', 'entry_price', 'evaluation', 'exit_price'], 'required'],
             [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status'], 'integer'],
             [['date', 'production_time', 'valid', 'created_at', 'updated_at'], 'safe'],
-            [['currency_amount', 'entry_price', 'exit_price', 'old_entry_price', 'old_exit_price', 'evaluation', 'old_evaluation'], 'number'],
+            [['currency_amount', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price'], 'number'],
+            [['evaluation'], 'number', 'min' => 1],
             [['type', 'model', 'brand', 'size'], 'string', 'max' => 255],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Suppliers::class, 'targetAttribute' => ['supplier_id' => 'id']],
             [['warehouse_id'], 'exist', 'skipOnError' => true, 'targetClass' => Warehouses::class, 'targetAttribute' => ['warehouse_id' => 'id']],
@@ -125,9 +125,8 @@ class Products extends BaseModel
             'entry_price' => Yii::t('app', 'Цена прх.'),
             'evaluation' => Yii::t('app', 'Оценка'),
             'exit_price' => Yii::t('app', 'Цена прд.'),
-            'old_entry_price' => Yii::t('app', 'Стар. цена прх.'),
-            'old_evaluation' => Yii::t('app', 'Стар. Оценка'),
-            'old_exit_price' => Yii::t('app', 'Стар. цена прд.'),
+            'sum_entry_price' => Yii::t('app', 'Стар. цена прх.'),
+            'sum_exit_price' => Yii::t('app', 'Стар. цена прд.'),
             'unit_type' => Yii::t('app', 'Едю./изм.'),
             'amount' => Yii::t('app', 'Едю./кол-во'),
             'input_status' => Yii::t('app', 'Статус'),
@@ -163,16 +162,20 @@ class Products extends BaseModel
     public function addProductToCache(){
         if ($this->validate()){
             Yii::$app->company->session();
-            $_SESSION[self::cacheProd()][] = $this->attributes;
+            $_SESSION[self::cacheProd()][] = $this->sumAttributes();
             self::sumParams();
             return true;
         }
     }
     public function updateProductFromCache($post){
-        $post['entry_price'] = self::strReplace($post['entry_price']);
-        $post['exit_price'] = self::strReplace($post['exit_price']);
+        $post['entry_price']    = self::strReplace($post['entry_price']);
+        $post['exit_price']     = self::strReplace($post['exit_price']);
+        $post['sum_entry_price']= $post['amount'] * self::strReplace($post['entry_price']);
+        $post['sum_exit_price'] = $post['amount'] * self::strReplace($post['exit_price']);
+
         $_SESSION[self::cacheProd()][$post['id']] = array_merge($_SESSION[self::cacheProd()][$post['id']], $post);
         self::sumParams();
+
         return true;
     }
     public function deleteProductFromCache($id){
@@ -224,7 +227,7 @@ class Products extends BaseModel
     }
 
     public static function Currency($currency){
-        return number_format(self::strReplace($currency), 0, ' ', ' ');
+        return number_format(self::strReplace($currency), 2, '.', ' ');
     }
 
     public static function strReplace($num){
@@ -232,9 +235,15 @@ class Products extends BaseModel
     }
 
     public static function sumParams(){
-        $_SESSION[self::cacheSum()]['entry_price'] = array_sum(array_column($_SESSION[self::cacheProd()], 'entry_price'));
-        $_SESSION[self::cacheSum()]['exit_price'] = array_sum(array_column($_SESSION[self::cacheProd()], 'exit_price'));
+        $_SESSION[self::cacheSum()]['sum_entry_price'] = array_sum(array_column($_SESSION[self::cacheProd()], 'sum_entry_price'));
+        $_SESSION[self::cacheSum()]['sum_exit_price'] = array_sum(array_column($_SESSION[self::cacheProd()], 'sum_exit_price'));
         $_SESSION[self::cacheSum()]['amount'] = array_sum(array_column($_SESSION[self::cacheProd()], 'amount'));
+    }
+
+    public function sumAttributes(){
+        $this->sum_entry_price = $this->amount * $this->entry_price;
+        $this->sum_exit_price = $this->amount * $this->exit_price;
+        return $this->attributes;
     }
 
 

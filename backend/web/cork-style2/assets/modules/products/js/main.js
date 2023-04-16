@@ -101,6 +101,29 @@ function clearProductsFromCache(obj){
     });
 }
 
+$("#products-entry_price").on("keyup", function(e) {
+    if ($('#products-entry_price').val() !== ''){
+        $("#products-evaluation").removeAttr('disabled');
+        if ($('#products-evaluation').val() !== ''){
+            var evaluation = (Number($("#products-evaluation").val()) + 100) / 100;
+            var sum =  evaluation * $('#products-entry_price').val()
+            $('#products-exit_price').val(number_format(sum,2,'.',' '));
+        }
+    }else {
+        $("#products-evaluation").attr('disabled','disabled');
+    }
+});
+
+$("#products-evaluation").on("keyup", function(e) {
+    if ($('#products-entry_price').val() !== ''){
+        evaluation = (Number($("#products-evaluation").val()) + 100) / 100;
+        var sum =  evaluation * $('#products-entry_price').val()
+        $('#products-exit_price').val(number_format(sum,2,'.',' '));
+    }else {
+        Notnotify('"Цена прх." не должен быть пустым', 'danger');
+    }
+});
+
 
 
 

@@ -45,9 +45,8 @@ class m230330_152255_create_products_table extends Migration
             'entry_price' => $this->float(),
             'evaluation' => $this->float(),
             'exit_price' => $this->float(),
-            'old_entry_price' => $this->float(),
-            'old_evaluation' => $this->float(),
-            'old_exit_price' => $this->float(),
+            'sum_entry_price' => $this->float(),
+            'sum_exit_price' => $this->float(),
 
             'unit_type' => $this->integer(),
             'amount' => $this->integer(),

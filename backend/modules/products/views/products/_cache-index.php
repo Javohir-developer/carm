@@ -19,8 +19,10 @@ $i = 1;
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Ед изм')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Кол-во')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Цена прх.')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
-                    <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Оценка')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
+                    <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Наоценка')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Цена прд.')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
+                    <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Прх. Сумма')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
+                    <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Прод. Сумма')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Бренд')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Модель')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Размер')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
@@ -32,18 +34,20 @@ $i = 1;
                     <input type="hidden" name="id" value="<?=$key?>">
                     <ul class="list-group  list-group-horizontal">
                         <li class="list-group-item left-position-sticky-title number-item" ><input type="text" value="<?=$i++;?>" disabled></li>
-                        <li class="list-group-item"><?= Html::textInput('barcode',  $val['barcode'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number']) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('type',     $val['type'], ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
-                        <li class="list-group-item"><?= Html::dropDownList('currency',      [$val['currency']], Products::currencyType(), ['class' => 'text-center up-ca-form-inp']); ?></li>
-                        <li class="list-group-item"><?= Html::dropDownList('unit_type',      [$val['unit_type']], Products::unitType(), ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('amount',           $val['amount'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number']) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('entry_price',      Products::Currency($val['entry_price']), ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('evaluation',       $val['evaluation'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number', 'step' => 'any']) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('exit_price',       $val['exit_price'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number', 'step' => 'any']) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('brand',    $val['brand'], ['class' => 'text-center up-ca-form-inp']) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('model',    $val['model'], ['class' => 'text-center up-ca-form-inp']) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('size',     $val['size'], ['class' => 'text-center up-ca-form-inp']) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('date',             $val['date'], ['type' => 'date', 'class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('barcode',      $val['barcode'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number']) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('type',         $val['type'], ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
+                        <li class="list-group-item"><?= Html::dropDownList('currency',  [$val['currency']], Products::currencyType(), ['class' => 'text-center up-ca-form-inp']); ?></li>
+                        <li class="list-group-item"><?= Html::dropDownList('unit_type', [$val['unit_type']], Products::unitType(), ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('amount',       $val['amount'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number']) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('entry_price',  Products::Currency($val['entry_price']), ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('evaluation',   $val['evaluation'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number', 'step' => 'any']) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('exit_price',   $val['exit_price'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number', 'step' => 'any']) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('sum_entry_price',  $val['sum_entry_price'], ['class' => 'text-center up-ca-form-inp', 'disabled' => true]) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('sum_exit_price',   $val['sum_exit_price'], ['class' => 'text-center up-ca-form-inp', 'disabled' => true]) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('brand',        $val['brand'], ['class' => 'text-center up-ca-form-inp']) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('model',        $val['model'], ['class' => 'text-center up-ca-form-inp']) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('size',         $val['size'], ['class' => 'text-center up-ca-form-inp']) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('date',         $val['date'], ['type' => 'date', 'class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
                         <li  class="right-position-sticky list-group-item">
                             <?= Html::SubmitButton(
                                 '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>',
@@ -63,9 +67,11 @@ $i = 1;
                     <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
                     <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
                     <li class=" list-group-item buttom-sticky"><input value="<?=isset(Products::getSumParamsInCache()['amount']) ? Products::getSumParamsInCache()['amount'] : 0; ?>" class="text-center up-ca-form-inp text-col" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="<?=isset(Products::getSumParamsInCache()['entry_price']) ? Products::getSumParamsInCache()['entry_price'] : 0; ?>" class="text-center up-ca-form-inp text-col" disabled></li>
                     <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
-                    <li class=" list-group-item buttom-sticky"><input value="<?=isset(Products::getSumParamsInCache()['exit_price']) ? Products::getSumParamsInCache()['exit_price'] : 0; ?>" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="<?=isset(Products::getSumParamsInCache()['sum_entry_price']) ? Products::getSumParamsInCache()['sum_entry_price'] : 0; ?>" class="text-center up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="<?=isset(Products::getSumParamsInCache()['sum_exit_price']) ? Products::getSumParamsInCache()['sum_exit_price'] : 0; ?>" class="text-center up-ca-form-inp text-col" disabled></li>
                     <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
                     <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
                     <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>

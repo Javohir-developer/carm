@@ -67,11 +67,11 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'exit_price') ?>
 
-    <?php // echo $form->field($model, 'old_entry_price') ?>
+    <?php // echo $form->field($model, 'sum_entry_price') ?>
 
     <?php // echo $form->field($model, 'old_evaluation') ?>
 
-    <?php // echo $form->field($model, 'old_exit_price') ?>
+    <?php // echo $form->field($model, 'sum_exit_price') ?>
 
     <?php // echo $form->field($model, 'unit_type') ?>
 

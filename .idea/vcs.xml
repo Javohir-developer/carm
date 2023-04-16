@@ -21,6 +21,7 @@
     <mapping directory="$PROJECT_DIR$/vendor/kartik-v/bootstrap-star-rating" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/vendor/kartik-v/dependent-dropdown" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/vendor/kartik-v/yii2-krajee-base" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/kartik-v/yii2-number" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-activeform" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-affix" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/vendor/kartik-v/yii2-widget-alert" vcs="Git" />

@@ -99,13 +99,12 @@ $confg = [
                         <div class="col-sm-6">
 <!--                            --><?php //= $form->field($model, 'ndc')->textInput() ?>
                             <?= $form->field($model, 'entry_price')->textInput() ?>
-                            <?= $form->field($model, 'evaluation')->textInput() ?>
-                            <?= $form->field($model, 'exit_price')->textInput() ?>
+                            <?= $form->field($model, 'evaluation')->textInput(['disabled' => true]) ?>
+                            <?= $form->field($model, 'exit_price')->textInput([ 'class' => 'class-disabled form-control']) ?>
                         </div>
                         <div class="col-sm-6">
-                            <?= $form->field($model, 'old_entry_price')->textInput(['disabled' => true]) ?>
-                            <?= $form->field($model, 'old_evaluation')->textInput(['disabled' => true]) ?>
-                            <?= $form->field($model, 'old_exit_price')->textInput(['disabled' => true]) ?>
+                            <?= $form->field($model, 'sum_entry_price')->textInput(['disabled' => true]) ?>
+                            <?= $form->field($model, 'sum_exit_price')->textInput(['disabled' => true]) ?>
                         </div>
                     </div>
                 </div>
