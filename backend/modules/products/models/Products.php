@@ -88,8 +88,7 @@ class Products extends BaseModel
             [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'type', 'amount', 'entry_price', 'evaluation', 'exit_price'], 'required'],
             [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status'], 'integer'],
             [['date', 'production_time', 'valid', 'created_at', 'updated_at'], 'safe'],
-            [['currency_amount', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price'], 'number'],
-            [['evaluation'], 'number', 'min' => 1],
+            [['currency_amount', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price', 'evaluation'], 'number'],
             [['type', 'model', 'brand', 'size'], 'string', 'max' => 255],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Suppliers::class, 'targetAttribute' => ['supplier_id' => 'id']],
             [['warehouse_id'], 'exist', 'skipOnError' => true, 'targetClass' => Warehouses::class, 'targetAttribute' => ['warehouse_id' => 'id']],
@@ -169,7 +168,7 @@ class Products extends BaseModel
     }
     public function updateProductFromCache($post){
         $post['entry_price']    = self::strReplace($post['entry_price']);
-        $post['exit_price']     = self::strReplace($post['exit_price']);
+        $post['exit_price']     = (($post['evaluation'] + 100) / 100) * self::strReplace($post['entry_price']);
         $post['sum_entry_price']= $post['amount'] * self::strReplace($post['entry_price']);
         $post['sum_exit_price'] = $post['amount'] * self::strReplace($post['exit_price']);
 
@@ -207,7 +206,7 @@ class Products extends BaseModel
     public static function currencyType(){
         return [
             1 => Yii::t('app', 'UZS'),
-            2 => Yii::t('app', 'USD')
+//            2 => Yii::t('app', 'USD')
         ];
     }
     public static function unitType(){
@@ -245,50 +244,5 @@ class Products extends BaseModel
         $this->sum_exit_price = $this->amount * $this->exit_price;
         return $this->attributes;
     }
-
-
-
-
-
-
-    //    /**
-//     * Gets query for [[Company]].
-//     *
-//     * @return \yii\db\ActiveQuery
-//     */
-//    public function getCompany()
-//    {
-//        return $this->hasOne(Companies::class, ['id' => 'company_id']);
-//    }
-//
-//    /**
-//     * Gets query for [[Supplier]].
-//     *
-//     * @return \yii\db\ActiveQuery
-//     */
-//    public function getSupplier()
-//    {
-//        return $this->hasOne(Suppliers::class, ['id' => 'supplier_id']);
-//    }
-//
-//    /**
-//     * Gets query for [[User]].
-//     *
-//     * @return \yii\db\ActiveQuery
-//     */
-//    public function getUser()
-//    {
-//        return $this->hasOne(User::class, ['id' => 'user_id']);
-//    }
-//
-//    /**
-//     * Gets query for [[Warehouse]].
-//     *
-//     * @return \yii\db\ActiveQuery
-//     */
-//    public function getWarehouse()
-//    {
-//        return $this->hasOne(Warehouses::class, ['id' => 'warehouse_id']);
-//    }
 
 }

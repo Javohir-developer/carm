@@ -2,14 +2,14 @@
 
 namespace app\modules\products\models\search;
 
-use backend\modules\products\models\Products;
+use backend\modules\products\models\ListOfTransitions;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * ProductsSearch represents the model behind the search form of `backend\modules\products\models\Products`.
+ * ListOfTransitionsSearch represents the model behind the search form of `backend\modules\products\models\ListOfTransitions`.
  */
-class ProductsSearch extends Products
+class ListOfTransitionsSearch extends ListOfTransitions
 {
     /**
      * {@inheritdoc}
@@ -17,9 +17,9 @@ class ProductsSearch extends Products
     public function rules()
     {
         return [
-            [['id', 'user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'currency_amount', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price', 'unit_type', 'amount', 'input_status', 'status'], 'integer'],
+            [['id', 'user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status'], 'integer'],
             [['date', 'type', 'model', 'brand', 'size', 'production_time', 'valid', 'created_at', 'updated_at'], 'safe'],
-            [['evaluation'], 'number'],
+            [['currency_amount', 'entry_price', 'evaluation', 'exit_price', 'sum_entry_price', 'sum_exit_price'], 'number'],
         ];
     }
 
@@ -41,7 +41,7 @@ class ProductsSearch extends Products
      */
     public function search($params)
     {
-        $query = Products::find();
+        $query = ListOfTransitions::find();
 
         // add conditions that should always apply here
 
