@@ -79,6 +79,12 @@
     right: 0;
     background: white!important;
 }
+.left-position-sticky{
+    position: sticky;
+    left: 0;
+    background: white!important;
+    z-index: 4!important;
+}
 .right-button-position-sticky{
     position: sticky;
     right: 0;
@@ -114,6 +120,10 @@
 /*end*/
 .help-block{
     color: red;
+}
+
+.form-control {
+    padding: 8px 10px!important;
 }
 
 

@@ -54,6 +54,8 @@ use Yii;
  */
 class ListOfTransitions extends BaseModel
 {
+    public $from_date;
+    public $to_date;
     /**
      * {@inheritdoc}
      */
@@ -70,7 +72,7 @@ class ListOfTransitions extends BaseModel
             [['input_status', 'status'], 'default', 'value' => self::STATUS_ACTIVE],
             [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'type', 'amount', 'entry_price', 'evaluation', 'exit_price'], 'required'],
             [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status'], 'integer'],
-            [['date', 'production_time', 'valid', 'created_at', 'updated_at'], 'safe'],
+            [['date', 'production_time', 'valid', 'created_at', 'updated_at', 'from_date', 'to_date'], 'safe'],
             [['currency_amount', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price', 'evaluation'], 'number'],
             [['type', 'model', 'brand', 'size'], 'string', 'max' => 255],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Suppliers::class, 'targetAttribute' => ['supplier_id' => 'id']],
@@ -113,6 +115,8 @@ class ListOfTransitions extends BaseModel
             'amount' => Yii::t('app', 'Едю./кол-во'),
             'input_status' => Yii::t('app', 'Статус'),
             'status' => Yii::t('app', 'Статус'),
+            'from_date' => Yii::t('app', 'с даты'),
+            'to_date' => Yii::t('app', 'до даты'),
         ];
     }
 

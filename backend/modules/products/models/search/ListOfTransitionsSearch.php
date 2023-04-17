@@ -17,9 +17,7 @@ class ListOfTransitionsSearch extends ListOfTransitions
     public function rules()
     {
         return [
-            [['id', 'user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status'], 'integer'],
-            [['date', 'type', 'model', 'brand', 'size', 'production_time', 'valid', 'created_at', 'updated_at'], 'safe'],
-            [['currency_amount', 'entry_price', 'evaluation', 'exit_price', 'sum_entry_price', 'sum_exit_price'], 'number'],
+            [['from_date', 'to_date'], 'safe'],
         ];
     }
 
@@ -58,44 +56,14 @@ class ListOfTransitionsSearch extends ListOfTransitions
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'user_id' => $this->user_id,
-            'company_id' => $this->company_id,
-            'warehouse_id' => $this->warehouse_id,
-            'supplier_id' => $this->supplier_id,
-            'date' => $this->date,
-            'currency' => $this->currency,
-            'currency_amount' => $this->currency_amount,
-            'barcode' => $this->barcode,
-            'group' => $this->group,
-            'ikpu' => $this->ikpu,
-            'unit_amount' => $this->unit_amount,
-            'max_ast' => $this->max_ast,
-            'min_ast' => $this->min_ast,
-            'production_time' => $this->production_time,
-            'term_amount' => $this->term_amount,
-            'term_type' => $this->term_type,
-            'valid' => $this->valid,
-            'ndc' => $this->ndc,
-            'entry_price' => $this->entry_price,
-            'evaluation' => $this->evaluation,
-            'exit_price' => $this->exit_price,
-            'sum_entry_price' => $this->sum_entry_price,
-            'sum_exit_price' => $this->sum_exit_price,
-            'unit_type' => $this->unit_type,
-            'amount' => $this->amount,
-            'input_status' => $this->input_status,
-            'status' => $this->status,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
-
-        $query->andFilterWhere(['ilike', 'type', $this->type])
-            ->andFilterWhere(['ilike', 'model', $this->model])
-            ->andFilterWhere(['ilike', 'brand', $this->brand])
-            ->andFilterWhere(['ilike', 'size', $this->size]);
+                '>=',
+                'date',
+                $this->from_date])
+            ->andFilterWhere([
+                '<=',
+                'date',
+                $this->to_date]);
 
         return $dataProvider;
     }
