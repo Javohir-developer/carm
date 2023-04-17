@@ -3,6 +3,7 @@
 namespace app\modules\products\models\search;
 
 use backend\modules\products\models\ListOfTransitions;
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -40,7 +41,7 @@ class ListOfTransitionsSearch extends ListOfTransitions
     public function search($params)
     {
         $query = ListOfTransitions::find();
-
+        $query->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id()]);
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
@@ -56,14 +57,8 @@ class ListOfTransitionsSearch extends ListOfTransitions
             return $dataProvider;
         }
 
-        $query->andFilterWhere([
-                '>=',
-                'date',
-                $this->from_date])
-            ->andFilterWhere([
-                '<=',
-                'date',
-                $this->to_date]);
+        $query->andFilterWhere(['>=', 'date', $this->from_date])
+                ->andFilterWhere(['<=', 'date', $this->to_date]);
 
         return $dataProvider;
     }

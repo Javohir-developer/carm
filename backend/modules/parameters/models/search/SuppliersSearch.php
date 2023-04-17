@@ -3,6 +3,7 @@
 namespace app\modules\parameters\models\search;
 
 use backend\modules\parameters\models\Suppliers;
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -41,6 +42,7 @@ class SuppliersSearch extends Suppliers
     public function search($params)
     {
         $query = Suppliers::find();
+        $query->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id()]);
 
         // add conditions that should always apply here
 

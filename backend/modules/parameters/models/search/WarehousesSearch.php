@@ -3,6 +3,7 @@
 namespace app\modules\parameters\models\search;
 
 use backend\modules\parameters\models\Warehouses;
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -41,6 +42,7 @@ class WarehousesSearch extends Warehouses
     public function search($params)
     {
         $query = Warehouses::find();
+        $query->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id()]);
 
         // add conditions that should always apply here
 
