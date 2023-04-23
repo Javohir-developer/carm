@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="carm@localhost" uuid="d3370a76-2c0d-41f0-bbe5-32d6a8bff059">
+    <data-source source="LOCAL" name="carm_db@95.130.227.29" uuid="d3370a76-2c0d-41f0-bbe5-32d6a8bff059">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://95.130.227.29:5432/carm_db</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="carm@localhost" uuid="1bc335a4-0d9b-43ab-ab0b-3d17a2c7afc1">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>

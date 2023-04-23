@@ -19,6 +19,7 @@ class m230330_152255_create_products_table extends Migration
 
             'warehouse_id' => $this->integer()->notNull(),
             'supplier_id' => $this->integer()->notNull(),
+            'product_types_id' => $this->integer(),
             'date' => $this->date(),
             'currency' => $this->integer()->notNull()->defaultValue(1),
             'currency_amount' => $this->float(),
@@ -61,6 +62,7 @@ class m230330_152255_create_products_table extends Migration
         $this->addForeignKey('fk_products_user',  'products', 'user_id', 'user', 'id');
         $this->addForeignKey('fk_products_warehouses',  'products', 'warehouse_id', 'warehouses', 'id');
         $this->addForeignKey('fk_products_suppliers',  'products', 'supplier_id', 'suppliers', 'id');
+        $this->addForeignKey('fk_products_product_types',  'products', 'product_types_id', 'product_types', 'id');
     }
 
     /**

@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="73e60096-4026-43d9-bca0-69bcf7696850" name="carm">
-        <fileTransfer rootFolder="/home/carm-user/carm-project" accessType="SFTP" host="95.130.227.29" port="22" sshConfigId="8251ab9f-6263-4a01-b7c5-2bf7d9c98239" sshConfig="root@95.130.227.29:22 password">
+        <fileTransfer rootFolder="/home/carm-user/carm-project" accessType="SFTP" host="95.130.227.29" port="22" sshConfigId="8251ab9f-6263-4a01-b7c5-2bf7d9c98239" sshConfig="carm-user@95.130.227.29:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
