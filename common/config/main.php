@@ -12,14 +12,14 @@ return [
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
         ],
-        'db' => [
-            'class' => 'yii\db\Connection',
-//            'dsn' => 'pgsql:host=localhost;port=5432;dbname=carm',
-            'dsn' => 'pgsql:host=carm-db;port=5432;dbname=carm',
-            'username' => 'root',
-            'password' => 'root',
-            'charset' => 'utf8',
-        ],
+//        'db' => [
+//            'class' => 'yii\db\Connection',
+////            'dsn' => 'pgsql:host=localhost;port=5432;dbname=carm',
+//            'dsn' => 'pgsql:host=carm-db;port=5432;dbname=carm',
+//            'username' => 'root',
+//            'password' => 'root',
+//            'charset' => 'utf8',
+//        ],
     ],
 
 ];
