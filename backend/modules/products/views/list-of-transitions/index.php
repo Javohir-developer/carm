@@ -1,6 +1,7 @@
 <?php
 
 use backend\modules\products\models\ListOfTransitions;
+use backend\modules\products\models\ProductTypes;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -35,11 +36,36 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['class' => 'left-position-sticky'],
             ],
             'barcode',
-            'warehouse_id',
-            'supplier_id',
-            'type',
-            'currency',
-            'unit_type',
+            [
+                'attribute' => 'warehouse_id',
+                'value' => function($data){
+                    return $data->warehouse->name;
+                }
+            ],
+            [
+                'attribute' => 'supplier_id',
+                'value' => function($data){
+                    return $data->supplier->name;
+                }
+            ],
+            [
+                'attribute' => 'product_types_id',
+                'value' => function($data){
+                    return isset($data->productTypes->name) ? $data->productTypes->name : '';
+                }
+            ],
+            [
+                'attribute' => 'currency',
+                'value' => function($data){
+                    return ListOfTransitions::currencyType()[$data->currency];
+                }
+            ],
+            [
+                'attribute' => 'unit_type',
+                'value' => function($data){
+                    return ListOfTransitions::unitType()[$data->unit_type];
+                }
+            ],
             'amount',
             'entry_price',
             'evaluation',

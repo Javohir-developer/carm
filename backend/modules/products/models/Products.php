@@ -205,28 +205,6 @@ class Products extends BaseModel
     }
 
 
-    public static function currencyType(){
-        return [
-            1 => Yii::t('app', 'UZS'),
-//            2 => Yii::t('app', 'USD')
-        ];
-    }
-    public static function unitType(){
-        return [
-            1 => Yii::t('app', 'шт'),
-            2 => Yii::t('app', 'кг')
-        ];
-    }
-
-    public static function termType(){
-        return [
-            1 => Yii::t('app', 'Суток'),
-            2 => Yii::t('app', 'Неделя'),
-            3 => Yii::t('app', 'Месяц'),
-            4 => Yii::t('app', 'год')
-        ];
-    }
-
     public static function Currency($currency){
         return number_format(self::strReplace($currency), 2, '.', ' ');
     }

@@ -2,6 +2,7 @@
 
 namespace backend\modules\products\models;
 
+use backend\models\BaseModel;
 use backend\modules\companies\models\Companies;
 use common\models\User;
 use Yii;
@@ -21,7 +22,7 @@ use Yii;
  * @property Products[] $products
  * @property User $user
  */
-class ProductTypes extends \yii\db\ActiveRecord
+class ProductTypes extends BaseModel
 {
     /**
      * {@inheritdoc}

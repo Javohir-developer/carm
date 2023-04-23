@@ -8,6 +8,7 @@ use backend\modules\parameters\models\Suppliers;
 use backend\modules\parameters\models\Warehouses;
 use common\models\User;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "products".
@@ -17,6 +18,7 @@ use Yii;
  * @property int $company_id
  * @property int $warehouse_id
  * @property int $supplier_id
+ * @property int|null $product_types_id
  * @property string|null $date
  * @property int $currency
  * @property float|null $currency_amount
@@ -44,11 +46,11 @@ use Yii;
  * @property int|null $amount
  * @property int $input_status
  * @property int $status
- * @property int $product_types_id
  * @property string|null $created_at
  * @property string|null $updated_at
  *
  * @property Companies $company
+ * @property ProductTypes $productTypes
  * @property Suppliers $supplier
  * @property User $user
  * @property Warehouses $warehouse
@@ -65,6 +67,9 @@ class ListOfTransitions extends BaseModel
         return 'products';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
@@ -76,10 +81,12 @@ class ListOfTransitions extends BaseModel
             [['date', 'production_time', 'valid', 'created_at', 'updated_at', 'from_date', 'to_date'], 'safe'],
             [['currency_amount', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price', 'evaluation'], 'number'],
             [['name', 'model', 'brand', 'size'], 'string', 'max' => 255],
+            [['product_types_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductTypes::class, 'targetAttribute' => ['product_types_id' => 'id']],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Suppliers::class, 'targetAttribute' => ['supplier_id' => 'id']],
             [['warehouse_id'], 'exist', 'skipOnError' => true, 'targetClass' => Warehouses::class, 'targetAttribute' => ['warehouse_id' => 'id']],
         ];
     }
+
 
     /**
      * {@inheritdoc}
@@ -118,6 +125,7 @@ class ListOfTransitions extends BaseModel
             'status' => Yii::t('app', 'Статус'),
             'from_date' => Yii::t('app', 'с даты'),
             'to_date' => Yii::t('app', 'до даты'),
+            'product_types_id' => Yii::t('app', 'Тип'),
         ];
     }
 
@@ -132,16 +140,6 @@ class ListOfTransitions extends BaseModel
     }
 
     /**
-     * Gets query for [[Supplier]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSupplier()
-    {
-        return $this->hasOne(Suppliers::class, ['id' => 'supplier_id']);
-    }
-
-    /**
      * Gets query for [[User]].
      *
      * @return \yii\db\ActiveQuery
@@ -152,6 +150,27 @@ class ListOfTransitions extends BaseModel
     }
 
     /**
+     * Gets query for [[ProductTypes]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProductTypes()
+    {
+        return $this->hasOne(ProductTypes::class, ['id' => 'product_types_id']);
+    }
+
+    /**
+     * Gets query for [[Supplier]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSupplier()
+    {
+        return $this->hasOne(Suppliers::class, ['id' => 'supplier_id']);
+    }
+
+
+    /**
      * Gets query for [[Warehouse]].
      *
      * @return \yii\db\ActiveQuery
@@ -159,5 +178,10 @@ class ListOfTransitions extends BaseModel
     public function getWarehouse()
     {
         return $this->hasOne(Warehouses::class, ['id' => 'warehouse_id']);
+    }
+
+    public static function productTypes(){
+        $product_type = ProductTypes::find()->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id(), 'status' => self::STATUS_ACTIVE])->all();
+        return ArrayHelper::map($product_type, 'id', 'name');
     }
 }
