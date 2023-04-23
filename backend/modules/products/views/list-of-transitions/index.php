@@ -48,6 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->supplier->name;
                 }
             ],
+            'name',
             [
                 'attribute' => 'product_types_id',
                 'value' => function($data){
