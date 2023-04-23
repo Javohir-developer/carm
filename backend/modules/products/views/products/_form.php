@@ -51,7 +51,10 @@ $confg = [
                     </div>
                 </div>
                 <div class="col-sm-2">
-                    <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
+                    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+                </div>
+                <div class="col-sm-2">
+                    <?= $form->field($model, 'product_types_id')->dropDownList($model::productTypes(), ['prompt' => '-Выберите тип-']) ?>
                 </div>
                 <div class="col-sm-2">
                     <?= $form->field($model, 'model')->textInput(['maxlength' => true]) ?>

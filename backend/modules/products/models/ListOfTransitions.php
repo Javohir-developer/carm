@@ -22,7 +22,7 @@ use Yii;
  * @property float|null $currency_amount
  * @property int|null $barcode
  * @property int|null $group
- * @property string|null $type
+ * @property string|null $name
  * @property string|null $model
  * @property string|null $brand
  * @property string|null $size
@@ -44,6 +44,7 @@ use Yii;
  * @property int|null $amount
  * @property int $input_status
  * @property int $status
+ * @property int $product_types_id
  * @property string|null $created_at
  * @property string|null $updated_at
  *
@@ -70,11 +71,11 @@ class ListOfTransitions extends BaseModel
             [['user_id'], 'default', 'value' => Yii::$app->user->id],
             [['company_id'], 'default', 'value' => Yii::$app->company->id()],
             [['input_status', 'status'], 'default', 'value' => self::STATUS_ACTIVE],
-            [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'type', 'amount', 'entry_price', 'evaluation', 'exit_price'], 'required'],
-            [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status'], 'integer'],
+            [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'name', 'amount', 'entry_price', 'evaluation', 'exit_price'], 'required'],
+            [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status', 'product_types_id'], 'integer'],
             [['date', 'production_time', 'valid', 'created_at', 'updated_at', 'from_date', 'to_date'], 'safe'],
             [['currency_amount', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price', 'evaluation'], 'number'],
-            [['type', 'model', 'brand', 'size'], 'string', 'max' => 255],
+            [['name', 'model', 'brand', 'size'], 'string', 'max' => 255],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Suppliers::class, 'targetAttribute' => ['supplier_id' => 'id']],
             [['warehouse_id'], 'exist', 'skipOnError' => true, 'targetClass' => Warehouses::class, 'targetAttribute' => ['warehouse_id' => 'id']],
         ];
@@ -93,7 +94,7 @@ class ListOfTransitions extends BaseModel
             'currency_amount' => Yii::t('app', 'Вал./Кол-во.'),
             'barcode' => Yii::t('app', 'Бар код'),
             'group' => Yii::t('app', 'Группа'),
-            'type' => Yii::t('app', 'Тип'),
+            'name' => Yii::t('app', 'Название'),
             'model' => Yii::t('app', 'Модель'),
             'brand' => Yii::t('app', 'Бранд'),
             'size' => Yii::t('app', 'Размер'),

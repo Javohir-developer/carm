@@ -2,6 +2,8 @@
 
 namespace backend\modules\products\models;
 
+use backend\modules\companies\models\Companies;
+use common\models\User;
 use Yii;
 
 /**
@@ -35,13 +37,12 @@ class ProductTypes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'company_id'], 'required'],
-            [['user_id', 'company_id', 'status'], 'default', 'value' => null],
+            [['user_id'], 'default', 'value' => Yii::$app->user->id],
+            [['company_id'], 'default', 'value' => Yii::$app->company->id()],
+            [['name'], 'required'],
             [['user_id', 'company_id', 'status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['name'], 'string', 'max' => 255],
-            [['company_id'], 'exist', 'skipOnError' => true, 'targetClass' => Companies::class, 'targetAttribute' => ['company_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::class, 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
