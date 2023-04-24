@@ -125,5 +125,11 @@
 .form-control {
     padding: 4px 10px!important;
 }
+.dropdown:not(.custom-dropdown-icon):not(.custom-dropdown) .dropdown-menu {
+    transform: translate(-116px, 27px)!important;
+}
 
-
+.avatar-sm {
+    width: 44px!important;
+    height: 44px!important;
+}

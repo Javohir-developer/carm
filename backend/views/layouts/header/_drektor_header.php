@@ -118,13 +118,10 @@ use yii\helpers\Url;
                         </div>
                     </div>
                 </a>
-
-                <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
+                <div class="dropdown-menu position-absolute account-style" aria-labelledby="userProfileDropdown">
                     <div class="user-profile-section dropdown-login">
                         <div class="media mx-auto">
-                            <div class="emoji me-2">
-                                👋
-                            </div>
+                            <div class="emoji me-2">👋</div>
                             <div class="media-body">
                                 <h5>Javohir</h5>
                                 <p>Xodim</p>
@@ -142,7 +139,6 @@ use yii\helpers\Url;
                         </a>
                     </div>
                 </div>
-
             </li>
 
         </ul>

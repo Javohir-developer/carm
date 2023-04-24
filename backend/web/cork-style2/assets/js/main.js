@@ -1,19 +1,3 @@
-function validateErrors(data){
-    // $('.h6-size').hide();
-    $('.help-block').addClass('help-block1');
-    $('.form-group').addClass('form-group1');
-    $.each(data, function(key, val) {
-        $('#'+key).next().html(val);
-    });
-}
-
-function success(){
-    $('.help-block').empty();
-    $('.help-block').removeClass('help-block1');
-    $('.form-group').removeClass('form-group1');
-    // $("#products-form-send-ajax").trigger('reset');
-}
-
 
 function Notnotify(notification, type){
     $.notify(

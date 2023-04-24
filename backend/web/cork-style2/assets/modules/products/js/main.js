@@ -124,6 +124,23 @@ $("#products-evaluation").on("keyup", function(e) {
     }
 });
 
+function validateErrors(data){
+    $('.help-block').addClass('help-block1');
+    $('.form-group').addClass('form-group1');
+    $.each(data, function(key, val) {
+        $('#'+key).next().html(val);
+    });
+}
+
+function success(){
+    $('.help-block').empty();
+    $('.help-block').removeClass('help-block1');
+    $('.form-group').removeClass('form-group1');
+    // $("#products-form-send-ajax").trigger('reset');
+}
+
+
+
 
 
 

@@ -422,7 +422,7 @@ use yii\helpers\Url;
                     </div>
                 </a>
 
-                <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
+                <div class="dropdown-menu position-absolute account-style" aria-labelledby="userProfileDropdown">
                     <div class="user-profile-section dropdown-login">
                         <div class="media mx-auto">
                             <div class="emoji me-2">
