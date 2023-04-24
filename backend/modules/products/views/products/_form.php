@@ -1,6 +1,7 @@
 <?php
 
 use kartik\widgets\DatePicker;
+use kartik\widgets\Select2;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
@@ -35,7 +36,7 @@ $confg = [
                     <?= $form->field($model, 'supplier_id')->dropDownList($model->Suppliers(), ['prompt'=> '-----']) ?>
                 </div>
                 <div class="col-sm-2">
-                    <?php echo $form->field($model, 'date')->textInput(['type' => 'date', 'value' => date('Y-m-d')]); ?>
+                    <?php echo $form->field($model, 'date')->textInput(['type' => 'date', 'value' => date('Y-m-d'), 'class' => 'date-style form-control']); ?>
                 </div>
                 <div class="col-sm-2">
                     <?= $form->field($model, 'group')->textInput() ?>
@@ -54,7 +55,14 @@ $confg = [
                     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
                 </div>
                 <div class="col-sm-2">
-                    <?= $form->field($model, 'product_types_id')->dropDownList($model::productTypes(), ['prompt' => '-Выберите тип-']) ?>
+                    <?= $form->field($model, 'product_types_id')->widget(Select2::classname(), [
+                        'data' => $model::productTypes(),
+                        'language' => 'ru',
+                        'options' => ['placeholder' => '-----'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ]) ?>
                 </div>
                 <div class="col-sm-2">
                     <?= $form->field($model, 'model')->textInput(['maxlength' => true]) ?>
@@ -83,7 +91,7 @@ $confg = [
                         </div>
                         <div class="col-sm-6">
                             <h6 class="text-center h6-size"><?=Yii::t('app', 'Срок годности')?></h6>
-                            <?= $form->field($model, 'production_time')->textInput(['type' => 'date', 'class' => 'form-control index-form-control', 'placeholder'=>Yii::t('app', 'Выбираете склад')]) ?>
+                            <?= $form->field($model, 'production_time')->textInput(['type' => 'date', 'class' => 'form-control index-form-control date-style', 'placeholder'=>Yii::t('app', 'Выбираете склад')]) ?>
                             <div class="row">
                                 <div class="col-sm-6">
                                     <?= $form->field($model, 'term_amount')->textInput(['class' => 'form-control index-form-control']) ?>
@@ -92,7 +100,7 @@ $confg = [
                                     <?= $form->field($model, 'term_type')->dropDownList($model::termType(), ['prompt'=> '-----']) ?>
                                 </div>
                             </div>
-                            <?= $form->field($model, 'valid')->textInput(['type' => 'date', 'value' => date('Y-m-d'), 'class' => 'form-control index-form-control']) ?>
+                            <?= $form->field($model, 'valid')->textInput(['type' => 'date', 'value' => date('Y-m-d'), 'class' => 'form-control index-form-control date-style']) ?>
                         </div>
                     </div>
                 </div>

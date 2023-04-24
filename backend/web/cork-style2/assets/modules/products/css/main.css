@@ -13,7 +13,7 @@
     width: 40%;!important;
 }
 .h6-size{
-    margin-top: 16px!important;
+
     font-size: 16px;
     font-weight: bold;
 }
@@ -157,6 +157,31 @@
 .class-disabled{
     background-color: #f8f9fa!important;
     color: #424242!important;
+}
+.date-style{
+    height: 33px!important;
+}
+body {
+    font-size: 14px!important;
+}
+/*.form-group {*/
+/*     margin-bottom: 0!important;*/
+/*}*/
+/*.form-group1 {*/
+/*    margin-top: 0!important;*/
+/*    margin-bottom: 0!important;*/
+/*}*/
+.form-group {
+    margin-top: 0!important;
+    margin-bottom: 0!important;
+}
+.help-block1 {
+    margin-top: 0!important;
+    margin-bottom: 0!important;
+}
+
+.help-block{
+    font-size: 12px!important;
 }
 
 /* small */

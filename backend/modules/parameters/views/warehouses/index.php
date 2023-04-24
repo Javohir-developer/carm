@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'status',
                 'value' => function($model) {
-                    return $model->status == 1 ? Yii::t('app', 'Актив') : Yii::t('app', 'Не актив');
+                    return Warehouses::status()[$model->status];
                 }
             ],
             'created_at',

@@ -35,7 +35,7 @@ use yii\helpers\Url;
             [
                 'attribute' => 'status',
                 'value' => function($model) {
-                    return $model->status == 1 ? Yii::t('app', 'Актив') : Yii::t('app', 'Не актив');
+                    return ProductTypes::status()[$model->status];
                 }
             ],
             'created_at',

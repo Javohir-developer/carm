@@ -1,5 +1,6 @@
 function validateErrors(data){
-    $('.h6-size').hide();
+    // $('.h6-size').hide();
+    $('.help-block').addClass('help-block1');
     $.each(data, function(key, val) {
         $('#'+key).next().html(val);
     });
