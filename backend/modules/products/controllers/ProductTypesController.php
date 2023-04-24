@@ -3,6 +3,7 @@
 namespace backend\modules\products\controllers;
 
 use app\modules\products\models\search\ProductTypesSearch;
+use backend\controllers\BaseController;
 use backend\modules\products\models\ProductTypes;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -11,25 +12,9 @@ use yii\web\NotFoundHttpException;
 /**
  * ProductTypesController implements the CRUD actions for ProductTypes model.
  */
-class ProductTypesController extends Controller
+class ProductTypesController extends BaseController
 {
-    /**
-     * @inheritDoc
-     */
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ]
-        );
-    }
+
 
     /**
      * Lists all ProductTypes models.
@@ -71,7 +56,7 @@ class ProductTypesController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['index', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -94,7 +79,7 @@ class ProductTypesController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index', 'id' => $model->id]);
         }
 
         return $this->render('update', [

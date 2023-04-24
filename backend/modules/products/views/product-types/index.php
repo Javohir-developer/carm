@@ -9,38 +9,42 @@ use yii\helpers\Url;
 /** @var yii\web\View $this */
 /** @var \app\modules\products\models\search\ProductTypesSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
-
-$this->title = 'Product Types';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="product-types-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Product Types', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Дабавить тип'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'summary' => '',
+        'options' => ['class' => 'table-parent-div'],
+        'headerRowOptions' => ['class' => 'no-wrap'],
+        'tableOptions' => ['class' => 'table table-striped table-bordered'],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'user_id',
-            'company_id',
+            [
+                'class' => 'yii\grid\SerialColumn',
+                'headerOptions' => ['class'=>'left-position-sticky'],
+                'contentOptions' => ['class' => 'left-position-sticky'],
+            ],
             'name',
-            'status',
-            //'created_at',
-            //'updated_at',
+            [
+                'attribute' => 'status',
+                'value' => function($model) {
+                    return $model->status == 1 ? Yii::t('app', 'Актив') : Yii::t('app', 'Не актив');
+                }
+            ],
+            'created_at',
             [
                 'class' => ActionColumn::className(),
+                'template' => '{update}{delete}',
                 'urlCreator' => function ($action, ProductTypes $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>

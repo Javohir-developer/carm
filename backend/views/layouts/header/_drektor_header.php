@@ -80,6 +80,9 @@ use yii\helpers\Url;
                     <li>
                         <a href="<?=Url::to(['/parameters/suppliers'])?>"> <?=Yii::t('app', 'Поставщики')?> </a>
                     </li>
+                    <li>
+                        <a href="<?=Url::to(['/products/product-types'])?>"> <?=Yii::t('app', 'Типы')?> </a>
+                    </li>
                 </ul>
             </li>
 
@@ -134,7 +137,7 @@ use yii\helpers\Url;
                         </a>
                     </div>
                     <div class="dropdown-item">
-                        <a href="http://localhost:5050/ru/site/logout">
+                        <a href="<?=Url::to(['/site/logout'])?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> <span>Выйти</span>
                         </a>
                     </div>
