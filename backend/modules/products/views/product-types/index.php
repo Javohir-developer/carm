@@ -10,7 +10,7 @@ use yii\helpers\Url;
 /** @var \app\modules\products\models\search\ProductTypesSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 ?>
-<div class="product-types-index">
+<div class="product-types-index container-fluid">
 
 
     <p>

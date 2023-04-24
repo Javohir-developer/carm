@@ -13,9 +13,6 @@ use yii\helpers\Url;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="suppliers-index container-fluid">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
 <!--        float-right margin-bottom-15-->
         <?= Html::a(Yii::t('app', 'Создать поставщиков'), ['create'], ['class' => 'btn btn-success']) ?>
