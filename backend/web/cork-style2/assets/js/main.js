@@ -1,6 +1,7 @@
 function validateErrors(data){
     // $('.h6-size').hide();
     $('.help-block').addClass('help-block1');
+    $('.form-group').addClass('form-group1');
     $.each(data, function(key, val) {
         $('#'+key).next().html(val);
     });
@@ -8,7 +9,8 @@ function validateErrors(data){
 
 function success(){
     $('.help-block').empty();
-    $('.h6-size').show();
+    $('.help-block').removeClass('help-block1');
+    $('.form-group').removeClass('form-group1');
     // $("#products-form-send-ajax").trigger('reset');
 }
 
