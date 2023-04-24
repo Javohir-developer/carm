@@ -9,6 +9,7 @@ $params = array_merge(
 $config = [
 
     'id' => 'app-backend',
+    'language' => 'ru-RU',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
 //    'bootstrap' => ['log'],
