@@ -16,6 +16,7 @@ $confg = [
         'onsubmit' => 'return addProductToCache(this);',
         'id' => 'products-form-send-ajax',
         'data-url' => Url::to(['/products/products/add-product-to-cache']),
+//        'class' => 'd-flex'
     ]
 ];
 ?>
@@ -27,7 +28,8 @@ $confg = [
             <div class="row">
                 <h6 class="text-center h6-size"><?=Yii::t('app', 'Информация о товаре')?></h6>
                 <div class="col-sm-2">
-                    <?= $form->field($model, 'barcode')->textInput() ?>
+                    <label class="control-label" for="products-barcode">Бар код</label>
+                    <?= $form->field($model, 'barcode', ['template' => '<div class="input-group">{input}<span class="input-group-addon" data-url="'.Url::to(['/products/products/search-barcode']).'" onclick="barcode(this)"><i class="bi bi-search"></i></span></div>{hint}{error}']);  ?>
                 </div>
                 <div class="col-sm-2">
                     <?= $form->field($model, 'warehouse_id')->dropDownList($model->Warehouses(), ['prompt'=> '-----']) ?>

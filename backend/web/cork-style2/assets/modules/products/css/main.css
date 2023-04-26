@@ -180,3 +180,7 @@ body {
 .button-form{
     margin-top: 10px!important;
 }
+.input-group-addon{
+    padding: 9px 22px 0px 11px!important;
+    cursor: pointer;
+}

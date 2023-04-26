@@ -86,7 +86,7 @@ class Products extends BaseModel
             [['user_id'], 'default', 'value' => Yii::$app->user->id],
             [['company_id'], 'default', 'value' => Yii::$app->company->id()],
             [['input_status', 'status'], 'default', 'value' => self::STATUS_ACTIVE],
-            [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'name', 'amount', 'entry_price', 'evaluation', 'exit_price'], 'required'],
+            [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'name', 'amount', 'entry_price', 'evaluation', 'exit_price', 'product_types_id'], 'required'],
             [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status', 'product_types_id'], 'integer'],
             [['date', 'production_time', 'valid', 'created_at', 'updated_at'], 'safe'],
             [['currency_amount', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price', 'evaluation'], 'number'],
@@ -228,6 +228,13 @@ class Products extends BaseModel
     public static function productTypes(){
         $product_type = ProductTypes::find()->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id(), 'status' => self::STATUS_ACTIVE])->all();
         return ArrayHelper::map($product_type, 'id', 'name');
+    }
+
+    public function searchBarcode($barcode){
+        $barcode = Products::find()->where(['company_id' => Yii::$app->company->id(), 'barcode' => $barcode])->orderBy(['id' => SORT_DESC])->one();
+        if ($barcode){
+            return $barcode;
+        }
     }
 
 }

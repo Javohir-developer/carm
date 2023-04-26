@@ -101,6 +101,27 @@ function clearProductsFromCache(obj){
     });
 }
 
+function barcode(obj){
+    $.ajax({
+        url: $(obj).data('url'),
+        type: 'GET',
+        data: {barcode: $('#products-barcode').val()},
+        dataType: 'json',
+        success: function (data) {
+            if (data.status) {
+                $.each(data.result, function(key, val) {
+                    $('#products-'+key).val(val);
+                });
+            }else {
+                Notnotify('Ничего не найдено для этого штрих-кода !', 'danger');
+            }
+        },
+        error: function () {
+            Notnotify('что произошло не так !', 'danger');
+        }
+    });
+}
+
 $("#products-entry_price").on("keyup", function(e) {
     if ($('#products-entry_price').val() !== ''){
         $("#products-evaluation").removeAttr('disabled');
@@ -128,7 +149,7 @@ function validateErrors(data){
     $('.help-block').addClass('help-block1');
     $('.form-group').addClass('form-group1');
     $.each(data, function(key, val) {
-        $('#'+key).next().html(val);
+        $('#'+key).parent().parent().find('.help-block').html(val);
     });
 }
 

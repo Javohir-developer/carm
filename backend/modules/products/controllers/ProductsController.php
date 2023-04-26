@@ -78,4 +78,12 @@ class ProductsController extends BaseController
         }
     }
 
+    public function actionSearchBarcode($barcode){
+        $model = new Products();
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if ($model = $model->searchBarcode($barcode)){
+            return ['status' => true, 'result' => $model];
+        }
+    }
+
 }

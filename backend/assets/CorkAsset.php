@@ -14,6 +14,7 @@ class CorkAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
 //        'https://cros.uz/shopping/bootstrap/css/shop_style.css',
+        'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css',
 
         'cork-style2/src/bootstrap/css/bootstrap.min.css',
         'cork-style2/layouts/horizontal-light-menu/css/light/plugins.css',
