@@ -110,7 +110,6 @@ $confg = [
                     <h6 class="text-center h6-size"><?=Yii::t('app', 'Цены')?></h6>
                     <div class="row">
                         <div class="col-sm-6">
-<!--                            --><?php //= $form->field($model, 'ndc')->textInput() ?>
                             <?= $form->field($model, 'entry_price')->textInput() ?>
                             <?= $form->field($model, 'evaluation')->textInput(['disabled' => true]) ?>
                             <?= $form->field($model, 'exit_price')->textInput([ 'class' => 'class-disabled form-control']) ?>
