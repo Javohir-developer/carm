@@ -84,6 +84,7 @@ class ProductsController extends BaseController
         if ($model = $model->searchBarcode($barcode)){
             return ['status' => true, 'result' => $model];
         }
+        return ['status' => false];
     }
 
 }
