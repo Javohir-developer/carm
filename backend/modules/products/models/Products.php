@@ -58,6 +58,9 @@ use yii\helpers\ArrayHelper;
  */
 class Products extends BaseModel
 {
+
+    public $old_entry_price;
+    public $old_exit_price;
     /**
      * {@inheritdoc}
      */
@@ -89,7 +92,7 @@ class Products extends BaseModel
             [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'name', 'amount', 'entry_price', 'evaluation', 'exit_price', 'product_types_id'], 'required'],
             [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status', 'product_types_id', 'size_num', 'size_type'], 'integer'],
             [['date', 'production_time', 'valid', 'created_at', 'updated_at'], 'safe'],
-            [['currency_amount', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price', 'evaluation'], 'number'],
+            [['currency_amount', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price', 'evaluation', 'old_entry_price', 'old_exit_price'], 'number'],
             [['name', 'model', 'brand'], 'string', 'max' => 255],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Suppliers::class, 'targetAttribute' => ['supplier_id' => 'id']],
             [['warehouse_id'], 'exist', 'skipOnError' => true, 'targetClass' => Warehouses::class, 'targetAttribute' => ['warehouse_id' => 'id']],
@@ -132,6 +135,8 @@ class Products extends BaseModel
             'input_status' => Yii::t('app', 'Статус'),
             'status' => Yii::t('app', 'Статус'),
             'product_types_id' => Yii::t('app', 'Тип'),
+            'old_entry_price' => Yii::t('app', 'Старый цена прх.'),
+            'old_exit_price' => Yii::t('app', 'Старый цена прд.'),
         ];
     }
 

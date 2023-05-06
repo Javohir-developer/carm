@@ -42,7 +42,7 @@ class ListOfTransitionsSearch extends ListOfTransitions
     {
         $query = ListOfTransitions::find();
         $query->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id()]);
-        // add conditions that should always apply here
+
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

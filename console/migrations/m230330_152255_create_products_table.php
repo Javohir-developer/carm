@@ -25,8 +25,8 @@ class m230330_152255_create_products_table extends Migration
             'currency_amount' => $this->float(),
 
 
-            'barcode' => $this->integer(),
-            'group' => $this->integer(),
+            'barcode' => $this->bigInteger(),
+            'group' => $this->bigInteger(),
             'name' => $this->string(),
             'model' => $this->string(),
             'brand' => $this->string(),
@@ -43,7 +43,7 @@ class m230330_152255_create_products_table extends Migration
             'term_type' => $this->integer(),
             'valid' => $this->date(),
 
-            'ndc' => $this->integer(),
+            'ndc' => $this->bigInteger(),
             'entry_price' => $this->float(),
             'evaluation' => $this->float(),
             'exit_price' => $this->float(),

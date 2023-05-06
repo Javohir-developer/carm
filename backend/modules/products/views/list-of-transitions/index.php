@@ -50,13 +50,13 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'amount',
             [
-                'attribute' => 'entry_price',
+                'attribute' => 'sum_entry_price',
                 'value' => function($data){
                     return $data::Currency($data->entry_price);
                 }
             ],
             [
-                'attribute' => 'exit_price',
+                'attribute' => 'sum_exit_price',
                 'value' => function($data){
                     return $data::Currency($data->exit_price);
                 }
