@@ -87,10 +87,10 @@ class Products extends BaseModel
             [['company_id'], 'default', 'value' => Yii::$app->company->id()],
             [['input_status', 'status'], 'default', 'value' => self::STATUS_ACTIVE],
             [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'name', 'amount', 'entry_price', 'evaluation', 'exit_price', 'product_types_id'], 'required'],
-            [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status', 'product_types_id'], 'integer'],
+            [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status', 'product_types_id', 'size_num', 'size_type'], 'integer'],
             [['date', 'production_time', 'valid', 'created_at', 'updated_at'], 'safe'],
             [['currency_amount', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price', 'evaluation'], 'number'],
-            [['name', 'model', 'brand', 'size'], 'string', 'max' => 255],
+            [['name', 'model', 'brand'], 'string', 'max' => 255],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Suppliers::class, 'targetAttribute' => ['supplier_id' => 'id']],
             [['warehouse_id'], 'exist', 'skipOnError' => true, 'targetClass' => Warehouses::class, 'targetAttribute' => ['warehouse_id' => 'id']],
         ];
@@ -112,7 +112,7 @@ class Products extends BaseModel
             'name' => Yii::t('app', 'Название'),
             'model' => Yii::t('app', 'Модель'),
             'brand' => Yii::t('app', 'Бранд'),
-            'size' => Yii::t('app', 'Размер'),
+            'size_num' => Yii::t('app', 'Размер'),
             'ikpu' => Yii::t('app', 'ИКПУ'),
             'unit_amount' => Yii::t('app', 'Ед./кол.'),
             'max_ast' => Yii::t('app', 'Махс./ост.'),
@@ -170,7 +170,11 @@ class Products extends BaseModel
     }
     public function updateProductFromCache($post){
         $post['entry_price']    = self::strReplace($post['entry_price']);
-        $post['exit_price']     = (($post['evaluation'] + 100) / 100) * self::strReplace($post['entry_price']);
+        if ($_SESSION[self::cacheProd()][$post['id']]['evaluation'] != $post['evaluation'] || $_SESSION[self::cacheProd()][$post['id']]['entry_price'] != $post['entry_price']){
+            $post['exit_price'] =  (($post['evaluation'] + 100) / 100) * self::strReplace($post['entry_price']);
+        }else{
+            $post['exit_price'] =  self::strReplace($post['exit_price']);
+        }
         $post['sum_entry_price']= $post['amount'] * self::strReplace($post['entry_price']);
         $post['sum_exit_price'] = $post['amount'] * self::strReplace($post['exit_price']);
 
@@ -228,6 +232,11 @@ class Products extends BaseModel
     public static function productTypes(){
         $product_type = ProductTypes::find()->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id(), 'status' => self::STATUS_ACTIVE])->all();
         return ArrayHelper::map($product_type, 'id', 'name');
+    }
+
+    public static function productType($id){
+        $product_type = ProductTypes::find()->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id(), 'status' => self::STATUS_ACTIVE, 'id' => $id])->one();
+        return $product_type->name;
     }
 
     public function searchBarcode($barcode){

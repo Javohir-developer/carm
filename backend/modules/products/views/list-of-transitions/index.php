@@ -75,7 +75,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'sum_exit_price',
             'brand',
             'model',
-            'size',
+            'size_num',
+            'size_type',
             'date',
         ],
     ]); ?>

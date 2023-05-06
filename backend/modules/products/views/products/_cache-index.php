@@ -15,6 +15,7 @@ $i = 1;
                     <li class="list-group-item left-position-sticky-title title-sticky number-item list-group-item-num  list-group-item-back z-index-title-num" ><input class="list-group-item-back" value="#" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Бар код')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Название')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
+                    <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Тип')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Валюта')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Ед изм')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
                     <li class="list-group-item title-sticky"><input value="<?=Yii::t('app', 'Кол-во')?>" class="text-center up-ca-form-inp list-group-item-back" disabled></li>
@@ -35,7 +36,8 @@ $i = 1;
                     <ul class="list-group  list-group-horizontal">
                         <li class="list-group-item left-position-sticky-title number-item" ><input type="text" value="<?=$i++;?>" disabled></li>
                         <li class="list-group-item"><?= Html::textInput('barcode',      $val['barcode'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number']) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('type',         $val['name'], ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('name',         $val['name'], ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('product_types_id', Products::productType($val['product_types_id']), ['class' => 'text-center up-ca-form-inp', 'required' => true, 'disabled' => true]) ?></li>
                         <li class="list-group-item"><?= Html::dropDownList('currency',  [$val['currency']], Products::currencyType(), ['class' => 'text-center up-ca-form-inp']); ?></li>
                         <li class="list-group-item"><?= Html::dropDownList('unit_type', [$val['unit_type']], Products::unitType(), ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
                         <li class="list-group-item"><?= Html::textInput('amount',       $val['amount'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number']) ?></li>
@@ -46,7 +48,7 @@ $i = 1;
                         <li class="list-group-item"><?= Html::textInput('sum_exit_price',   Products::Currency($val['sum_exit_price']), ['class' => 'text-center up-ca-form-inp', 'disabled' => true]) ?></li>
                         <li class="list-group-item"><?= Html::textInput('brand',        $val['brand'], ['class' => 'text-center up-ca-form-inp']) ?></li>
                         <li class="list-group-item"><?= Html::textInput('model',        $val['model'], ['class' => 'text-center up-ca-form-inp']) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('size',         $val['size'], ['class' => 'text-center up-ca-form-inp']) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('size_num',         $val['size_num'], ['class' => 'text-center up-ca-form-inp']) ?></li>
                         <li class="list-group-item"><?= Html::textInput('date',         $val['date'], ['type' => 'date', 'class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
                         <li  class="right-position-sticky list-group-item">
                             <?= Html::SubmitButton(
@@ -62,6 +64,7 @@ $i = 1;
                 <?php endforeach;?>
                 <ul class="list-group list-group-horizontal">
                     <li class=" list-group-item buttom-sticky number-item list-group-item-num" ><input  class="up-ca-form-inp text-col" disabled></li>
+                    <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
                     <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
                     <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>
                     <li class=" list-group-item buttom-sticky"><input value="" class="text-center up-ca-form-inp text-col" disabled></li>

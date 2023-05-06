@@ -36,7 +36,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'brand')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'size')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'size_num')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'ikpu')->textInput() ?>
 

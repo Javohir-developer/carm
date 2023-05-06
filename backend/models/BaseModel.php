@@ -30,4 +30,13 @@ class BaseModel extends CommonBaseModel
             4 => Yii::t('app', 'год')
         ];
     }
+
+    public static function sizeType(){
+        return [
+            1 => Yii::t('app', 'гр'),
+            2 => Yii::t('app', 'кг'),
+            3 => Yii::t('app', 'мл'),
+            4 => Yii::t('app', 'л'),
+        ];
+    }
 }

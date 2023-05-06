@@ -30,7 +30,8 @@ class m230330_152255_create_products_table extends Migration
             'name' => $this->string(),
             'model' => $this->string(),
             'brand' => $this->string(),
-            'size' => $this->string(),
+            'size_num' => $this->integer(),
+            'size_type' => $this->integer(),
             'ikpu' => $this->bigInteger(),
 
             'unit_amount' => $this->integer(),

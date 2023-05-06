@@ -27,7 +27,7 @@ function updateProductFromCache(obj) {
         url: $(obj).data('url'),
         type: 'POST',
         data: $(obj).serializeArray(),
-        dataType: 'html',
+        dataType: 'json',
         success: function (data) {
             if (data) {
                 $.pjax.reload('#products-cache-index');
@@ -48,7 +48,7 @@ function deleteProductFromCache(obj){
         url: $(obj).data('url'),
         type: 'POST',
         data: {id: $(obj).data('id')},
-        dataType: 'html',
+        dataType: 'json',
         success: function (data) {
             if (data){
                 $.pjax.reload('#products-cache-index');
@@ -101,27 +101,32 @@ function clearProductsFromCache(obj){
     });
 }
 
-function barcode(obj){
-    $.ajax({
-        url: $(obj).data('url'),
-        type: 'GET',
-        data: {barcode: $('#products-barcode').val()},
-        dataType: 'json',
-        success: function (data) {
-            if (data.status) {
-                $.each(data.result, function(key, val) {
-                    $('#products-'+key).val(val);
-                });
-                $("#products-product_types_id").val(data.result.product_types_id).change();
-                $("#products-evaluation").removeAttr('disabled');
-            }else {
-                Notnotify('Ничего не найдено для этого штрих-кода !', 'danger');
+function searchBarcode(obj){
+    if ($('#products-barcode').val() !== ''){
+        $.ajax({
+            url: $(obj).data('url'),
+            type: 'GET',
+            data: {barcode: $('#products-barcode').val()},
+            dataType: 'json',
+            success: function (data) {
+                if (data.status) {
+                    $.each(data.result, function(key, val) {
+                        $('#products-'+key).val(val);
+                    });
+                    $("#products-product_types_id").val(data.result.product_types_id).change();
+                    $("#products-evaluation").removeAttr('disabled');
+                }else {
+                    Notnotify('Ничего не найдено для этого штрих-кода !', 'danger');
+                }
+            },
+            error: function () {
+                Notnotify('что произошло не так !', 'danger');
             }
-        },
-        error: function () {
-            Notnotify('что произошло не так !', 'danger');
-        }
-    });
+        });
+    }else {
+        Notnotify('"Бар код" не должен быть пустым !', 'danger');
+    }
+
 }
 
 $("#products-entry_price").on("keyup", function(e) {
@@ -147,6 +152,17 @@ $("#products-evaluation").on("keyup", function(e) {
     }
 });
 
+$("#products-size_num").on("keyup", function(e) {
+    var id = $("#products-size_type");
+    if ($('#products-size_num').val() != '') {
+        id.removeAttr('disabled');
+        id.attr('required', true);
+    }else {
+        id.attr('disabled', true);
+        id.removeAttr('required');
+    }
+});
+
 function validateErrors(data){
     $('.help-block').addClass('help-block1');
     $('.form-group').addClass('form-group1');
@@ -162,6 +178,25 @@ function success(){
     // $("#products-form-send-ajax").trigger('reset');
 }
 
+
+function generateBarcode(){
+    var value = Date.now().toString();
+    var btype = 'code128';
+    var renderer = 'css';
+    var settings = {
+        output:renderer,
+        bgColor: '#FFFFFF',
+        color: '#000000',
+        barWidth: '1',
+        barHeight: '50',
+        moduleSize: '5',
+        posX: '10',
+        posY: '20',
+        addQuietZone: '1'
+    };
+    // $("#barcodeTarget").html("").show().barcode(value, btype, settings);
+    $('#products-barcode').val(value);
+}
 
 
 

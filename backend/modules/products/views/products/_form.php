@@ -20,7 +20,6 @@ $confg = [
     ]
 ];
 ?>
-
 <div class="products-form container-fluid">
     <?php $form = ActiveForm::begin($confg); ?>
 
@@ -29,7 +28,9 @@ $confg = [
                 <h6 class="text-center h6-size"><?=Yii::t('app', 'Информация о товаре')?></h6>
                 <div class="col-sm-2">
                     <label class="control-label" for="products-barcode">Бар код</label>
-                    <?= $form->field($model, 'barcode', ['template' => '<div class="input-group">{input}<span class="input-group-addon" data-url="'.Url::to(['/products/products/search-barcode']).'" onclick="barcode(this)"><i class="bi bi-search"></i></span></div>{hint}{error}']);  ?>
+                    <?= $form->field($model, 'barcode', ['template' => '<div class="input-group">{input}
+                        <span class="input-group-addon" data-url="'.Url::to(['/products/products/search-barcode']).'" onclick="searchBarcode(this)"><i class="bi bi-search"></i></span>
+                        <span class="input-group-qr-code" data-url="'.Url::to(['#']).'" onclick="generateBarcode();"><i class="bi bi-upc"></i></span></div>{hint}{error}']);  ?>
                 </div>
                 <div class="col-sm-2">
                     <?= $form->field($model, 'warehouse_id')->dropDownList($model->Warehouses(), ['prompt'=> '-----']) ?>
@@ -73,7 +74,14 @@ $confg = [
                     <?= $form->field($model, 'brand')->textInput(['maxlength' => true]) ?>
                 </div>
                 <div class="col-sm-2">
-                    <?= $form->field($model, 'size')->textInput(['maxlength' => true]) ?>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <?= $form->field($model, 'size_num')->textInput(['maxlength' => true]) ?>
+                        </div>
+                        <div class="col-sm-6">
+                            <?= $form->field($model, 'size_type')->dropDownList($model::sizeType(), ['prompt'=> '-----', 'disabled' => true])->label('-') ?>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-sm-2">
                     <?= $form->field($model, 'ikpu')->textInput() ?>
@@ -102,7 +110,7 @@ $confg = [
                                     <?= $form->field($model, 'term_type')->dropDownList($model::termType(), ['prompt'=> '-----']) ?>
                                 </div>
                             </div>
-                            <?= $form->field($model, 'valid')->textInput(['type' => 'date', 'value' => date('Y-m-d'), 'class' => 'form-control index-form-control date-style']) ?>
+                            <?= $form->field($model, 'valid')->textInput(['type' => 'date', 'class' => 'form-control index-form-control date-style']) ?>
                         </div>
                     </div>
                 </div>

@@ -39,6 +39,7 @@ class CorkAsset extends AssetBundle
 //        'cork-style2/src/assets/js/dashboard/dash_1.js',
 
         'cork-style2/assets/js/bootstrap-notify-3-1-5.js',
+        'cork-style2/assets/js/jquery-barcode.js',
         'cork-style2/assets/js/main.js'
     ];
 
