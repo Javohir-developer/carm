@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['class'=>'left-position-sticky'],
                 'contentOptions' => ['class' => 'left-position-sticky'],
             ],
-            'barcode',
+            'date',
             [
                 'attribute' => 'warehouse_id',
                 'value' => function($data){
@@ -48,37 +48,38 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->supplier->name;
                 }
             ],
-            'name',
-            [
-                'attribute' => 'product_types_id',
-                'value' => function($data){
-                    return isset($data->productTypes->name) ? $data->productTypes->name : '';
-                }
-            ],
-            [
-                'attribute' => 'currency',
-                'value' => function($data){
-                    return ListOfTransitions::currencyType()[$data->currency];
-                }
-            ],
-            [
-                'attribute' => 'unit_type',
-                'value' => function($data){
-                    return ListOfTransitions::unitType()[$data->unit_type];
-                }
-            ],
             'amount',
-            'entry_price',
-            'evaluation',
-            'exit_price',
-            'sum_entry_price',
-            'sum_exit_price',
-            'brand',
-            'model',
-            'size_num',
-            'size_type',
-            'date',
+            [
+                'attribute' => 'entry_price',
+                'value' => function($data){
+                    return $data::Currency($data->entry_price);
+                }
+            ],
+            [
+                'attribute' => 'exit_price',
+                'value' => function($data){
+                    return $data::Currency($data->exit_price);
+                }
+            ],
+            [
+                'attribute' => 'user_id',
+                'value' => function($data){
+                    return Yii::$app->user->identity->full_name;
+                }
+            ],
+            [
+                'headerOptions' => ['class'=>'right-position-sticky'],
+                'contentOptions' => ['class' => 'right-position-sticky'],
+                'format' => 'raw',
+                'value' => function ($data) {
+                    $buttons = '';
+                    $buttons .=  Html::a(Yii::t('app', '<i class="bi bi-eye"></i>'), Yii::$app->urlManager->createUrl(['/abs/service-nodes/edit', 'ServiceNodes[id]' => $data->id]), [
+                            'class' => 'text-primary',
+                            'style' => 'font-size: 20px;',
+                        ]).'<br>';
+                    return $buttons;
+                },
+            ],
         ],
     ]); ?>
-
 </div>

@@ -39,4 +39,12 @@ class BaseModel extends CommonBaseModel
             4 => Yii::t('app', 'л'),
         ];
     }
+
+    public static function Currency($currency){
+        return number_format(self::strReplace($currency), 2, '.', ' ');
+    }
+
+    public static function strReplace($num){
+        return str_replace(" ", "", $num);
+    }
 }

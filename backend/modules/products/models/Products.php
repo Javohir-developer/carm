@@ -208,15 +208,6 @@ class Products extends BaseModel
         return true;
     }
 
-
-    public static function Currency($currency){
-        return number_format(self::strReplace($currency), 2, '.', ' ');
-    }
-
-    public static function strReplace($num){
-        return str_replace(" ", "", $num);
-    }
-
     public static function sumParams(){
         $_SESSION[self::cacheSum()]['sum_entry_price'] = array_sum(array_column($_SESSION[self::cacheProd()], 'sum_entry_price'));
         $_SESSION[self::cacheSum()]['sum_exit_price'] = array_sum(array_column($_SESSION[self::cacheProd()], 'sum_exit_price'));

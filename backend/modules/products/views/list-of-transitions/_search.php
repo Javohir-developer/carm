@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
 <!--            </div>-->
             <div class="col-sm-6">
                 <div class="form-group">
-                    <?= Html::submitButton(Yii::t('app', 'Поиск'), ['class' => 'btn btn-primary', 'style' => 'margin-top: 32px;']) ?>
+                    <?= Html::submitButton(Yii::t('app', 'Поиск'), ['class' => 'btn btn-primary', 'style' => 'margin-top: 27px;']) ?>
                 </div>
             </div>
         </div>

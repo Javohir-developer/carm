@@ -120,12 +120,14 @@ class ListOfTransitions extends BaseModel
             'sum_entry_price' => Yii::t('app', 'Стар. цена прх.'),
             'sum_exit_price' => Yii::t('app', 'Стар. цена прд.'),
             'unit_type' => Yii::t('app', 'Едю./изм.'),
-            'amount' => Yii::t('app', 'Едю./кол-во'),
+            'amount' => Yii::t('app', 'Кол-во'),
             'input_status' => Yii::t('app', 'Статус'),
             'status' => Yii::t('app', 'Статус'),
             'from_date' => Yii::t('app', 'с даты'),
             'to_date' => Yii::t('app', 'до даты'),
             'product_types_id' => Yii::t('app', 'Тип'),
+            'created_at' => Yii::t('app', 'Время регист.'),
+            'user_id' => Yii::t('app', 'Полъзволетлъ'),
         ];
     }
 

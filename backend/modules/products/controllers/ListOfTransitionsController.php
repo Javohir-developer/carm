@@ -5,8 +5,10 @@ namespace backend\modules\products\controllers;
 use app\modules\products\models\search\ListOfTransitionsSearch;
 use backend\controllers\BaseController;
 use backend\modules\products\models\ListOfTransitions;
+use yii\bootstrap\BootstrapAsset;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
+use yii\web\JqueryAsset;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -15,7 +17,16 @@ use yii\web\NotFoundHttpException;
 class ListOfTransitionsController extends BaseController
 {
 
-
+    public function beforeAction($action)
+    {
+        $this->view->registerJsFile('@web/cork-style2/assets/modules/list-of-transitions/js/main.js', [
+            'depends' => JqueryAsset::className()
+        ]);
+        $this->view->registerCssFile('@web/cork-style2/assets/modules/list-of-transitions/css/main.css', [
+            ['depends' => BootstrapAsset::className()]
+        ]);
+        return parent::beforeAction($action);
+    }
     /**
      * Lists all ListOfTransitions models.
      *

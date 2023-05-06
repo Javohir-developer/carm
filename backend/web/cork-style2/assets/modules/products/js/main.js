@@ -115,6 +115,7 @@ function searchBarcode(obj){
                     });
                     $("#products-product_types_id").val(data.result.product_types_id).change();
                     $("#products-evaluation").removeAttr('disabled');
+                    $("#products-size_type").removeAttr('disabled');
                 }else {
                     Notnotify('Ничего не найдено для этого штрих-кода !', 'danger');
                 }
