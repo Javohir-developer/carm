@@ -179,6 +179,7 @@ class Products extends BaseModel
             $post['exit_price'] =  (($post['evaluation'] + 100) / 100) * self::strReplace($post['entry_price']);
         }else{
             $post['exit_price'] =  self::strReplace($post['exit_price']);
+            $post['evaluation'] = ($post['exit_price'] / $post['entry_price']) * 100 - 100;
         }
         $post['sum_entry_price']= $post['amount'] * self::strReplace($post['entry_price']);
         $post['sum_exit_price'] = $post['amount'] * self::strReplace($post['exit_price']);

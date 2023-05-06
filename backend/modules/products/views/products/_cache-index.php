@@ -42,7 +42,7 @@ $i = 1;
                         <li class="list-group-item"><?= Html::dropDownList('unit_type', [$val['unit_type']], Products::unitType(), ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
                         <li class="list-group-item"><?= Html::textInput('amount',       $val['amount'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number']) ?></li>
                         <li class="list-group-item"><?= Html::textInput('entry_price',  Products::Currency($val['entry_price']), ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
-                        <li class="list-group-item"><?= Html::textInput('evaluation',   $val['evaluation'], ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number', 'step' => 'any']) ?></li>
+                        <li class="list-group-item"><?= Html::textInput('evaluation',   Products::Currency($val['evaluation']), ['class' => 'text-center up-ca-form-inp', 'required' => true, 'type' => 'number', 'step' => 'any']) ?></li>
                         <li class="list-group-item"><?= Html::textInput('exit_price',   Products::Currency($val['exit_price']), ['class' => 'text-center up-ca-form-inp', 'required' => true]) ?></li>
                         <li class="list-group-item"><?= Html::textInput('sum_entry_price',  Products::Currency($val['sum_entry_price']), ['class' => 'text-center up-ca-form-inp', 'disabled' => true]) ?></li>
                         <li class="list-group-item"><?= Html::textInput('sum_exit_price',   Products::Currency($val['sum_exit_price']), ['class' => 'text-center up-ca-form-inp', 'disabled' => true]) ?></li>

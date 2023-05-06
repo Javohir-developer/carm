@@ -135,7 +135,7 @@ $("#products-entry_price").on("keyup", function(e) {
         $("#products-evaluation").removeAttr('disabled');
         if ($('#products-evaluation').val() !== ''){
             var evaluation = (Number($("#products-evaluation").val()) + 100) / 100;
-            var sum =  evaluation * $('#products-entry_price').val()
+            var sum =  evaluation * $('#products-entry_price').val();
             $('#products-exit_price').val(number_format(sum,2,'.',''));
         }
     }else {
@@ -146,10 +146,19 @@ $("#products-entry_price").on("keyup", function(e) {
 $("#products-evaluation").on("keyup", function(e) {
     if ($('#products-entry_price').val() !== ''){
         evaluation = (Number($("#products-evaluation").val()) + 100) / 100;
-        var sum =  evaluation * $('#products-entry_price').val()
+        var sum =  evaluation * $('#products-entry_price').val();
         $('#products-exit_price').val(number_format(sum,2,'.',''));
     }else {
         Notnotify('"Цена прх." не должен быть пустым', 'danger');
+    }
+});
+
+$("#products-exit_price").on("keyup", function(e) {
+    if ($('#products-entry_price').val() !== '' && $('#products-evaluation').val() !== '' ){
+        evaluation = (Number($('#products-exit_price').val()) / Number($('#products-entry_price').val())) * 100 - 100;
+        $('#products-evaluation').val(number_format(evaluation,1,'.',''));
+    }else {
+        Notnotify('"Цена прх." и "Оценка" не должен быть пустым', 'danger');
     }
 });
 
