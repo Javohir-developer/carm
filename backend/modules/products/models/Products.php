@@ -92,7 +92,8 @@ class Products extends BaseModel
             [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'name', 'amount', 'entry_price', 'evaluation', 'exit_price', 'product_types_id'], 'required'],
             [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status', 'product_types_id', 'size_num', 'size_type'], 'integer'],
             [['date', 'production_time', 'valid', 'created_at', 'updated_at'], 'safe'],
-            [['currency_amount', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price', 'evaluation', 'old_entry_price', 'old_exit_price'], 'number'],
+            [['currency_amount', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price', 'old_entry_price', 'old_exit_price'], 'number'],
+            [['evaluation'], 'number', 'min' => 1],
             [['name', 'model', 'brand'], 'string', 'max' => 255],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Suppliers::class, 'targetAttribute' => ['supplier_id' => 'id']],
             [['warehouse_id'], 'exist', 'skipOnError' => true, 'targetClass' => Warehouses::class, 'targetAttribute' => ['warehouse_id' => 'id']],
@@ -141,15 +142,7 @@ class Products extends BaseModel
     }
 
 
-    public function Warehouses(){
-        $warehouse = Warehouses::find()->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id()])->all();
-        return ArrayHelper::map($warehouse, 'id', 'name');
-    }
 
-    public function Suppliers(){
-        $warehouse = Suppliers::find()->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id()])->all();
-        return ArrayHelper::map($warehouse, 'id', 'name');
-    }
 
     public static function getProductInCache(){
         if (!empty($_SESSION[self::cacheProd()])){
@@ -226,15 +219,7 @@ class Products extends BaseModel
         return $this->attributes;
     }
 
-    public static function productTypes(){
-        $product_type = ProductTypes::find()->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id(), 'status' => self::STATUS_ACTIVE])->all();
-        return ArrayHelper::map($product_type, 'id', 'name');
-    }
 
-    public static function productType($id){
-        $product_type = ProductTypes::find()->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id(), 'status' => self::STATUS_ACTIVE, 'id' => $id])->one();
-        return $product_type->name;
-    }
 
     public function searchBarcode($barcode){
         $barcode = Products::find()->where(['company_id' => Yii::$app->company->id(), 'barcode' => $barcode])->orderBy(['id' => SORT_DESC])->one();

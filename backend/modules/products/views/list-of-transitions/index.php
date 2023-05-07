@@ -2,6 +2,7 @@
 
 use backend\modules\products\models\ListOfTransitions;
 use backend\modules\products\models\ProductTypes;
+use yii\bootstrap4\Modal;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
@@ -10,9 +11,6 @@ use yii\helpers\Url;
 /** @var yii\web\View $this */
 /** @var \app\modules\products\models\search\ListOfTransitionsSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
-
-$this->title = 'List Of Transitions';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="container-fluid list-of-transitions-index">
 
@@ -35,7 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'headerOptions' => ['class'=>'left-position-sticky'],
                 'contentOptions' => ['class' => 'left-position-sticky'],
             ],
-            'date',
             [
                 'attribute' => 'warehouse_id',
                 'value' => function($data){
@@ -48,11 +45,44 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->supplier->name;
                 }
             ],
+            'name',
+            [
+                'attribute' => 'product_types_id',
+                'value' => function($data){
+                    return $data::productType($data->product_types_id);
+                }
+            ],
+            'brand',
+            'model',
+            [
+                'attribute' => 'size_num',
+                'value' => function($data){
+                    return $data->size_num.$data::sizeType()[$data->size_type];
+                }
+            ],
             'amount',
+            [
+                'attribute' => 'entry_price',
+                'value' => function($data){
+                    return $data::Currency($data->entry_price);
+                }
+            ],
+            [
+                'attribute' => 'evaluation',
+                'value' => function($data){
+                    return $data::Currency($data->evaluation);
+                }
+            ],
+            [
+                'attribute' => 'exit_price',
+                'value' => function($data){
+                    return $data::Currency($data->exit_price);
+                }
+            ],
             [
                 'attribute' => 'sum_entry_price',
                 'value' => function($data){
-                    return $data::Currency($data->entry_price);
+                    return $data::Currency($data->exit_price);
                 }
             ],
             [
@@ -61,6 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data::Currency($data->exit_price);
                 }
             ],
+            'date',
             [
                 'attribute' => 'user_id',
                 'value' => function($data){
@@ -73,13 +104,25 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'value' => function ($data) {
                     $buttons = '';
-                    $buttons .=  Html::a(Yii::t('app', '<i class="bi bi-eye"></i>'), Yii::$app->urlManager->createUrl(['/abs/service-nodes/edit', 'ServiceNodes[id]' => $data->id]), [
+                    $buttons .=  Html::a('<i class="bi bi-pencil-square"></i>', Url::to(['#']), [
                             'class' => 'text-primary',
-                            'style' => 'font-size: 20px;',
-                        ]).'<br>';
+                            'style' => 'font-size: 18px;',
+                            'data-id' => $data->id,
+                            'data-url' => Url::to(['/products/list-of-transitions/update-product-form']),
+                            'onclick' => 'updateProductForm(this)',
+                        ]);
+                    $buttons .=  Html::a('<i class="bi bi-trash"></i>', Url::to(['/products/list-of-transitions/delete', 'id' => $data->id]), [
+                            'class' => 'text-primary',
+                            'style' => 'font-size: 18px;',
+                            'data' => [
+                                'confirm' => Yii::t('app', 'Действительно хотите удалить?'),
+                            ],
+                        ]);
                     return $buttons;
                 },
             ],
         ],
     ]); ?>
 </div>
+<?php Modal::begin(['id' => 'update-product-form-modal', 'size' => 'modal-xl', 'bodyOptions' => ['id' => 'id-modal-body']]); ?>
+<?php Modal::end();?>

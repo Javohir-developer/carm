@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\JqueryAsset;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 /**
  * ListOfTransitionsController implements the CRUD actions for ListOfTransitions model.
@@ -96,6 +97,22 @@ class ListOfTransitionsController extends BaseController
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+
+    public function actionUpdateProductForm($id)
+    {
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        if (($model = ListOfTransitions::findOne(['id' => $id])) !== null) {
+
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->renderAjax('update', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**

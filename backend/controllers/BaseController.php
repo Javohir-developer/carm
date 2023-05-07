@@ -31,7 +31,7 @@ class BaseController extends \yii\web\Controller
                         'actions' => [
                             'index', 'create', 'view', 'update', 'delete', 'add-product-to-cache',
                             'update-product-from-cache', 'delete-product-from-cache', 'save-cache-products',
-                            'clear-products-from-cache', 'search-barcode'
+                            'clear-products-from-cache', 'search-barcode', 'update-product-form'
                         ],
                         'allow' => true,
                         'roles' => ['Drektor'],

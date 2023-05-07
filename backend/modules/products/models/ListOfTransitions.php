@@ -59,6 +59,8 @@ class ListOfTransitions extends BaseModel
 {
     public $from_date;
     public $to_date;
+    public $old_entry_price;
+    public $old_exit_price;
     /**
      * {@inheritdoc}
      */
@@ -76,12 +78,12 @@ class ListOfTransitions extends BaseModel
             [['user_id'], 'default', 'value' => Yii::$app->user->id],
             [['company_id'], 'default', 'value' => Yii::$app->company->id()],
             [['input_status', 'status'], 'default', 'value' => self::STATUS_ACTIVE],
-            [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'name', 'amount', 'entry_price', 'evaluation', 'exit_price'], 'required'],
+            [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'name', 'amount', 'entry_price', 'evaluation', 'exit_price', 'product_types_id'], 'required'],
             [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status', 'product_types_id', 'size_num', 'size_type'], 'integer'],
             [['date', 'production_time', 'valid', 'created_at', 'updated_at', 'from_date', 'to_date'], 'safe'],
-            [['currency_amount', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price', 'evaluation'], 'number'],
+            [['currency_amount', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price', 'old_entry_price', 'old_exit_price'], 'number'],
+            [['evaluation'], 'number', 'min' => 1],
             [['name', 'model', 'brand'], 'string', 'max' => 255],
-            [['product_types_id'], 'exist', 'skipOnError' => true, 'targetClass' => ProductTypes::class, 'targetAttribute' => ['product_types_id' => 'id']],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Suppliers::class, 'targetAttribute' => ['supplier_id' => 'id']],
             [['warehouse_id'], 'exist', 'skipOnError' => true, 'targetClass' => Warehouses::class, 'targetAttribute' => ['warehouse_id' => 'id']],
         ];

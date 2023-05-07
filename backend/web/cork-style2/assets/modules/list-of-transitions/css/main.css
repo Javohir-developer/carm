@@ -1,3 +1,61 @@
 .table > tbody > tr > td {
     padding: 0px 9px 0px 10px!important;
 }
+.modal-xl{
+    --bs-modal-width: 84% !important;
+}
+.modal-content {
+    background: var(--bs-modal-bg) !important;
+}
+.input-group-addon{
+    padding: 9px 22px 0px 11px!important;
+    background-color: #eeeeee;
+    cursor: pointer;
+}
+.input-group-qr-code{
+    padding: 5px 5px 0px 5px!important;
+    font-size: 23px;
+    cursor: pointer;
+    font-weight: 400;
+    line-height: 1;
+    color: #555555;
+    text-align: center;
+    background-color: #eeeeee;
+    border: 1px solid #ccc;
+}
+.help-block{
+    font-size: 12px!important;
+}
+.help-block1 {
+    margin-top: 0!important;
+    margin-bottom: 0!important;
+}
+.form-group {
+    margin-bottom: 18px!important;
+}
+.form-group1 {
+    margin-top: 0!important;
+    margin-bottom: 0!important;
+}
+.class-disabled{
+    background-color: #f8f9fa!important;
+    color: #424242!important;
+}
+.date-style{
+    height: 33px!important;
+}
+.index-add-button{
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+.padding-class{
+    margin-top: 3px;
+    padding-top: 3px;
+    padding-bottom: 6px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.select2-container--open{
+    z-index: 9999;
+}
