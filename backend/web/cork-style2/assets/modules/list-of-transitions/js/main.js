@@ -6,9 +6,9 @@ function ajaxGetListOfTransitions(obj) {
         dataType: 'json',
         success: function (data) {
             if (data) {
-                $("script[src='/cork-style2/assets/modules/list-of-transitions/js/main.js']").remove();
                 $('#id-modal-body').html(data);
-                $( "#id-modal-body" ).find('link:first').remove();
+                $("script[src='/cork-style2/assets/modules/list-of-transitions/js/main.js']").remove();
+                $("#id-modal-body").find('link')[1].remove();
                 $('#update-list-of-transitions-form-modal').modal('show');
             }else {
                 Notnotify('что произошло с "data" !', 'danger');
@@ -16,7 +16,7 @@ function ajaxGetListOfTransitions(obj) {
         },
         error: function () {
             Notnotify('что произошло не так !', 'danger');
-        }
+        },
     });
     return false;
 }
@@ -34,7 +34,7 @@ function ajaxEditListOfTransitions(obj) {
                 Notnotify('Продукт успешно  редактирован !', 'success');
             }else {
                 $('#id-modal-body').html(data);
-                $( "#id-modal-body" ).find('link:first').remove();
+                $("#id-modal-body").find('link:first').remove();
                 Notnotify('данных недостаточно!', 'danger');
             }
         },
