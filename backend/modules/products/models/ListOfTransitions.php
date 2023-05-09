@@ -188,4 +188,8 @@ class ListOfTransitions extends BaseModel
         $product_type = ProductTypes::find()->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id(), 'status' => self::STATUS_ACTIVE])->all();
         return ArrayHelper::map($product_type, 'id', 'name');
     }
+
+    public function edit(){
+        return true;
+    }
 }

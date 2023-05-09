@@ -2,11 +2,13 @@
 
 use backend\modules\products\models\ListOfTransitions;
 use backend\modules\products\models\ProductTypes;
+use kartik\widgets\Select2;
 use yii\bootstrap4\Modal;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 /** @var yii\web\View $this */
 /** @var \app\modules\products\models\search\ListOfTransitionsSearch $searchModel */
@@ -14,14 +16,9 @@ use yii\helpers\Url;
 ?>
 <div class="container-fluid list-of-transitions-index">
 
-
-<!--    <p>-->
-<!--        --><?php //= Html::a('Create List Of Transitions', ['create'], ['class' => 'btn btn-success']) ?>
-<!--    </p>-->
-
     <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
+    <?php Pjax::begin(['timeout' => 5000, 'id'=>'pjax-list-of-transitions-index', 'enablePushState' => false]); ?>
+        <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'summary' => '',
         'options' => ['class' => 'table-parent-div'],
@@ -108,8 +105,8 @@ use yii\helpers\Url;
                             'class' => 'text-primary',
                             'style' => 'font-size: 18px;',
                             'data-id' => $data->id,
-                            'data-url' => Url::to(['/products/list-of-transitions/update-product-form']),
-                            'onclick' => 'updateProductForm(this)',
+                            'data-url' => Url::to(['/products/list-of-transitions/ajax-get-list-of-transitions']),
+                            'onclick' => 'ajaxGetListOfTransitions(this)',
                         ]);
                     $buttons .=  Html::a('<i class="bi bi-trash"></i>', Url::to(['/products/list-of-transitions/delete', 'id' => $data->id]), [
                             'class' => 'text-primary',
@@ -123,6 +120,9 @@ use yii\helpers\Url;
             ],
         ],
     ]); ?>
+    <?php Pjax::end(); ?>
+
 </div>
-<?php Modal::begin(['id' => 'update-product-form-modal', 'size' => 'modal-xl', 'bodyOptions' => ['id' => 'id-modal-body']]); ?>
+<?php Modal::begin(['title' => Yii::t('app', 'Редактировать'), 'closeButton' => ['id' => 'close-modal-button'], 'id' => 'update-list-of-transitions-form-modal', 'size' => 'modal-xl', 'bodyOptions' => ['id' => 'id-modal-body']]); ?>
 <?php Modal::end();?>
+

@@ -11,11 +11,11 @@ use kartik\widgets\Select2;
 /** @var yii\widgets\ActiveForm $form */
 $confg = [
     'enableAjaxValidation'=>true,
+    'action' => '#',
     'options' => [
-//        'onsubmit' => 'return addProductToCache(this);',
-//        'id' => 'products-form-send-ajax',
-//        'data-url' => Url::to(['/products/products/add-product-to-cache']),
-//        'class' => 'd-flex'
+        'onsubmit' => 'return ajaxEditListOfTransitions(this);',
+        'id' => 'update-list-of-transitions-form',
+        'data-url' => Url::to(['/products/list-of-transitions/ajax-edit-list-of-transitions']),
     ]
 ];
 ?>
@@ -23,7 +23,9 @@ $confg = [
 <div class="list-of-transitions-form">
 
         <?php $form = ActiveForm::begin($confg); ?>
-
+        <?php if (isset($model->id)):?>
+            <?= $form->field($model, 'id')->hiddenInput()->label(false) ?>
+        <?php endif;?>
         <div class="card padding-class">
             <div class="row">
                 <h6 class="text-center h6-size"><?=Yii::t('app', 'Информация о товаре')?></h6>
@@ -143,7 +145,7 @@ $confg = [
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group ">
-                                <?= Html::submitButton(Yii::t('app', 'Добавить'), ['class' => 'btn btn-primary index-add-button']) ?>
+                                <?= Html::submitButton(Yii::t('app', 'Сохранять'), ['class' => 'btn btn-primary index-add-button']) ?>
                             </div>
                         </div>
                     </div>

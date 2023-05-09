@@ -1,4 +1,4 @@
-function updateProductForm(obj) {
+function ajaxGetListOfTransitions(obj) {
     $.ajax({
         url: $(obj).data('url'),
         type: 'GET',
@@ -6,9 +6,36 @@ function updateProductForm(obj) {
         dataType: 'json',
         success: function (data) {
             if (data) {
+                $("script[src='/cork-style2/assets/modules/list-of-transitions/js/main.js']").remove();
                 $('#id-modal-body').html(data);
                 $("link[href='/assets/dd6bf345/css/bootstrap.css']").remove();
-                $('#update-product-form-modal').modal('show');
+                $('#update-list-of-transitions-form-modal').modal('show');
+            }else {
+                Notnotify('что произошло с "data" !', 'danger');
+            }
+        },
+        error: function () {
+            Notnotify('что произошло не так !', 'danger');
+        }
+    });
+    return false;
+}
+
+function ajaxEditListOfTransitions(obj) {
+    $.ajax({
+        url: $(obj).data('url'),
+        type: 'POST',
+        data: $(obj).serializeArray(),
+        dataType: 'json',
+        success: function (data) {
+            if (data == true) {
+                $('#update-list-of-transitions-form-modal').modal('hide');
+                $.pjax.reload('#pjax-list-of-transitions-index');
+                Notnotify('Продукт успешно  редактирован !', 'success');
+            }else {
+                $('#id-modal-body').html(data);
+                $("link[href='/assets/dd6bf345/css/bootstrap.css']").remove();
+                Notnotify('данных недостаточно!', 'danger');
             }
         },
         error: function () {
@@ -110,3 +137,7 @@ function generateBarcode(){
     // $("#barcodeTarget").html("").show().barcode(value, btype, settings);
     $('#listoftransitions-barcode').val(value);
 }
+
+$('#close-modal-button').on('click', function (){
+    $('#update-list-of-transitions-form-modal').modal('hide');
+});
