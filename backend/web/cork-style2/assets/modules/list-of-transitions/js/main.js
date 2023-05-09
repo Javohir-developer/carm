@@ -34,7 +34,8 @@ function ajaxEditListOfTransitions(obj) {
                 Notnotify('Продукт успешно  редактирован !', 'success');
             }else {
                 $('#id-modal-body').html(data);
-                $("#id-modal-body").find('link:first').remove();
+                $("script[src='/cork-style2/assets/modules/list-of-transitions/js/main.js']").remove();
+                $("#id-modal-body").find('link')[1].remove();
                 Notnotify('данных недостаточно!', 'danger');
             }
         },
