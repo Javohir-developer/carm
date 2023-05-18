@@ -32,7 +32,7 @@ class BaseController extends \yii\web\Controller
                             'index', 'create', 'view', 'update', 'delete', 'add-product-to-cache',
                             'update-product-from-cache', 'delete-product-from-cache', 'save-cache-products',
                             'clear-products-from-cache', 'search-barcode', 'ajax-get-list-of-transitions',
-                            'ajax-edit-list-of-transitions'
+                            'ajax-edit-list-of-transitions', 'excel-export'
                         ],
                         'allow' => true,
                         'roles' => ['Drektor'],

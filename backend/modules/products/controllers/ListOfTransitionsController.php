@@ -7,12 +7,11 @@ use backend\controllers\BaseController;
 use backend\modules\products\models\ListOfTransitions;
 use Yii;
 use yii\bootstrap\BootstrapAsset;
-use yii\filters\VerbFilter;
-use yii\web\Controller;
+use yii\data\ActiveDataProvider;
 use yii\web\JqueryAsset;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
-use yii\widgets\ActiveForm;
+use yii2tech\spreadsheet\Spreadsheet;
 
 /**
  * ListOfTransitionsController implements the CRUD actions for ListOfTransitions model.
@@ -39,65 +38,11 @@ class ListOfTransitionsController extends BaseController
     {
         $searchModel = new ListOfTransitionsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-
+        $code_group = isset(Yii::$app->request->get('ListOfTransitionsSearch')['code_group']) ? Yii::$app->request->get('ListOfTransitionsSearch')['code_group'] : false;
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single ListOfTransitions model.
-     * @param int $id ID
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new ListOfTransitions model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
-    public function actionCreate()
-    {
-        $model = new ListOfTransitions();
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
-    }
-
-    /**
-     * Updates an existing ListOfTransitions model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
-     * @return string|\yii\web\Response
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
+            'code_group' => $code_group,
         ]);
     }
 
@@ -132,11 +77,11 @@ class ListOfTransitionsController extends BaseController
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($id, $code_group)
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['index', 'ListOfTransitionsSearch[code_group]' => $code_group]);
     }
 
     /**
@@ -153,5 +98,11 @@ class ListOfTransitionsController extends BaseController
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionExcelExport()
+    {
+        $model = new ListOfTransitions;
+        $model->excelExport($this->request->queryParams);
     }
 }

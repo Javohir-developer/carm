@@ -2,6 +2,7 @@
 
 namespace backend\modules\products\models;
 
+use app\modules\products\models\search\ListOfTransitionsSearch;
 use backend\models\BaseModel;
 use backend\modules\companies\models\Companies;
 use backend\modules\parameters\models\Suppliers;
@@ -9,6 +10,7 @@ use backend\modules\parameters\models\Warehouses;
 use common\models\User;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii2tech\spreadsheet\Spreadsheet;
 
 /**
  * This is the model class for table "products".
@@ -190,7 +192,63 @@ class ListOfTransitions extends BaseModel
         return ArrayHelper::map($product_type, 'id', 'name');
     }
 
-    public function edit(){
-        return true;
+    public function excelExport($queryParams){
+        $searchModel = new ListOfTransitionsSearch();
+        $exporter = (new Spreadsheet([
+            'dataProvider' => $searchModel->search($queryParams),
+            'columns' => [
+                'barcode',
+                'name',
+                [
+                    'attribute' => 'product_types_id',
+                    'value' => function($data){
+                        return $data::productType($data->product_types_id);
+                    }
+                ],
+                'brand',
+                'model',
+                [
+                    'attribute' => 'size_num',
+                    'value' => function($data){
+                        if ($data->size_num && $data->size_type){
+                            return $data->size_num.$data::sizeType()[$data->size_type];
+                        }
+                    }
+                ],
+                'amount',
+                [
+                    'attribute' => 'entry_price',
+                    'value' => function($data){
+                        return $data::Currency($data->entry_price);
+                    }
+                ],
+                [
+                    'attribute' => 'evaluation',
+                    'value' => function($data){
+                        return $data::Currency($data->evaluation);
+                    }
+                ],
+                [
+                    'attribute' => 'exit_price',
+                    'value' => function($data){
+                        return $data::Currency($data->exit_price);
+                    }
+                ],
+                [
+                    'attribute' => 'sum_entry_price',
+                    'value' => function($data){
+                        return $data::Currency($data->exit_price);
+                    }
+                ],
+                [
+                    'attribute' => 'sum_exit_price',
+                    'value' => function($data){
+                        return $data::Currency($data->exit_price);
+                    }
+                ],
+                'date',
+            ],
+        ]))->render();
+        return $exporter->send(date('Y-m-d').'.xls');
     }
 }
