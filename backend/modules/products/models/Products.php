@@ -47,6 +47,7 @@ use yii\helpers\ArrayHelper;
  * @property int|null $amount
  * @property int $input_status
  * @property int $status
+ * @property int $code_group
  * @property int $product_types_id
  * @property string|null $created_at
  * @property string|null $updated_at
@@ -90,7 +91,7 @@ class Products extends BaseModel
             [['company_id'], 'default', 'value' => Yii::$app->company->id()],
             [['input_status', 'status'], 'default', 'value' => self::STATUS_ACTIVE],
             [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'name', 'amount', 'entry_price', 'evaluation', 'exit_price', 'product_types_id'], 'required'],
-            [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status', 'product_types_id', 'size_num', 'size_type'], 'integer'],
+            [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status', 'product_types_id', 'size_num', 'size_type', 'code_group'], 'integer'],
             [['date', 'production_time', 'valid', 'created_at', 'updated_at'], 'safe'],
             [['currency_amount', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price', 'old_entry_price', 'old_exit_price'], 'number'],
             [['evaluation'], 'number', 'min' => 1],
@@ -216,6 +217,7 @@ class Products extends BaseModel
     public function sumAttributes(){
         $this->sum_entry_price = $this->amount * $this->entry_price;
         $this->sum_exit_price = $this->amount * $this->exit_price;
+        $this->code_group = isset(static::find()->orderBy(['id' => SORT_DESC])->one()->code_group) ? static::find()->orderBy(['id' => SORT_DESC])->one()->code_group + 1 : 1;
         return $this->attributes;
     }
 

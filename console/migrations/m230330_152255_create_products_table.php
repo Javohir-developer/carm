@@ -56,6 +56,7 @@ class m230330_152255_create_products_table extends Migration
             'input_status' => $this->integer()->notNull()->defaultValue(1),
 
             'status' => $this->integer()->notNull()->defaultValue(1),
+            'code_group' => $this->bigInteger(),
             'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'updated_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
         ]);
