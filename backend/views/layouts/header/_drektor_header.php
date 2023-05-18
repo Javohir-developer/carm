@@ -103,7 +103,7 @@ use yii\helpers\Url;
                 </a>
                 <ul class="dropdown-menu submenu list-unstyled" id="components" data-bs-parent="#accordionExample">
                     <li>
-                        <a href="<?=Url::to(['/products/list-of-transitions'])?>"> <?=Yii::t('app', 'Список переходы')?> </a>
+                        <a href="<?=Url::to(['/products/transition-list-group'])?>"> <?=Yii::t('app', 'Список переходы')?> </a>
                     </li>
                 </ul>
             </li>

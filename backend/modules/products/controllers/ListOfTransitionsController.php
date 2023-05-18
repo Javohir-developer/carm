@@ -5,6 +5,7 @@ namespace backend\modules\products\controllers;
 use app\modules\products\models\search\ListOfTransitionsSearch;
 use backend\controllers\BaseController;
 use backend\modules\products\models\ListOfTransitions;
+use Yii;
 use yii\bootstrap\BootstrapAsset;
 use yii\filters\VerbFilter;
 use yii\web\Controller;

@@ -18,9 +18,7 @@ class TransitionListGroupSearch extends TransitionListGroup
     public function rules()
     {
         return [
-            [['id', 'user_id', 'company_id', 'warehouse_id', 'supplier_id', 'product_types_id', 'currency', 'barcode', 'group', 'size_num', 'size_type', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status', 'code_group'], 'integer'],
-            [['date', 'name', 'model', 'brand', 'production_time', 'valid', 'created_at', 'updated_at'], 'safe'],
-            [['currency_amount', 'entry_price', 'evaluation', 'exit_price', 'sum_entry_price', 'sum_exit_price'], 'number'],
+            [['from_date', 'to_date'], 'safe'],
         ];
     }
 

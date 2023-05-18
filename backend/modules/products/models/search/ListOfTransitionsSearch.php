@@ -6,6 +6,7 @@ use backend\modules\products\models\ListOfTransitions;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\web\NotFoundHttpException;
 
 /**
  * ListOfTransitionsSearch represents the model behind the search form of `backend\modules\products\models\ListOfTransitions`.
@@ -40,6 +41,16 @@ class ListOfTransitionsSearch extends ListOfTransitions
      */
     public function search($params)
     {
+
+        $session = Yii::$app->session;
+        if (isset(Yii::$app->request->get('ListOfTransitionsSearch')['code_group'])){
+            $session['code_group'] = Yii::$app->request->get('ListOfTransitionsSearch')['code_group'];
+        }
+        if (!$session['code_group']){
+            throw new NotFoundHttpException(Yii::t('app', '"code_group" параметр не найден'), 404);
+        }
+
+
         $query = ListOfTransitions::find();
         $query->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id()]);
 
@@ -58,7 +69,7 @@ class ListOfTransitionsSearch extends ListOfTransitions
         }
 
         $query->andFilterWhere(['>=', 'date', $this->from_date])
-                ->andFilterWhere(['=', 'code_group', $this->code_group])
+                ->andFilterWhere(['=', 'code_group', $session['code_group']])
                 ->andFilterWhere(['<=', 'date', $this->to_date]);
 
         return $dataProvider;

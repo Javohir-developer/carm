@@ -30,18 +30,7 @@ use yii\widgets\Pjax;
                 'headerOptions' => ['class'=>'left-position-sticky'],
                 'contentOptions' => ['class' => 'left-position-sticky'],
             ],
-            [
-                'attribute' => 'warehouse_id',
-                'value' => function($data){
-                    return $data->warehouse->name;
-                }
-            ],
-            [
-                'attribute' => 'supplier_id',
-                'value' => function($data){
-                    return $data->supplier->name;
-                }
-            ],
+            'barcode',
             'name',
             [
                 'attribute' => 'product_types_id',
@@ -54,7 +43,9 @@ use yii\widgets\Pjax;
             [
                 'attribute' => 'size_num',
                 'value' => function($data){
-                    return $data->size_num.$data::sizeType()[$data->size_type];
+                    if ($data->size_num && $data->size_type){
+                        return $data->size_num.$data::sizeType()[$data->size_type];
+                    }
                 }
             ],
             'amount',
@@ -89,12 +80,6 @@ use yii\widgets\Pjax;
                 }
             ],
             'date',
-            [
-                'attribute' => 'user_id',
-                'value' => function($data){
-                    return Yii::$app->user->identity->full_name;
-                }
-            ],
             [
                 'headerOptions' => ['class'=>'right-position-sticky'],
                 'contentOptions' => ['class' => 'right-position-sticky'],

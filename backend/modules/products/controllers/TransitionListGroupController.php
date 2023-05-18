@@ -5,6 +5,7 @@ namespace backend\modules\products\controllers;
 use app\modules\products\models\search\TransitionListGroupSearch;
 use backend\controllers\BaseController;
 use backend\modules\products\models\TransitionListGroup;
+use Yii;
 use yii\bootstrap\BootstrapAsset;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -31,6 +32,8 @@ class TransitionListGroupController extends BaseController
 
     public function actionIndex()
     {
+        $session = Yii::$app->session;
+        $session->remove('code_group');
         $searchModel = new TransitionListGroupSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
