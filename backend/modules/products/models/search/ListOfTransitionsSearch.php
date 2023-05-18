@@ -18,7 +18,7 @@ class ListOfTransitionsSearch extends ListOfTransitions
     public function rules()
     {
         return [
-            [['from_date', 'to_date'], 'safe'],
+            [['from_date', 'to_date', 'code_group'], 'safe'],
         ];
     }
 
@@ -58,6 +58,7 @@ class ListOfTransitionsSearch extends ListOfTransitions
         }
 
         $query->andFilterWhere(['>=', 'date', $this->from_date])
+                ->andFilterWhere(['=', 'code_group', $this->code_group])
                 ->andFilterWhere(['<=', 'date', $this->to_date]);
 
         return $dataProvider;

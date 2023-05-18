@@ -37,7 +37,7 @@ class BaseController extends \yii\web\Controller
                         'allow' => true,
                         'roles' => ['Drektor'],
                         'matchCallback' => function () {
-                            $controllers = ['statistics', 'site', 'suppliers', 'warehouses', 'products', 'list-of-transitions', 'product-types'];
+                            $controllers = ['statistics', 'site', 'suppliers', 'warehouses', 'products', 'list-of-transitions', 'product-types', 'transition-list-group'];
                             return in_array(Yii::$app->controller->id, $controllers);// Метод $controllers вернет true или false в зависимости от роли пользователя.
                         },
                     ],

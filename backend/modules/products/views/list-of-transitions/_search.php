@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
-<div class="list-of-transitions-search mb-3">
+<div class="list-of-transitions-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
