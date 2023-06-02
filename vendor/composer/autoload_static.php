@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit3fac4266833c6c3ea55a59807cea2c46
+class ComposerStaticInit9e30c93ee4663280ab563f95316d2516
 {
     public static $files = array (
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
@@ -511,8 +511,8 @@ class ComposerStaticInit3fac4266833c6c3ea55a59807cea2c46
         ),
         'Codeception\\' => 
         array (
-            0 => __DIR__ . '/..' . '/codeception/codeception/src/Codeception',
-            1 => __DIR__ . '/..' . '/codeception/stub/src',
+            0 => __DIR__ . '/..' . '/codeception/stub/src',
+            1 => __DIR__ . '/..' . '/codeception/codeception/src/Codeception',
             2 => __DIR__ . '/..' . '/codeception/verify/src/Codeception',
         ),
         'Baha2Odeh\\RecaptchaV3\\' => 
@@ -1005,7 +1005,7 @@ class ComposerStaticInit3fac4266833c6c3ea55a59807cea2c46
         'PharIo\\Manifest\\ManifestLoader' => __DIR__ . '/..' . '/phar-io/manifest/src/ManifestLoader.php',
         'PharIo\\Manifest\\ManifestLoaderException' => __DIR__ . '/..' . '/phar-io/manifest/src/exceptions/ManifestLoaderException.php',
         'PharIo\\Manifest\\ManifestSerializer' => __DIR__ . '/..' . '/phar-io/manifest/src/ManifestSerializer.php',
-        'PharIo\\Manifest\\NoEmailAddressException' => __DIR__ . '/..' . '/phar-io/manifest/src/exceptions/NoEmailAdressException.php',
+        'PharIo\\Manifest\\NoEmailAddressException' => __DIR__ . '/..' . '/phar-io/manifest/src/exceptions/NoEmailAddressException.php',
         'PharIo\\Manifest\\PhpElement' => __DIR__ . '/..' . '/phar-io/manifest/src/xml/PhpElement.php',
         'PharIo\\Manifest\\PhpExtensionRequirement' => __DIR__ . '/..' . '/phar-io/manifest/src/values/PhpExtensionRequirement.php',
         'PharIo\\Manifest\\PhpVersionRequirement' => __DIR__ . '/..' . '/phar-io/manifest/src/values/PhpVersionRequirement.php',
@@ -1200,10 +1200,10 @@ class ComposerStaticInit3fac4266833c6c3ea55a59807cea2c46
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit3fac4266833c6c3ea55a59807cea2c46::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit3fac4266833c6c3ea55a59807cea2c46::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit3fac4266833c6c3ea55a59807cea2c46::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit3fac4266833c6c3ea55a59807cea2c46::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit9e30c93ee4663280ab563f95316d2516::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit9e30c93ee4663280ab563f95316d2516::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit9e30c93ee4663280ab563f95316d2516::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit9e30c93ee4663280ab563f95316d2516::$classMap;
 
         }, null, ClassLoader::class);
     }
