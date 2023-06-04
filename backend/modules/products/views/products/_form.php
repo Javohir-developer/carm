@@ -1,11 +1,8 @@
 <?php
-
-use kartik\widgets\DatePicker;
 use kartik\widgets\Select2;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
-use yii\widgets\Pjax;
 
 /** @var yii\web\View $this */
 /** @var backend\modules\products\models\Products $model */
@@ -15,14 +12,12 @@ $confg = [
     'options' => [
         'onsubmit' => 'return addProductToCache(this);',
         'id' => 'products-form-send-ajax',
-        'data-url' => Url::to(['/products/products/add-product-to-cache']),
-//        'class' => 'd-flex'
+        'data-url' => Url::to(['/products/products/add-product-to-cache'])
     ]
 ];
 ?>
 <div class="products-form container-fluid">
     <?php $form = ActiveForm::begin($confg); ?>
-
         <div class="card padding-class">
             <div class="row">
                 <h6 class="text-center h6-size"><?=Yii::t('app', 'Информация о товаре')?></h6>
@@ -30,7 +25,7 @@ $confg = [
                     <label class="control-label" for="products-barcode">Бар код</label>
                     <?= $form->field($model, 'barcode', ['template' => '<div class="input-group">{input}
                         <span class="input-group-addon" data-url="'.Url::to(['/products/products/search-barcode']).'" onclick="searchBarcode(this)"><i class="bi bi-search"></i></span>
-                        <span class="input-group-qr-code" data-url="'.Url::to(['#']).'" onclick="generateBarcode();"><i class="bi bi-upc"></i></span></div>{hint}{error}']);  ?>
+                        <span data-toggle="modal" class="input-group-qr-code"  onclick="generateBarcode()"><i class="bi bi-upc"></i></span></div>{hint}{error}']);  ?>
                 </div>
                 <div class="col-sm-2">
                     <?= $form->field($model, 'warehouse_id')->dropDownList($model->Warehouses(), ['prompt'=> '-----']) ?>
@@ -95,7 +90,6 @@ $confg = [
                     <div class="row">
                         <div class="col-sm-6">
                             <h6 class="text-center h6-size"><?=Yii::t('app', 'Признаки')?></h6>
-<!--                            --><?php //= $form->field($model, 'unit_amount')->textInput(['class' => 'form-control index-form-control']) ?>
                             <?= $form->field($model, 'max_ast')->textInput(['class' => 'form-control index-form-control']) ?>
                             <?= $form->field($model, 'min_ast')->textInput(['class' => 'form-control index-form-control']) ?>
                         </div>
@@ -160,5 +154,6 @@ $confg = [
             </div>
         </div>
     <?php ActiveForm::end(); ?>
-
 </div>
+<?= $this->render('_generate-barcode-modal', ['model' => $model]) ?>
+

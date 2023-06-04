@@ -30,7 +30,9 @@ class BaseModel extends CommonBaseModel
     public static function unitType(){
         return [
             1 => Yii::t('app', 'шт'),
-            2 => Yii::t('app', 'кг')
+            2 => Yii::t('app', 'кг'),
+            3 => Yii::t('app', 'г'),
+            4 => Yii::t('app', 'мг'),
         ];
     }
 

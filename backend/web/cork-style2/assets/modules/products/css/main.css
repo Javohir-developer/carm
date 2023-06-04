@@ -80,7 +80,7 @@
 /*}*/
 .list-group-item-title{
     /*width: 25px!important;*/
-    width: 65px!important;
+    width: 53px!important;
 }
 .list-group-item-num{
     border-top: 1px solid rgb(220 220 220) !important;
@@ -181,7 +181,9 @@ body {
     margin-top: 10px!important;
 }
 .input-group-addon{
-    padding: 9px 22px 0px 11px!important;
+    padding: 9px 11px 0px 11px!important;
+    background-color: #eeeeee;
+    border: #eeeeee;
     cursor: pointer;
 }
 .input-group-qr-code{
@@ -194,4 +196,32 @@ body {
     text-align: center;
     background-color: #eeeeee;
     border: 1px solid #ccc;
+}
+label{
+    margin-bottom: 1px!important;
+}
+.modal-content {
+    background: var(--bs-modal-bg) !important;
+}
+.bar-cod-class{
+    margin: 15px 0 15px 0;
+    padding: 47px;
+}
+.barcode-generate{
+    width: 60% !important;
+    margin-left: 20%;
+}
+.barcode-generate-1{
+    width: 60% !important;
+    margin-left: 31%;
+}
+.barcode-generate-body{
+    width: 60% !important;
+    margin-left: 21%;
+}
+.padding-barcode{
+    padding: 38px;
+}
+#id-modal-body{
+    padding: 0!important;
 }

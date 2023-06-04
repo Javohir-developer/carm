@@ -53,19 +53,19 @@ $config = [
             'decimalSeparator' => '.',
             'currencyCode'=>'sum',
         ],
-//        'assetManager' => [
-//            'bundles' => [
+        'assetManager' => [
+            'bundles' => [
 //                'yii\web\JqueryAsset' => [
 //                    'js'=>[]
 //                ],
 //                'yii\bootstrap\BootstrapPluginAsset' => [
 //                    'js'=>[]
 //                ],
-//                'yii\bootstrap\BootstrapAsset' => [
-//                    'css' => [],
-//                ],
-//            ],
-//        ],
+                'yii\bootstrap\BootstrapAsset' => [
+                    'css' => [],
+                ],
+            ],
+        ],
         'request' => [
             'baseUrl' => '',
             'csrfParam' => '_csrf-backend',

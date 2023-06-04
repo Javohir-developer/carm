@@ -60,6 +60,8 @@ use yii\helpers\ArrayHelper;
 class Products extends BaseModel
 {
 
+    const BAR_CODE_TYPE_WEIGHT = 2;
+    const BAR_CODE_TYPE_PIECE = 3;
     public $old_entry_price;
     public $old_exit_price;
     /**

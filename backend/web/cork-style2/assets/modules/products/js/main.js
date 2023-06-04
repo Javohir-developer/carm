@@ -106,7 +106,7 @@ function searchBarcode(obj){
         $.ajax({
             url: $(obj).data('url'),
             type: 'GET',
-            data: {barcode: $('#products-barcode').val()},
+            data: {barcode: $('#products-barcode').val(), barCodeType: $(obj).data('bar-code-type')},
             dataType: 'json',
             success: function (data) {
                 if (data.status) {
@@ -197,15 +197,58 @@ function generateBarcode(){
         output:renderer,
         bgColor: '#FFFFFF',
         color: '#000000',
-        barWidth: '1',
-        barHeight: '50',
+        barWidth: '2',
+        barHeight: '60',
         moduleSize: '5',
         posX: '10',
         posY: '20',
         addQuietZone: '1'
     };
-    // $("#barcodeTarget").html("").show().barcode(value, btype, settings);
-    $('#products-barcode').val(value);
+    $("#bar-cod-class").html("").show().barcode(value, btype, settings);
+    $('#barcode-generate-input').val(value);
+    $('#bar-code-modal').modal('show');
+}
+
+function generateBarcodeForWeight(){
+    var value = Date.now().toString();
+    var btype = 'code128';
+    var renderer = 'css';
+    var settings = {
+        output:renderer,
+        bgColor: '#FFFFFF',
+        color: '#000000',
+        barWidth: '2',
+        barHeight: '60',
+        moduleSize: '5',
+        posX: '10',
+        posY: '20',
+        addQuietZone: '1'
+    };
+    $("#bar-cod-class").html("").show().barcode(value, btype, settings);
+    $('#barcode-generate-input').val(value);
+}
+function generateBarcodeForPiece(){
+    var value = Date.now().toString();
+    var btype = 'code128';
+    var renderer = 'css';
+    var settings = {
+        output:renderer,
+        bgColor: '#FFFFFF',
+        color: '#000000',
+        barWidth: '2',
+        barHeight: '60',
+        moduleSize: '5',
+        posX: '10',
+        posY: '20',
+        addQuietZone: '1'
+    };
+    $("#bar-cod-class").html("").show().barcode(value, btype, settings);
+    $('#barcode-generate-input').val(value);
+}
+
+function addToTheInput(){
+    $('#products-barcode').val($('#barcode-generate-input').val());
+    $('#bar-code-modal').modal('hide');
 }
 
 

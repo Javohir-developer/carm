@@ -10,6 +10,7 @@ use backend\modules\parameters\models\Warehouses;
 use common\models\User;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii2tech\spreadsheet\SerialColumn;
 use yii2tech\spreadsheet\Spreadsheet;
 
 /**
@@ -197,6 +198,7 @@ class ListOfTransitions extends BaseModel
         $exporter = (new Spreadsheet([
             'dataProvider' => $searchModel->search($queryParams),
             'columns' => [
+                ['class' => SerialColumn::class],
                 'barcode',
                 'name',
                 [
@@ -249,6 +251,6 @@ class ListOfTransitions extends BaseModel
                 'date',
             ],
         ]))->render();
-        return $exporter->send(date('Y-m-d').'.xls');
+        return $exporter->send(date('Y-m-d H:i:s').'.xls');
     }
 }
