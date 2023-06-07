@@ -41,9 +41,9 @@ class TransitionListGroupSearch extends TransitionListGroup
     public function search($params)
     {
         $query = TransitionListGroup::find();
-        $query->select(['code_group', 'user_id', 'date', 'warehouse_id', 'supplier_id', 'count(*) as count_product', 'sum(amount) as amount', 'sum(sum_entry_price) as sum_entry_price', 'sum(sum_exit_price) as sum_exit_price']);
+        $query->select(['code_group', 'user_id', 'warehouse_id', 'supplier_id', 'count(*) as count_product', 'sum(amount) as amount', 'sum(sum_entry_price) as sum_entry_price', 'sum(sum_exit_price) as sum_exit_price']);
         $query->where(['user_id' => Yii::$app->user->id, 'company_id' => Yii::$app->company->id()]);
-        $query->groupBy(['code_group', 'user_id', 'date', 'warehouse_id', 'supplier_id', 'code_group']);
+        $query->groupBy(['code_group', 'user_id', 'warehouse_id', 'supplier_id']);
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([

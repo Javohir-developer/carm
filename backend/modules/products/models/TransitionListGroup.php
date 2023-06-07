@@ -182,4 +182,8 @@ class TransitionListGroup extends BaseModel
     {
         return $this->hasOne(Warehouses::class, ['id' => 'warehouse_id']);
     }
+
+    public static function dateCodeGroup($code_group){
+        return Products::find()->where(['code_group' => $code_group, 'company_id' => Yii::$app->company->id()])->orderBy(['date' => SORT_DESC])->one()->date;
+    }
 }

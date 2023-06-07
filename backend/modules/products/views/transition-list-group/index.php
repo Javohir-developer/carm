@@ -26,7 +26,12 @@ use yii\helpers\Url;
                 'headerOptions' => ['class'=>'left-position-sticky'],
                 'contentOptions' => ['class' => 'left-position-sticky'],
             ],
-            'date',
+            [
+                'attribute' => 'date',
+                'value' => function($data){
+                    return $data::dateCodeGroup($data->code_group);
+                }
+            ],
             [
                 'attribute' => 'warehouse_id',
                 'value' => function($data){
