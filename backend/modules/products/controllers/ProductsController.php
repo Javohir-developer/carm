@@ -87,4 +87,14 @@ class ProductsController extends BaseController
         return ['status' => false];
     }
 
+    public function actionGenerateBarCodeForWeight(){
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return Products::generateBarCodeForWeight();
+    }
+
+    public function actionGenerateBarCodeForPiece(){
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return Products::generateBarCodeForPiece();
+    }
+
 }

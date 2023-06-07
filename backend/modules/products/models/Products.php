@@ -24,6 +24,7 @@ use yii\helpers\ArrayHelper;
  * @property int $currency
  * @property int|null $currency_amount
  * @property int|null $barcode
+ * @property int|null $barcode_type
  * @property int|null $group
  * @property string|null $name
  * @property string|null $model
@@ -60,6 +61,7 @@ use yii\helpers\ArrayHelper;
 class Products extends BaseModel
 {
 
+    const BAR_CODE_TYPE_RANDOM = 1;
     const BAR_CODE_TYPE_WEIGHT = 2;
     const BAR_CODE_TYPE_PIECE = 3;
     public $old_entry_price;
@@ -93,14 +95,21 @@ class Products extends BaseModel
             [['company_id'], 'default', 'value' => Yii::$app->company->id()],
             [['input_status', 'status'], 'default', 'value' => self::STATUS_ACTIVE],
             [['user_id', 'company_id', 'supplier_id', 'warehouse_id', 'barcode', 'name', 'amount', 'entry_price', 'evaluation', 'exit_price', 'product_types_id'], 'required'],
-            [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status', 'product_types_id', 'size_num', 'size_type', 'code_group'], 'integer'],
+            [['user_id', 'company_id', 'warehouse_id', 'supplier_id', 'currency', 'barcode', 'group', 'ikpu', 'unit_amount', 'max_ast', 'min_ast', 'term_amount', 'term_type', 'ndc', 'unit_type', 'amount', 'input_status', 'status', 'product_types_id', 'size_num', 'size_type', 'code_group', 'barcode_type'], 'integer'],
             [['date', 'production_time', 'valid', 'created_at', 'updated_at'], 'safe'],
             [['currency_amount', 'entry_price', 'exit_price', 'sum_entry_price', 'sum_exit_price', 'old_entry_price', 'old_exit_price'], 'number'],
             [['evaluation'], 'number', 'min' => 1],
             [['name', 'model', 'brand'], 'string', 'max' => 255],
             [['supplier_id'], 'exist', 'skipOnError' => true, 'targetClass' => Suppliers::class, 'targetAttribute' => ['supplier_id' => 'id']],
             [['warehouse_id'], 'exist', 'skipOnError' => true, 'targetClass' => Warehouses::class, 'targetAttribute' => ['warehouse_id' => 'id']],
+            [['barcode'], 'barcode_unique']
         ];
+    }
+
+    public function barcode_unique($attribute, $params)
+    {
+        if (Products::findOne(['barcode' => $this->$attribute, 'company_id' => Yii::$app->company->id()]) || in_array($this->$attribute, array_column(self::getProductInCache(), 'barcode')))
+            $this->addError($attribute, Yii::t('app', 'этот штрих-код уже существует'));
     }
 
     /**
@@ -198,7 +207,7 @@ class Products extends BaseModel
             foreach($_SESSION[self::cacheProd()] as $value){
                 $product = new Products();
                 $product->attributes = $value;
-                $product->save();
+                $product->save(false);
             }
             unset($_SESSION[self::cacheProd()], $_SESSION[self::cacheSum()]);
             return true;
@@ -223,13 +232,37 @@ class Products extends BaseModel
         return $this->attributes;
     }
 
-
-
     public function searchBarcode($barcode){
         $barcode = Products::find()->where(['company_id' => Yii::$app->company->id(), 'barcode' => $barcode])->orderBy(['id' => SORT_DESC])->one();
         if ($barcode){
             return $barcode;
         }
+    }
+
+    public static function generateBarCodeForWeight(){
+        $arr = [];
+        foreach(self::getProductInCache() as $prod){
+            if($prod['barcode_type'] == self::BAR_CODE_TYPE_WEIGHT || $prod['barcode_type'] == self::BAR_CODE_TYPE_PIECE){
+                $arr[] = $prod['barcode'];
+            }
+        }
+        $arr[] = Products::find()->where(['IN', 'barcode_type', [self::BAR_CODE_TYPE_WEIGHT, self::BAR_CODE_TYPE_PIECE]])->andWhere(['company_id' => Yii::$app->company->id()])->max("barcode");
+        if(max($arr) < 1000000000000)
+            return 1000000000000 + max($arr) + 1;
+        return max($arr) + 1;
+    }
+
+    public static function generateBarCodeForPiece(){
+        $arr = [];
+        foreach(self::getProductInCache() as $prod){
+            if($prod['barcode_type'] == self::BAR_CODE_TYPE_WEIGHT || $prod['barcode_type'] == self::BAR_CODE_TYPE_PIECE){
+                $arr[] = $prod['barcode'];
+            }
+        }
+        $arr[] = Products::find()->where(['IN', 'barcode_type', [self::BAR_CODE_TYPE_WEIGHT, self::BAR_CODE_TYPE_PIECE]])->andWhere(['company_id' => Yii::$app->company->id()])->max("barcode");
+        if(max($arr) < 1000000000000)
+            return 1000000000000 + max($arr) + 1;
+        return max($arr) + 1;   
     }
 
 }

@@ -43,4 +43,25 @@ function number_format (number, decimals, dec_point, thousands_sep) {
     return s.join(dec);
 }
 
+function barCode(value = Date.now().toString()){
+    var btype = 'code128';
+    var renderer = 'css';
+    var settings = {
+        output:renderer,
+        bgColor: '#FFFFFF',
+        color: '#000000',
+        barWidth: '2',
+        barHeight: '60',
+        moduleSize: '5',
+        posX: '10',
+        posY: '20',
+        addQuietZone: '1'
+    };
+    return {value: value, btype: btype, settings: settings};
+}
+
+function closeButton(obj){
+    $(obj).parents().modal('hide');
+}
+
 

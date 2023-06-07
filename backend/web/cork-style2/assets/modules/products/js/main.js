@@ -189,61 +189,56 @@ function success(){
 }
 
 
-function generateBarcode(){
-    var value = Date.now().toString();
-    var btype = 'code128';
-    var renderer = 'css';
-    var settings = {
-        output:renderer,
-        bgColor: '#FFFFFF',
-        color: '#000000',
-        barWidth: '2',
-        barHeight: '60',
-        moduleSize: '5',
-        posX: '10',
-        posY: '20',
-        addQuietZone: '1'
-    };
-    $("#bar-cod-class").html("").show().barcode(value, btype, settings);
-    $('#barcode-generate-input').val(value);
+function generateRandomBarCode(obj){
+    var bar_code = barCode();
+    $("#bar-cod-class").html("").show().barcode(bar_code.value, bar_code.btype, bar_code.settings);
+    $('#barcode-generate-input').val(bar_code.value);
+    $('#products-barcode_type').val($(obj).data('bar-code-type'));
     $('#bar-code-modal').modal('show');
 }
 
-function generateBarcodeForWeight(){
-    var value = Date.now().toString();
-    var btype = 'code128';
-    var renderer = 'css';
-    var settings = {
-        output:renderer,
-        bgColor: '#FFFFFF',
-        color: '#000000',
-        barWidth: '2',
-        barHeight: '60',
-        moduleSize: '5',
-        posX: '10',
-        posY: '20',
-        addQuietZone: '1'
-    };
-    $("#bar-cod-class").html("").show().barcode(value, btype, settings);
-    $('#barcode-generate-input').val(value);
+function generateBarCodeForWeight(obj){
+    $.ajax({
+        url: $(obj).data('url'),
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            if (data) {
+                var bar_code = barCode(value = String(data));
+                $('#products-barcode_type').val($(obj).data('bar-code-type'));
+                $("#bar-cod-class").html("").show().barcode(bar_code.value, bar_code.btype, bar_code.settings);
+                $('#barcode-generate-input').val(bar_code.value);
+            }else {
+                Notnotify('данных недостаточно !', 'danger');
+                validateErrors(data.result);
+            }
+        },
+        error: function () {
+            Notnotify('что произошло не так !', 'danger');
+        }
+    });
 }
-function generateBarcodeForPiece(){
-    var value = Date.now().toString();
-    var btype = 'code128';
-    var renderer = 'css';
-    var settings = {
-        output:renderer,
-        bgColor: '#FFFFFF',
-        color: '#000000',
-        barWidth: '2',
-        barHeight: '60',
-        moduleSize: '5',
-        posX: '10',
-        posY: '20',
-        addQuietZone: '1'
-    };
-    $("#bar-cod-class").html("").show().barcode(value, btype, settings);
-    $('#barcode-generate-input').val(value);
+
+function generateBarCodeForPiece(obj){
+    $.ajax({
+        url: $(obj).data('url'),
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            if (data) {
+                var bar_code = barCode(value = String(data));
+                $('#products-barcode_type').val($(obj).data('bar-code-type'));
+                $("#bar-cod-class").html("").show().barcode(bar_code.value, bar_code.btype, bar_code.settings);
+                $('#barcode-generate-input').val(bar_code.value);
+            }else {
+                Notnotify('данных недостаточно !', 'danger');
+                validateErrors(data.result);
+            }
+        },
+        error: function () {
+            Notnotify('что произошло не так !', 'danger');
+        }
+    });
 }
 
 function addToTheInput(){

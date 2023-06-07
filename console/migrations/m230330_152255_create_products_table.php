@@ -26,6 +26,7 @@ class m230330_152255_create_products_table extends Migration
 
 
             'barcode' => $this->bigInteger(),
+            'barcode_type' => $this->integer(),
             'group' => $this->bigInteger(),
             'name' => $this->string(),
             'model' => $this->string(),

@@ -18,6 +18,7 @@ $confg = [
 ?>
 <div class="products-form container-fluid">
     <?php $form = ActiveForm::begin($confg); ?>
+    <?= $form->field($model, 'barcode_type')->hiddenInput(['value' => $model::BAR_CODE_TYPE_RANDOM])->label(false) ?>
         <div class="card padding-class">
             <div class="row">
                 <h6 class="text-center h6-size"><?=Yii::t('app', 'Информация о товаре')?></h6>
@@ -25,7 +26,7 @@ $confg = [
                     <label class="control-label" for="products-barcode">Бар код</label>
                     <?= $form->field($model, 'barcode', ['template' => '<div class="input-group">{input}
                         <span class="input-group-addon" data-url="'.Url::to(['/products/products/search-barcode']).'" onclick="searchBarcode(this)"><i class="bi bi-search"></i></span>
-                        <span data-toggle="modal" class="input-group-qr-code"  onclick="generateBarcode()"><i class="bi bi-upc"></i></span></div>{hint}{error}']);  ?>
+                        <span data-toggle="modal" class="input-group-qr-code" data-bar-code-type="'.$model::BAR_CODE_TYPE_RANDOM.'" onclick="generateRandomBarCode(this)"><i class="bi bi-upc"></i></span></div>{hint}{error}']);  ?>
                 </div>
                 <div class="col-sm-2">
                     <?= $form->field($model, 'warehouse_id')->dropDownList($model->Warehouses(), ['prompt'=> '-----']) ?>

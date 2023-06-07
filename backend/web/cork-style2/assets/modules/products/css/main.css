@@ -7,10 +7,10 @@
 }
 .form-control{
     padding: 4px 1.25rem!important;
-    width: 40%;!important;
+    /* width: 40%!important; */
 }
 .index-form-control{
-    width: 40%;!important;
+    /* width: 40%!important; */
 }
 .h6-size{
 
@@ -224,4 +224,7 @@ label{
 }
 #id-modal-body{
     padding: 0!important;
+}
+.up-ca-form-inp-barcod{
+    width: 120px!important;
 }
