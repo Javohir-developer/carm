@@ -56,9 +56,7 @@ class ListOfTransitionsSearch extends ListOfTransitions
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['>=', 'date', $this->from_date])
-                ->andFilterWhere(['=', 'code_group', $this->code_group])
-                ->andFilterWhere(['<=', 'date', $this->to_date]);
+        $query->andFilterWhere(['=', 'code_group', $this->code_group]);
 
         return $dataProvider;
     }

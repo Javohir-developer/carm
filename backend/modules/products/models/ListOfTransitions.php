@@ -12,6 +12,7 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use yii2tech\spreadsheet\SerialColumn;
 use yii2tech\spreadsheet\Spreadsheet;
+use diecoding\barcode\generator\Barcode;
 
 /**
  * This is the model class for table "products".
@@ -253,4 +254,18 @@ class ListOfTransitions extends BaseModel
         ]))->render();
         return $exporter->send(date('Y-m-d H:i:s').'.xls');
     }
+
+    public static function generatorBarcode(){
+        return Barcode::widget([
+            'value'         => '12341234123',
+            'format'        => Barcode::CODE128,
+            'pluginOptions' => [
+              'lineColor'    => '#0aa',
+              'width'        => 4,
+              'height'       => 40,
+              'displayValue' => false
+            ]
+          ]);
+    }
+
 }

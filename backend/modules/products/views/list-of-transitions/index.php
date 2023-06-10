@@ -16,6 +16,7 @@ use yii\widgets\Pjax;
 <div class="container-fluid list-of-transitions-index">
     <?php if ($code_group): ?>
         <?= Html::a('<i class="bi bi-file-earmark-spreadsheet"></i>', ['/products/list-of-transitions/excel-export', 'ListOfTransitionsSearch[code_group]' => $code_group], ['class' => 'btn btn-info'])?>
+        <?= Html::a('<i class="bi bi-file-earmark-pdf"></i>', ['/products/list-of-transitions/export-bar-code-pdf', 'code_group' => $code_group], ['class' => 'btn btn-info'])?>
         <?php Pjax::begin(['timeout' => 5000, 'id'=>'pjax-list-of-transitions-index', 'enablePushState' => false]); ?>
             <?= GridView::widget([
             'dataProvider' => $dataProvider,

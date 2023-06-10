@@ -247,8 +247,8 @@ class Products extends BaseModel
             }
         }
         $arr[] = Products::find()->where(['IN', 'barcode_type', [self::BAR_CODE_TYPE_WEIGHT, self::BAR_CODE_TYPE_PIECE]])->andWhere(['company_id' => Yii::$app->company->id()])->max("barcode");
-        if(max($arr) < 1000000000000)
-            return 1000000000000 + max($arr) + 1;
+        if(max($arr) < 10000000)
+            return 10000000 + max($arr) + 1;
         return max($arr) + 1;
     }
 
@@ -260,8 +260,8 @@ class Products extends BaseModel
             }
         }
         $arr[] = Products::find()->where(['IN', 'barcode_type', [self::BAR_CODE_TYPE_WEIGHT, self::BAR_CODE_TYPE_PIECE]])->andWhere(['company_id' => Yii::$app->company->id()])->max("barcode");
-        if(max($arr) < 1000000000000)
-            return 1000000000000 + max($arr) + 1;
+        if(max($arr) < 10000000)
+            return 10000000 + max($arr) + 1;
         return max($arr) + 1;   
     }
 

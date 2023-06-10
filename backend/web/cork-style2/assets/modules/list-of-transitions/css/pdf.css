@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .column {
+    float: left;
+    width: 32.5%;
+    padding: 3px 3px;
+  }
+  .row {margin: 0 -50px;}
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  .card {
+    padding: 5px 10px;
+    border-style:dashed;
+    border: 1px solid black;
+    background-color: #fff;
+    /* border-radius: 10px; */
+  }
+  .barcod-date{
+    transform: rotate(0.5turn);
+    -webkit-transform: rotate(0.5turn);
+    -moz-transform: rotate(0.5turn);
+    -ms-transform: rotate(0.5turn);
+    -o-transform: rotate(0.5turn);
+    white-space: nowrap;
+     position: relative;
+  }

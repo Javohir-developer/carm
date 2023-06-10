@@ -12,6 +12,7 @@ use yii\web\JqueryAsset;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii2tech\spreadsheet\Spreadsheet;
+use kartik\mpdf\Pdf;
 
 /**
  * ListOfTransitionsController implements the CRUD actions for ListOfTransitions model.
@@ -104,5 +105,23 @@ class ListOfTransitionsController extends BaseController
     {
         $model = new ListOfTransitions;
         $model->excelExport($this->request->queryParams);
+    }
+
+    public function actionExportBarCodePdf($code_group)
+    {
+        $model = ListOfTransitions::find()->where(['code_group' => $code_group,'company_id' => Yii::$app->company->id()])->all();
+        $content = $this->renderPartial('export-bar-code-pdf', ['model' =>  $model]);
+        $pdf = new Pdf([
+            'mode' => Pdf::MODE_CORE, 
+            'format' => Pdf::FORMAT_A4, 
+            'orientation' => Pdf::ORIENT_PORTRAIT, 
+            'destination' => Pdf::DEST_BROWSER, 
+            'content' => $content,
+            'cssFile' => [
+                    '@vendor/kartik-v/yii2-mpdf/src/assets/kv-mpdf-bootstrap.css', 
+                    Yii::getAlias('@backend').'/web/cork-style2/assets/modules/list-of-transitions/css/pdf.css'
+                ],
+        ]);
+        return $pdf->render();
     }
 }
